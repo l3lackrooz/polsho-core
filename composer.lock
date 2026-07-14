@@ -138,9 +138,14 @@
         {
             "name": "clue/redis-protocol",
             "version": "v0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clue/redis-protocol.git",
+                "reference": "6f565332f5531b7722d1e9c445314b91862f6d6c"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/clue/redis-protocol/v0.3.2/clue-redis-protocol-v0.3.2.zip",
+                "url": "https://api.github.com/repos/clue/redis-protocol/zipball/6f565332f5531b7722d1e9c445314b91862f6d6c",
                 "reference": "6f565332f5531b7722d1e9c445314b91862f6d6c",
                 "shasum": ""
             },
@@ -156,6 +161,7 @@
                     "Clue\\Redis\\Protocol\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -194,9 +200,14 @@
         {
             "name": "clue/redis-react",
             "version": "v2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clue/reactphp-redis.git",
+                "reference": "84569198dfd5564977d2ae6a32de4beb5a24bdca"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/clue/redis-react/v2.8.0/clue-redis-react-v2.8.0.zip",
+                "url": "https://api.github.com/repos/clue/reactphp-redis/zipball/84569198dfd5564977d2ae6a32de4beb5a24bdca",
                 "reference": "84569198dfd5564977d2ae6a32de4beb5a24bdca",
                 "shasum": ""
             },
@@ -219,6 +230,7 @@
                     "Clue\\React\\Redis\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -629,9 +641,14 @@
         {
             "name": "evenement/evenement",
             "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igorw/evenement.git",
+                "reference": "0a16b0d71ab13284339abb99d9d2bd813640efbc"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/evenement/evenement/v3.0.2/evenement-evenement-v3.0.2.zip",
+                "url": "https://api.github.com/repos/igorw/evenement/zipball/0a16b0d71ab13284339abb99d9d2bd813640efbc",
                 "reference": "0a16b0d71ab13284339abb99d9d2bd813640efbc",
                 "shasum": ""
             },
@@ -647,6 +664,7 @@
                     "Evenement\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1495,9 +1513,14 @@
         {
             "name": "laravel/reverb",
             "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/reverb.git",
+                "reference": "7a1ef2235cfe085cdf3190d0dcfaed4f7d251734"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/laravel/reverb/v1.9.0/laravel-reverb-v1.9.0.zip",
+                "url": "https://api.github.com/repos/laravel/reverb/zipball/7a1ef2235cfe085cdf3190d0dcfaed4f7d251734",
                 "reference": "7a1ef2235cfe085cdf3190d0dcfaed4f7d251734",
                 "shasum": ""
             },
@@ -1539,6 +1562,7 @@
                     "Laravel\\Reverb\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2828,9 +2852,14 @@
         {
             "name": "paragonie/sodium_compat",
             "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/sodium_compat.git",
+                "reference": "4714da6efdc782c06690bc72ce34fae7941c2d9f"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/paragonie/sodium_compat/v2.5.0/paragonie-sodium_compat-v2.5.0.zip",
+                "url": "https://api.github.com/repos/paragonie/sodium_compat/zipball/4714da6efdc782c06690bc72ce34fae7941c2d9f",
                 "reference": "4714da6efdc782c06690bc72ce34fae7941c2d9f",
                 "shasum": ""
             },
@@ -2861,6 +2890,7 @@
                     "ParagonIE\\Sodium\\": "namespaced/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "ISC"
             ],
@@ -2993,9 +3023,14 @@
         {
             "name": "predis/predis",
             "version": "v3.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/predis/predis.git",
+                "reference": "2033429520d8997a7815a2485f56abe6d2d0e075"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/predis/predis/v3.4.2/predis-predis-v3.4.2.zip",
+                "url": "https://api.github.com/repos/predis/predis/zipball/2033429520d8997a7815a2485f56abe6d2d0e075",
                 "reference": "2033429520d8997a7815a2485f56abe6d2d0e075",
                 "shasum": ""
             },
@@ -3018,6 +3053,7 @@
                     "Predis\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3541,9 +3577,14 @@
         {
             "name": "pusher/pusher-php-server",
             "version": "7.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pusher/pusher-http-php.git",
+                "reference": "148b0b5100d000ed57195acdf548a2b1b38ee3f7"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/pusher/pusher-php-server/7.2.7/pusher-pusher-php-server-7.2.7.zip",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/148b0b5100d000ed57195acdf548a2b1b38ee3f7",
                 "reference": "148b0b5100d000ed57195acdf548a2b1b38ee3f7",
                 "shasum": ""
             },
@@ -3570,6 +3611,7 @@
                     "Pusher\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3794,9 +3836,14 @@
         {
             "name": "ratchet/rfc6455",
             "version": "v0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ratchetphp/RFC6455.git",
+                "reference": "859d95f85dda0912c6d5b936d036d044e3af47ef"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/ratchet/rfc6455/v0.4.0/ratchet-rfc6455-v0.4.0.zip",
+                "url": "https://api.github.com/repos/ratchetphp/RFC6455/zipball/859d95f85dda0912c6d5b936d036d044e3af47ef",
                 "reference": "859d95f85dda0912c6d5b936d036d044e3af47ef",
                 "shasum": ""
             },
@@ -3816,6 +3863,7 @@
                     "Ratchet\\RFC6455\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3847,9 +3895,14 @@
         {
             "name": "react/cache",
             "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/cache.git",
+                "reference": "d47c472b64aa5608225f47965a484b75c7817d5b"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/react/cache/v1.2.0/react-cache-v1.2.0.zip",
+                "url": "https://api.github.com/repos/reactphp/cache/zipball/d47c472b64aa5608225f47965a484b75c7817d5b",
                 "reference": "d47c472b64aa5608225f47965a484b75c7817d5b",
                 "shasum": ""
             },
@@ -3866,6 +3919,7 @@
                     "React\\Cache\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3913,9 +3967,14 @@
         {
             "name": "react/dns",
             "version": "v1.14.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/dns.git",
+                "reference": "7562c05391f42701c1fccf189c8225fece1cd7c3"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/react/dns/v1.14.0/react-dns-v1.14.0.zip",
+                "url": "https://api.github.com/repos/reactphp/dns/zipball/7562c05391f42701c1fccf189c8225fece1cd7c3",
                 "reference": "7562c05391f42701c1fccf189c8225fece1cd7c3",
                 "shasum": ""
             },
@@ -3936,6 +3995,7 @@
                     "React\\Dns\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3983,9 +4043,14 @@
         {
             "name": "react/event-loop",
             "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/event-loop.git",
+                "reference": "ba276bda6083df7e0050fd9b33f66ad7a4ac747a"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/react/event-loop/v1.6.0/react-event-loop-v1.6.0.zip",
+                "url": "https://api.github.com/repos/reactphp/event-loop/zipball/ba276bda6083df7e0050fd9b33f66ad7a4ac747a",
                 "reference": "ba276bda6083df7e0050fd9b33f66ad7a4ac747a",
                 "shasum": ""
             },
@@ -4004,6 +4069,7 @@
                     "React\\EventLoop\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4049,9 +4115,14 @@
         {
             "name": "react/promise",
             "version": "v3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "23444f53a813a3296c1368bb104793ce8d88f04a"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/react/promise/v3.3.0/react-promise-v3.3.0.zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/23444f53a813a3296c1368bb104793ce8d88f04a",
                 "reference": "23444f53a813a3296c1368bb104793ce8d88f04a",
                 "shasum": ""
             },
@@ -4071,6 +4142,7 @@
                     "React\\Promise\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4116,9 +4188,14 @@
         {
             "name": "react/promise-timer",
             "version": "v1.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise-timer.git",
+                "reference": "4f70306ed66b8b44768941ca7f142092600fafc1"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/react/promise-timer/v1.11.0/react-promise-timer-v1.11.0.zip",
+                "url": "https://api.github.com/repos/reactphp/promise-timer/zipball/4f70306ed66b8b44768941ca7f142092600fafc1",
                 "reference": "4f70306ed66b8b44768941ca7f142092600fafc1",
                 "shasum": ""
             },
@@ -4139,6 +4216,7 @@
                     "React\\Promise\\Timer\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4189,9 +4267,14 @@
         {
             "name": "react/socket",
             "version": "v1.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/socket.git",
+                "reference": "ef5b17b81f6f60504c539313f94f2d826c5faa08"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/react/socket/v1.17.0/react-socket-v1.17.0.zip",
+                "url": "https://api.github.com/repos/reactphp/socket/zipball/ef5b17b81f6f60504c539313f94f2d826c5faa08",
                 "reference": "ef5b17b81f6f60504c539313f94f2d826c5faa08",
                 "shasum": ""
             },
@@ -4215,6 +4298,7 @@
                     "React\\Socket\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4263,9 +4347,14 @@
         {
             "name": "react/stream",
             "version": "v1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/stream.git",
+                "reference": "1e5b0acb8fe55143b5b426817155190eb6f5b18d"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://package-mirror.liara.ir/repository/composer/react/stream/v1.4.0/react-stream-v1.4.0.zip",
+                "url": "https://api.github.com/repos/reactphp/stream/zipball/1e5b0acb8fe55143b5b426817155190eb6f5b18d",
                 "reference": "1e5b0acb8fe55143b5b426817155190eb6f5b18d",
                 "shasum": ""
             },
@@ -4284,6 +4373,7 @@
                     "React\\Stream\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -9431,5 +9521,5 @@
         "php": "^8.2"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
