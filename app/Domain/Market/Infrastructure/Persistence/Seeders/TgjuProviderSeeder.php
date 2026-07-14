@@ -107,7 +107,7 @@ class TgjuProviderSeeder extends Seeder
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
+            ], 
         );
 
         $providerId = DB::table('market_providers')->where('slug', 'tgju')->value('id');

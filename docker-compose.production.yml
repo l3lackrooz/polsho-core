@@ -8,6 +8,8 @@ services:
     image: polsho-backend:production
     container_name: polsho-backend
     restart: unless-stopped
+    volumes:
+      - .:/var/www
     ports:
       - '${APP_PORT:-8000}:8000'
       - '${REVERB_SERVER_PORT:-8081}:8081'
