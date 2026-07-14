@@ -2,8 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Domain\Asset\Infrastructure\Persistence\Models\Asset;
+use App\Domain\Asset\Models\Instrument;
 use App\Domain\Market\Infrastructure\Aggregation\LatestQuoteAggregator;
 use App\Domain\Market\Infrastructure\Persistence\Models\MarketProvider;
+use App\Domain\Market\Infrastructure\Persistence\Models\ProviderMarket;
 use App\Domain\Market\Infrastructure\Stores\LatestQuoteStore;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -89,10 +92,50 @@ class LatestQuoteAggregatorTest extends TestCase
         $this->assertTrue($aggregated->toArray()['providers'][0]['is_best_ask']);
     }
 
-    /** @param array<string, array<string, int|string|float|null>> $rows */
-    private function aggregate(array $rows): ?\App\Domain\Market\Application\DTO\AggregatedQuoteDTO
+    public function test_includes_active_provider_markets_without_a_quote_for_comparison(): void
     {
-        return (new LatestQuoteAggregator(new class($rows) extends LatestQuoteStore {
+        $provider = $this->createProvider('nobitex');
+        $base = Asset::query()->create(['symbol' => 'USDT', 'name' => 'Tether']);
+        $quote = Asset::query()->create(['symbol' => 'IRT', 'name' => 'Iranian Toman']);
+        $instrument = Instrument::query()->create([
+            'base_asset_id' => $base->id,
+            'quote_asset_id' => $quote->id,
+            'symbol' => 'USDT-IRT',
+        ]);
+        ProviderMarket::query()->create([
+            'provider_id' => $provider->id,
+            'instrument_id' => $instrument->id,
+            'remote_symbol' => 'usdt-irt',
+        ]);
+
+        $aggregated = $this->aggregate([], 'USDT-IRT');
+
+        $this->assertNotNull($aggregated);
+        $this->assertNull($aggregated->bestBid);
+        $this->assertSame([
+            [
+                'provider' => 'nobitex',
+                'provider_market_id' => 1,
+                'is_reference' => false,
+                'bid' => null,
+                'ask' => null,
+                'last' => null,
+                'volume' => null,
+                'spread' => null,
+                'timestamp' => null,
+                'is_best_bid' => false,
+                'is_best_ask' => false,
+            ],
+        ], $aggregated->toArray()['comparison_providers']);
+    }
+
+    /** @param array<string, array<string, int|string|float|null>> $rows */
+    private function aggregate(
+        array $rows,
+        string $instrument = 'USDT-IRR',
+    ): ?\App\Domain\Market\Application\DTO\AggregatedQuoteDTO {
+        return (new LatestQuoteAggregator(new class($rows) extends LatestQuoteStore
+        {
             /** @param array<string, array<string, int|string|float|null>> $rows */
             public function __construct(private readonly array $rows) {}
 
@@ -100,13 +143,13 @@ class LatestQuoteAggregatorTest extends TestCase
             {
                 return $this->rows;
             }
-        }))->aggregateInstrument('USDT-IRR');
+        }))->aggregateInstrument($instrument);
     }
 
     /** @param array<string, mixed> $config */
-    private function createProvider(string $slug, array $config = []): void
+    private function createProvider(string $slug, array $config = []): MarketProvider
     {
-        MarketProvider::query()->create([
+        return MarketProvider::query()->create([
             'name' => strtoupper($slug),
             'slug' => $slug,
             'driver' => sprintf('Tests\\%sDriver', ucfirst($slug)),

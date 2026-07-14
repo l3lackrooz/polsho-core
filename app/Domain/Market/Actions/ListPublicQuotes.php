@@ -4,21 +4,23 @@ namespace App\Domain\Market\Actions;
 
 use App\Domain\Asset\Models\Instrument;
 use App\Domain\Market\Infrastructure\Stores\AggregateStore;
+use Illuminate\Support\Facades\DB;
 
 class ListPublicQuotes
 {
     public function __construct(private AggregateStore $store) {}
 
     /**
-     * @param string[] $requestedSymbols
+     * @param  string[]  $requestedSymbols
      * @return array{quotes: array<int, array>, missing: string[]}
      */
     public function execute(array $requestedSymbols): array
     {
         $activeSymbols = Instrument::query()
             ->where('status', 'active')
-            ->whereIn('symbol', $requestedSymbols)
+            ->whereIn(DB::raw('UPPER(symbol)'), $requestedSymbols)
             ->pluck('symbol')
+            ->map(static fn (string $symbol): string => strtoupper($symbol))
             ->all();
 
         $quotes = [];

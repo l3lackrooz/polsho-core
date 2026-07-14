@@ -3,14 +3,18 @@
 namespace App\Domain\Market\Infrastructure\Aggregation;
 
 use App\Domain\Market\Application\DTO\AggregatedQuoteDTO;
+use App\Domain\Market\Application\DTO\ComparisonProviderQuoteDTO;
 use App\Domain\Market\Application\DTO\QuoteDTO;
-use App\Domain\Market\Infrastructure\Stores\LatestQuoteStore;
 use App\Domain\Market\Infrastructure\Persistence\Models\MarketProvider;
+use App\Domain\Market\Infrastructure\Persistence\Models\ProviderMarket;
+use App\Domain\Market\Infrastructure\Stores\LatestQuoteStore;
 
 class LatestQuoteAggregator
 {
     private const DEFAULT_MAX_QUOTE_AGE_SECONDS = 5;
+
     private const MAX_SPREAD_RATIO = 0.10;
+
     private const MAX_DEVIATION = 0.08; // 8% from median
 
     public function __construct(
@@ -20,21 +24,17 @@ class LatestQuoteAggregator
     public function aggregateInstrument(string $instrument): ?AggregatedQuoteDTO
     {
         $rows = $this->quotes->getAll($instrument);
-
-        if ($rows === []) {
-            return null;
-        }
-
         $providers = $this->loadProviders();
+        $comparisonProviders = $this->comparisonProviders($instrument, $rows, $providers);
         $quotes = $this->normalizeQuotes($rows, $providers);
 
-        if ($quotes === []) {
+        if ($quotes === [] && $comparisonProviders === []) {
             return null;
         }
 
         $tradableQuotes = array_values(array_filter(
             $quotes,
-            static fn (QuoteDTO $quote): bool => !$quote->isReference,
+            static fn (QuoteDTO $quote): bool => ! $quote->isReference,
         ));
         $bestPriceCandidates = $this->filterOutliers($tradableQuotes);
         $referenceFallback = $tradableQuotes === []
@@ -46,6 +46,7 @@ class LatestQuoteAggregator
             $quotes,
             $bestPriceCandidates,
             $referenceFallback,
+            $comparisonProviders,
         );
     }
 
@@ -78,6 +79,62 @@ class LatestQuoteAggregator
         return $map;
     }
 
+    /**
+     * @param  array<string, array<string, mixed>>  $rows
+     * @param  array<string, array<string, mixed>>  $providers
+     * @return ComparisonProviderQuoteDTO[]
+     */
+    private function comparisonProviders(
+        string $instrument,
+        array $rows,
+        array $providers,
+    ): array {
+        $markets = ProviderMarket::query()
+            ->select([
+                'provider_markets.id',
+                'provider_markets.provider_id',
+                'market_providers.slug as provider_slug',
+            ])
+            ->join('market_providers', 'market_providers.id', '=', 'provider_markets.provider_id')
+            ->join('instruments', 'instruments.id', '=', 'provider_markets.instrument_id')
+            ->where('provider_markets.status', 'active')
+            ->where('market_providers.status', 'active')
+            ->whereRaw('UPPER(instruments.symbol) = ?', [strtoupper($instrument)])
+            ->orderBy('market_providers.priority')
+            ->orderBy('market_providers.slug')
+            ->get();
+
+        $comparisonProviders = [];
+
+        foreach ($markets as $market) {
+            $provider = (string) $market->provider_slug;
+            $providerConfig = $providers[$provider] ?? null;
+
+            if ($providerConfig === null) {
+                continue;
+            }
+
+            $quote = $rows[$provider] ?? null;
+            $isCurrentMarket = is_array($quote)
+                && (int) ($quote['provider_market_id'] ?? 0) === (int) $market->id;
+            $isValidQuote = $isCurrentMarket
+                && $this->isValidQuote($quote, $providerConfig['is_reference']);
+
+            $comparisonProviders[] = new ComparisonProviderQuoteDTO(
+                provider: $provider,
+                providerMarketId: (int) $market->id,
+                isReference: $providerConfig['is_reference'],
+                bid: $isValidQuote ? (float) $quote['bid'] : null,
+                ask: $isValidQuote ? (float) $quote['ask'] : null,
+                last: $isValidQuote && isset($quote['last']) ? (float) $quote['last'] : null,
+                volume: $isValidQuote && isset($quote['volume']) ? (float) $quote['volume'] : null,
+                timestamp: $isValidQuote ? (int) $quote['timestamp'] : null,
+            );
+        }
+
+        return $comparisonProviders;
+    }
+
     private function normalizeQuotes(array $rows, array $providers): array
     {
         $result = [];
@@ -85,17 +142,17 @@ class LatestQuoteAggregator
 
         foreach ($rows as $provider => $data) {
 
-            if (!isset($providers[$provider])) {
+            if (! isset($providers[$provider])) {
                 continue;
             }
 
             $isReference = $providers[$provider]['is_reference'];
 
-            if (!$this->isValidQuote($data, $isReference)) {
+            if (! $this->isValidQuote($data, $isReference)) {
                 continue;
             }
 
-            if (!$this->isFreshTimestamp(
+            if (! $this->isFreshTimestamp(
                 $data['timestamp'] ?? null,
                 $nowMs,
                 $providers[$provider]['max_quote_age_ms'],
@@ -106,11 +163,11 @@ class LatestQuoteAggregator
             $result[] = new QuoteDTO(
                 instrument: $data['instrument'],
                 provider: $provider,
-                bid: (float)$data['bid'],
-                ask: (float)$data['ask'],
+                bid: (float) $data['bid'],
+                ask: (float) $data['ask'],
                 last: $data['last'] ?? null,
                 volume: $data['volume'] ?? null,
-                timestamp: (int)$data['timestamp'],
+                timestamp: (int) $data['timestamp'],
                 providerMarketId: $data['provider_market_id'] ?? null,
                 isReference: $isReference,
             );
@@ -121,7 +178,7 @@ class LatestQuoteAggregator
 
     private function isValidQuote(array $quote, bool $isReference): bool
     {
-        if (!isset($quote['bid'], $quote['ask'])) {
+        if (! isset($quote['bid'], $quote['ask'])) {
             return false;
         }
 
@@ -141,7 +198,7 @@ class LatestQuoteAggregator
 
     private function isFreshTimestamp(mixed $timestamp, int $nowMs, int $maxAgeMs): bool
     {
-        if (!is_int($timestamp) && !is_float($timestamp) && !is_string($timestamp)) {
+        if (! is_int($timestamp) && ! is_float($timestamp) && ! is_string($timestamp)) {
             return false;
         }
 
@@ -200,7 +257,7 @@ class LatestQuoteAggregator
         $latest = null;
 
         foreach ($quotes as $quote) {
-            if (!$quote->isReference) {
+            if (! $quote->isReference) {
                 continue;
             }
 
@@ -213,21 +270,26 @@ class LatestQuoteAggregator
     }
 
     /**
-     * @param QuoteDTO[] $quotes
+     * @param  QuoteDTO[]  $quotes
+     * @param  ComparisonProviderQuoteDTO[]  $comparisonProviders
      */
     private function buildBestPrices(
         string $instrument,
         array $providers,
         array $bestPriceCandidates,
         ?QuoteDTO $referenceFallback,
-    ): AggregatedQuoteDTO
-    {
+        array $comparisonProviders,
+    ): AggregatedQuoteDTO {
         $bestBid = $referenceFallback;
         $bestAsk = $referenceFallback;
         $latestTimestamp = 0;
 
         foreach ($providers as $quote) {
             $latestTimestamp = max($latestTimestamp, $quote->timestamp);
+        }
+
+        foreach ($comparisonProviders as $quote) {
+            $latestTimestamp = max($latestTimestamp, $quote->timestamp ?? 0);
         }
 
         foreach ($bestPriceCandidates as $quote) {
@@ -247,7 +309,8 @@ class LatestQuoteAggregator
             bestBid: $bestBid,
             bestAsk: $bestAsk,
             providers: $providers,
-            timestamp: $latestTimestamp,
+            timestamp: $latestTimestamp > 0 ? $latestTimestamp : now()->getTimestampMs(),
+            comparisonProviders: $comparisonProviders,
         );
     }
 }

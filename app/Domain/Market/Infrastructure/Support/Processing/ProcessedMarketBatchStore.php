@@ -6,9 +6,15 @@ use Illuminate\Support\Facades\Cache;
 
 class ProcessedMarketBatchStore
 {
+    private const CACHE_VERSION = 'v2';
+
     public function remember(string $batchKey, callable $callback, int $ttlSeconds = 3600): bool
     {
-        $cacheKey = sprintf('market.processed-batch.%s', sha1($batchKey));
+        $cacheKey = sprintf(
+            'market.processed-batch.%s.%s',
+            self::CACHE_VERSION,
+            sha1($batchKey),
+        );
 
         return Cache::lock($cacheKey, $ttlSeconds)->get(function () use ($cacheKey, $callback, $ttlSeconds): bool {
             if (Cache::has($cacheKey)) {

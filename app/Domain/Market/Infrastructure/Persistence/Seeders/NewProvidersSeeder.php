@@ -97,6 +97,7 @@ class NewProvidersSeeder extends Seeder
                         $definition['slug'],
                         $remoteSymbol,
                     ));
+
                     continue;
                 }
 

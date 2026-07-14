@@ -71,7 +71,7 @@ class TgjuProviderSeeder extends Seeder
             }
 
             DB::table('instruments')->updateOrInsert(
-                ['symbol' => strtolower($base).'-irr'],
+                ['symbol' => $base.'-IRR'],
                 [
                     'base_asset_id' => $baseId,
                     'quote_asset_id' => $irrId,
@@ -107,19 +107,19 @@ class TgjuProviderSeeder extends Seeder
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ], 
+            ],
         );
 
         $providerId = DB::table('market_providers')->where('slug', 'tgju')->value('id');
 
         // TGJU remote symbols, all quoted in rial.
         $markets = [
-            'usd-irr' => 'price_dollar_rl',
-            'eur-irr' => 'price_eur',
-            'aed-irr' => 'price_aed',
-            'try-irr' => 'price_try',
-            'mesghal-irr' => 'mesghal',
-            'geram18-irr' => 'geram18',
+            'USD-IRR' => 'price_dollar_rl',
+            'EUR-IRR' => 'price_eur',
+            'AED-IRR' => 'price_aed',
+            'TRY-IRR' => 'price_try',
+            'MESGHAL-IRR' => 'mesghal',
+            'GERAM18-IRR' => 'geram18',
         ];
 
         foreach ($markets as $instrumentSymbol => $remoteSymbol) {

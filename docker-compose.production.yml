@@ -16,7 +16,7 @@ services:
     networks:
       backend_private:
         aliases:
-          - boxing-backend
+          - polsho-backend
 
 networks:
   backend_private:

@@ -33,6 +33,7 @@ class SyncProviderQuotesJob implements ShouldQueue
 
         if ($provider->markets->isEmpty()) {
             Log::warning(sprintf('Skipping provider [%s]; no active markets found.', $provider->slug ?: $provider->name));
+
             return;
         }
 
@@ -41,6 +42,11 @@ class SyncProviderQuotesJob implements ShouldQueue
 
         if ($quotes === []) {
             Log::info(sprintf('Provider [%s] returned no quotes.', $driver->name()));
+
+            foreach ($provider->markets as $market) {
+                AggregateInstrumentJob::dispatch($market->instrument->symbol);
+            }
+
             return;
         }
 
