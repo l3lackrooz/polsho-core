@@ -1,0 +1,22 @@
+services:
+  polsho:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        WWWGROUP: '${WWWGROUP:-1000}'
+    image: polsho-backend:production
+    container_name: polsho-backend
+    restart: unless-stopped
+    ports:
+      - '${APP_PORT:-8000}:8000'
+      - '${REVERB_SERVER_PORT:-8081}:8081'
+    networks:
+      backend_private:
+        aliases:
+          - boxing-backend
+
+networks:
+  backend_private:
+    external: true
+    name: backend_private
