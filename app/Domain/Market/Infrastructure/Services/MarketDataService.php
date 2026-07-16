@@ -2,6 +2,7 @@
 
 namespace App\Domain\Market\Infrastructure\Services;
 
+use App\Domain\Market\Application\Jobs\EvaluatePriceAlertsJob;
 use App\Domain\Market\Events\MarketDataUpdated;
 use App\Domain\Market\Infrastructure\Aggregation\LatestQuoteAggregator;
 use App\Domain\Market\Infrastructure\Stores\AggregateStore;
@@ -17,7 +18,7 @@ class MarketDataService
     {
         $dto = $this->aggregator->aggregateInstrument($instrument);
 
-        if (!$dto) {
+        if (! $dto) {
             return;
         }
 
@@ -27,8 +28,8 @@ class MarketDataService
         );
 
         if ($changed) {
+            EvaluatePriceAlertsJob::dispatch($dto->toArray());
             event(new MarketDataUpdated($dto));
         }
     }
 }
-

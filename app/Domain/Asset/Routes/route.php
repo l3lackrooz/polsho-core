@@ -2,6 +2,7 @@
 
 use App\Domain\Asset\Controllers\AssetController;
 use App\Domain\Asset\Controllers\InstrumentController;
+use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Support\Facades\Route;
 
 // Returned as a closure (instead of registering routes at include time) because
@@ -13,7 +14,9 @@ return function (): void {
     });
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::apiResource('assets', AssetController::class);
-        Route::apiResource('instruments', InstrumentController::class);
+        Route::middleware(EnsureAdmin::class)->group(function (): void {
+            Route::apiResource('assets', AssetController::class);
+            Route::apiResource('instruments', InstrumentController::class);
+        });
     });
 };

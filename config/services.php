@@ -49,4 +49,21 @@ return [
         'timeout' => (int) env('BALE_BOT_TIMEOUT', 10),
     ],
 
+    'pushe' => [
+        'enabled' => env('PUSHE_ENABLED', false),
+        'legacy_user_targeting' => env('PUSHE_LEGACY_USER_TARGETING', true),
+        'base_url' => env('PUSHE_BASE_URL', 'https://api.pushe.co'),
+        'app_id' => env('PUSHE_APP_ID'),
+        'token' => env('PUSHE_API_TOKEN'),
+        'timeout' => (int) env('PUSHE_TIMEOUT', 10),
+    ],
+
+    'fcm' => [
+        'enabled' => env('FCM_ENABLED', false),
+        'base_url' => env('FCM_BASE_URL', 'https://fcm.googleapis.com/v1'),
+        'project_id' => env('FCM_PROJECT_ID'),
+        'credentials' => env('GOOGLE_APPLICATION_CREDENTIALS'),
+        'timeout' => (int) env('FCM_TIMEOUT', 10),
+    ],
+
 ];

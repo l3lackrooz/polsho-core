@@ -50,7 +50,7 @@ class LatestQuoteAggregatorTest extends TestCase
         $this->assertTrue($providers['ramzinex']['is_best_ask']);
     }
 
-    public function test_excludes_a_quote_older_than_five_seconds_using_millisecond_timestamps(): void
+    public function test_keeps_a_quote_within_the_default_thirty_second_grace_window(): void
     {
         $this->createProvider('nobitex');
 
@@ -59,7 +59,25 @@ class LatestQuoteAggregatorTest extends TestCase
                 'nobitex',
                 1_774_000,
                 1_774_300,
-                now()->subSeconds(6)->getTimestampMs(),
+                now()->subSeconds(10)->getTimestampMs(),
+                3,
+            ),
+        ]);
+
+        $this->assertNotNull($aggregated);
+        $this->assertSame('nobitex', $aggregated->bestBid?->provider);
+    }
+
+    public function test_excludes_a_quote_older_than_thirty_seconds_using_millisecond_timestamps(): void
+    {
+        $this->createProvider('nobitex');
+
+        $aggregated = $this->aggregate([
+            'nobitex' => $this->quote(
+                'nobitex',
+                1_774_000,
+                1_774_300,
+                now()->subSeconds(31)->getTimestampMs(),
                 3,
             ),
         ]);

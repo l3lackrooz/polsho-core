@@ -2,18 +2,23 @@
 
 namespace App\Domain\Market;
 
-use App\Domain\Market\Infrastructure\Aggregation\PriceAggregator;
+use App\Domain\Market\Application\Services\PushProviderRegistry;
+use App\Domain\Market\Contracts\FcmAccessTokenProvider;
 use App\Domain\Market\Infrastructure\Aggregation\LatestQuoteAggregator;
+use App\Domain\Market\Infrastructure\Aggregation\PriceAggregator;
 use App\Domain\Market\Infrastructure\Aggregation\ProviderManager;
 use App\Domain\Market\Infrastructure\Broadcasting\MarketBroadcaster;
-use App\Domain\Market\Infrastructure\Stores\LatestQuoteStore;
+use App\Domain\Market\Infrastructure\Notifications\FcmPushNotificationSender;
+use App\Domain\Market\Infrastructure\Notifications\GoogleFcmAccessTokenProvider;
+use App\Domain\Market\Infrastructure\Notifications\PushePushNotificationSender;
 use App\Domain\Market\Infrastructure\Persistence\MarketSnapshotWriter;
 use App\Domain\Market\Infrastructure\Persistence\Models\MarketProvider;
 use App\Domain\Market\Infrastructure\Providers\ProviderFactory;
-use App\Domain\Market\Infrastructure\Support\Processing\ProcessedMarketBatchStore;
+use App\Domain\Market\Infrastructure\Stores\LatestQuoteStore;
 use App\Domain\Market\Infrastructure\Subscriptions\MarketSubscriptionFactory;
-use Throwable;
+use App\Domain\Market\Infrastructure\Support\Processing\ProcessedMarketBatchStore;
 use Illuminate\Support\ServiceProvider;
+use Throwable;
 
 class MarketServiceProvider extends ServiceProvider
 {
@@ -49,6 +54,13 @@ class MarketServiceProvider extends ServiceProvider
         $this->app->singleton(ProcessedMarketBatchStore::class);
         $this->app->singleton(PriceAggregator::class);
         $this->app->singleton(MarketBroadcaster::class);
+        $this->app->singleton(FcmAccessTokenProvider::class, GoogleFcmAccessTokenProvider::class);
+        $this->app->singleton(PushePushNotificationSender::class);
+        $this->app->singleton(FcmPushNotificationSender::class);
+        $this->app->singleton(PushProviderRegistry::class, fn ($app): PushProviderRegistry => new PushProviderRegistry([
+            $app->make(PushePushNotificationSender::class),
+            $app->make(FcmPushNotificationSender::class),
+        ]));
     }
 
     public function boot(): void

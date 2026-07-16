@@ -11,7 +11,10 @@ use App\Domain\Market\Infrastructure\Stores\LatestQuoteStore;
 
 class LatestQuoteAggregator
 {
-    private const DEFAULT_MAX_QUOTE_AGE_SECONDS = 5;
+    // Providers are polled on a ten-second cadence. Leave room for network
+    // latency and sequential jobs so one provider update does not evict the
+    // other current exchange quotes from the aggregate event.
+    private const DEFAULT_MAX_QUOTE_AGE_SECONDS = 30;
 
     private const MAX_SPREAD_RATIO = 0.10;
 

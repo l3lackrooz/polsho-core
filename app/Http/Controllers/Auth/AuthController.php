@@ -4,17 +4,34 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Services\AuthUserPresenter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function register(RegisterRequest $request, AuthUserPresenter $presenter): JsonResponse
+    {
+        $user = User::query()->create($request->safe()->except(['password_confirmation', 'device_name']));
+        $user->sendEmailVerificationNotification();
+        $token = $user->createToken($request->input('device_name', 'polsho-mobile'));
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'token' => $token->plainTextToken,
+                'user' => $presenter->present($user),
+            ],
+        ], 201);
+    }
+
     /**
      * Issue a personal access token for valid credentials.
      */
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request, AuthUserPresenter $presenter): JsonResponse
     {
         $user = User::query()->where('email', $request->input('email'))->first();
 
@@ -25,13 +42,20 @@ class AuthController extends Controller
             ], 401);
         }
 
+        if ($request->input('device_name') === 'backoffice-web' && ! $user->is_admin) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Administrator access is required.',
+            ], 403);
+        }
+
         $token = $user->createToken($request->input('device_name', 'backoffice'));
 
         return response()->json([
             'success' => true,
             'data' => [
                 'token' => $token->plainTextToken,
-                'user' => $user,
+                'user' => $presenter->present($user),
             ],
         ]);
     }
@@ -52,12 +76,12 @@ class AuthController extends Controller
     /**
      * The currently authenticated user.
      */
-    public function me(Request $request): JsonResponse
+    public function me(Request $request, AuthUserPresenter $presenter): JsonResponse
     {
         return response()->json([
             'success' => true,
             'data' => [
-                'user' => $request->user(),
+                'user' => $presenter->present($request->user()),
             ],
         ]);
     }
