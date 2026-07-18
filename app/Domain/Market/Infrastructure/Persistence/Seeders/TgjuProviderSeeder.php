@@ -29,12 +29,12 @@ class TgjuProviderSeeder extends Seeder
     private function seedAssets(): void
     {
         $assets = [
-            ['symbol' => 'USD', 'name' => 'US Dollar', 'precision' => 0, 'type' => 'fiat'],
-            ['symbol' => 'EUR', 'name' => 'Euro', 'precision' => 0, 'type' => 'fiat'],
-            ['symbol' => 'AED', 'name' => 'UAE Dirham', 'precision' => 0, 'type' => 'fiat'],
-            ['symbol' => 'TRY', 'name' => 'Turkish Lira', 'precision' => 0, 'type' => 'fiat'],
-            ['symbol' => 'MESGHAL', 'name' => 'Gold (Mithqal)', 'precision' => 0, 'type' => 'metal'],
-            ['symbol' => 'GERAM18', 'name' => '18K Gold (Gram)', 'precision' => 0, 'type' => 'metal'],
+            ['symbol' => 'USD', 'name' => 'US Dollar', 'precision' => 0, 'type' => 'fiat', 'translations' => ['fa' => 'دلار آمریکا', 'de' => 'US-Dollar']],
+            ['symbol' => 'EUR', 'name' => 'Euro', 'precision' => 0, 'type' => 'fiat', 'translations' => ['fa' => 'یورو', 'de' => 'Euro']],
+            ['symbol' => 'AED', 'name' => 'UAE Dirham', 'precision' => 0, 'type' => 'fiat', 'translations' => ['fa' => 'درهم امارات', 'de' => 'VAE-Dirham']],
+            ['symbol' => 'TRY', 'name' => 'Turkish Lira', 'precision' => 0, 'type' => 'fiat', 'translations' => ['fa' => 'لیر ترکیه', 'de' => 'Türkische Lira']],
+            ['symbol' => 'MESGHAL', 'name' => 'Gold (Mithqal)', 'precision' => 0, 'type' => 'metal', 'translations' => ['fa' => 'مثقال طلا', 'de' => 'Gold (Mithqal)']],
+            ['symbol' => 'GERAM18', 'name' => '18K Gold (Gram)', 'precision' => 0, 'type' => 'metal', 'translations' => ['fa' => 'طلای ۱۸ عیار (گرم)', 'de' => '18-Karat-Gold (Gramm)']],
         ];
 
         foreach ($assets as $asset) {
@@ -45,6 +45,7 @@ class TgjuProviderSeeder extends Seeder
                     'precision' => $asset['precision'],
                     'type' => $asset['type'],
                     'status' => 'active',
+                    'translations' => json_encode($asset['translations']),
                     'metadata' => json_encode((object) []),
                     'created_at' => now(),
                     'updated_at' => now(),
@@ -90,6 +91,7 @@ class TgjuProviderSeeder extends Seeder
             ['slug' => 'tgju'],
             [
                 'name' => 'TGJU',
+                'translations' => json_encode(['fa' => 'شبکه اطلاع رسانی طلا، سکه و ارز', 'de' => 'TGJU-Referenzkurse']),
                 'driver' => TgjuDriver::class,
                 'base_url' => 'https://call4.tgju.org',
                 'description' => 'TGJU reference rates for fiat currencies and gold (IRR).',

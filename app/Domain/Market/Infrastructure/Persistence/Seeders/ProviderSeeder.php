@@ -3,10 +3,8 @@
 namespace App\Domain\Market\Infrastructure\Persistence\Seeders;
 
 use App\Domain\Market\Infrastructure\Providers\Drivers\NobitexDriver;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
 
 class ProviderSeeder extends Seeder
 {
@@ -18,12 +16,13 @@ class ProviderSeeder extends Seeder
         DB::table('market_providers')->insert([
             [
                 'name' => 'Nobitex',
+                'translations' => json_encode(['fa' => 'نوبیتکس', 'de' => 'Nobitex']),
                 'slug' => 'nobitex',
                 'driver' => NobitexDriver::class,
                 'base_url' => 'https://api.nobitex.ir',
                 'status' => 'active',
                 'config' => json_encode([
-                    'api_url' => 'https://api.nobitex.ir'
+                    'api_url' => 'https://api.nobitex.ir',
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),

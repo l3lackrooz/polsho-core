@@ -3,10 +3,14 @@
 namespace App\Domain\Market\Application\Services;
 
 use App\Domain\Market\Application\Jobs\SendPriceAlertPushJob;
+use App\Domain\Market\Application\Presenters\MarketNotificationPresenter;
+use App\Domain\Market\Events\PriceAlertNotificationCreated;
 use App\Domain\Market\Infrastructure\Notifications\PriceAlertTriggeredNotification;
 use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlertEvent;
 use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlertNotificationDelivery;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class PriceAlertNotificationService
@@ -14,6 +18,7 @@ class PriceAlertNotificationService
     public function __construct(
         private readonly PushNotificationTargetResolver $targets,
         private readonly PriceAlertPushDeliveryService $pushDeliveries,
+        private readonly MarketNotificationPresenter $notificationPresenter,
     ) {}
 
     public function deliver(int $eventId): void
@@ -33,8 +38,9 @@ class PriceAlertNotificationService
             ['provider' => 'multiple', 'push_status' => 'pending'],
         );
 
+        $inAppNotificationSent = false;
         if ($alert->notify_in_app && $delivery->in_app_sent_at === null) {
-            DB::transaction(function () use ($delivery, $user, $event): void {
+            DB::transaction(function () use ($delivery, $user, $event, &$inAppNotificationSent): void {
                 $locked = PriceAlertNotificationDelivery::query()
                     ->lockForUpdate()
                     ->findOrFail($delivery->id);
@@ -42,8 +48,13 @@ class PriceAlertNotificationService
                 if ($locked->in_app_sent_at === null) {
                     $user->notify(new PriceAlertTriggeredNotification($event));
                     $locked->update(['in_app_sent_at' => now()]);
+                    $inAppNotificationSent = true;
                 }
             });
+        }
+
+        if ($inAppNotificationSent) {
+            $this->broadcastInAppNotification($user->id, $event->id);
         }
 
         $delivery->refresh();
@@ -92,6 +103,43 @@ class PriceAlertNotificationService
     public static function recipientId(int $userId): string
     {
         return sprintf('polsho-user-%d', $userId);
+    }
+
+    private function broadcastInAppNotification(int $userId, int $eventId): void
+    {
+        $notification = DatabaseNotification::query()
+            ->where('notifiable_type', 'App\\Models\\User')
+            ->where('notifiable_id', $userId)
+            ->where('type', PriceAlertTriggeredNotification::class)
+            ->latest()
+            ->get()
+            ->first(function (DatabaseNotification $item) use ($eventId): bool {
+                return (int) data_get($item->data, 'price_alert_event_id') === $eventId;
+            });
+
+        if ($notification === null) {
+            Log::warning('Price alert inbox notification was not found for broadcast.', [
+                'user_id' => $userId,
+                'price_alert_event_id' => $eventId,
+            ]);
+
+            return;
+        }
+
+        try {
+            event(new PriceAlertNotificationCreated(
+                $userId,
+                $this->notificationPresenter->present($notification),
+            ));
+        } catch (Throwable $exception) {
+            // The inbox and push path have already succeeded. A temporary Reverb
+            // failure must not make an alert delivery fail or be retried as push.
+            Log::warning('Price alert realtime broadcast failed.', [
+                'user_id' => $userId,
+                'price_alert_event_id' => $eventId,
+                'error' => $exception->getMessage(),
+            ]);
+        }
     }
 
     public function markDispatchFailed(int $eventId, Throwable $exception): void

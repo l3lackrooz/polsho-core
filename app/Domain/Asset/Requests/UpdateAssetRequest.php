@@ -29,6 +29,9 @@ class UpdateAssetRequest extends FormRequest
             'precision' => ['sometimes', 'integer', 'min:0', 'max:30'],
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
             'type' => ['sometimes', Rule::enum(CurrencyType::class)],
+            'is_base_currency' => ['sometimes', 'boolean'],
+            'translations' => ['nullable', 'array'],
+            'translations.*' => ['nullable', 'string', 'max:255'],
             'metadata' => ['nullable', 'array'],
         ];
     }

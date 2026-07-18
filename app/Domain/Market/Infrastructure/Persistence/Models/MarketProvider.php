@@ -2,6 +2,7 @@
 
 namespace App\Domain\Market\Infrastructure\Persistence\Models;
 
+use App\Domain\Shared\Services\BrandingStorage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -11,10 +12,13 @@ class MarketProvider extends Model
 
     protected $fillable = [
         'name',
+        'translations',
         'driver',
         'slug',
         'base_url',
+        'homepage_url',
         'description',
+        'logo_path',
         'status',
         'is_default',
         'priority',
@@ -23,8 +27,16 @@ class MarketProvider extends Model
 
     protected $casts = [
         'config' => 'array',
+        'translations' => 'array',
         'is_default' => 'boolean',
     ];
+
+    protected $appends = ['logo_url'];
+
+    public function getLogoUrlAttribute(): ?string
+    {
+        return app(BrandingStorage::class)->url($this->logo_path);
+    }
 
     public function markets(): HasMany
     {

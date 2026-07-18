@@ -12,10 +12,12 @@ class MarketProviderDTO
         public string $driver,
         public string $slug,
         public string $baseUrl,
+        public ?string $homepageUrl = null,
         public ?string $description = null,
         public string $status = 'active',
         public bool $isDefault = false,
         public int $priority = 0,
+        public ?array $translations = null,
         public ?array $config = null,
     ) {}
 
@@ -28,10 +30,12 @@ class MarketProviderDTO
             driver: trim($data['driver']),
             slug: strtolower(trim($data['slug'] ?? '') ?: Str::slug($name, '_')),
             baseUrl: rtrim(trim($data['base_url']), '/'),
+            homepageUrl: self::normalizeUrl($data['homepage_url'] ?? null),
             description: $data['description'] ?? null,
             status: $data['status'] ?? 'active',
             isDefault: (bool) ($data['is_default'] ?? false),
             priority: (int) ($data['priority'] ?? 0),
+            translations: self::normalizeTranslations($data['translations'] ?? null),
             config: $data['config'] ?? null,
         );
     }
@@ -48,10 +52,12 @@ class MarketProviderDTO
                 'driver' => $provider->driver,
                 'slug' => $provider->slug,
                 'base_url' => $provider->base_url,
+                'homepage_url' => $provider->homepage_url,
                 'description' => $provider->description,
                 'status' => $provider->status,
                 'is_default' => $provider->is_default,
                 'priority' => $provider->priority,
+                'translations' => $provider->translations,
                 'config' => $provider->config,
             ],
             $overrides,
@@ -65,10 +71,12 @@ class MarketProviderDTO
             'driver' => $this->driver,
             'slug' => $this->slug,
             'base_url' => $this->baseUrl,
+            'homepage_url' => $this->homepageUrl,
             'description' => $this->description,
             'status' => $this->status,
             'is_default' => $this->isDefault,
             'priority' => $this->priority,
+            'translations' => $this->translations,
             'config' => $this->config,
         ];
     }
@@ -80,11 +88,40 @@ class MarketProviderDTO
             'name' => $this->name,
             'class_name' => $this->driver,
             'slug' => $this->slug,
+            'homepage_url' => $this->homepageUrl,
             'description' => $this->description,
             'status' => $this->status,
             'is_default' => $this->isDefault,
             'priority' => $this->priority,
+            'translations' => $this->translations,
             'config' => array_merge($this->config ?? [], ['base_url' => $this->baseUrl]),
         ];
+    }
+
+    private static function normalizeTranslations(?array $translations): ?array
+    {
+        if ($translations === null) {
+            return null;
+        }
+
+        $normalized = [];
+        foreach ($translations as $locale => $name) {
+            $locale = strtolower(trim((string) $locale));
+            $name = trim((string) $name);
+            if ($locale !== '' && $name !== '') {
+                $normalized[$locale] = $name;
+            }
+        }
+
+        return $normalized;
+    }
+
+    private static function normalizeUrl(mixed $value): ?string
+    {
+        if (! is_string($value) || trim($value) === '') {
+            return null;
+        }
+
+        return rtrim(trim($value), '/');
     }
 }

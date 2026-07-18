@@ -15,6 +15,8 @@ return function (): void {
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::middleware(EnsureAdmin::class)->group(function (): void {
+            Route::post('assets/{asset}/logo', [AssetController::class, 'uploadLogo']);
+            Route::delete('assets/{asset}/logo', [AssetController::class, 'deleteLogo']);
             Route::apiResource('assets', AssetController::class);
             Route::apiResource('instruments', InstrumentController::class);
         });

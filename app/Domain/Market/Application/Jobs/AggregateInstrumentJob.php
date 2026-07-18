@@ -8,6 +8,8 @@ use Illuminate\Foundation\Queue\Queueable;
 
 class AggregateInstrumentJob implements ShouldQueue
 {
+    use Queueable;
+
     public function __construct(
         private string $instrument
     ) {}
@@ -17,4 +19,3 @@ class AggregateInstrumentJob implements ShouldQueue
         $service->aggregate($this->instrument);
     }
 }
-

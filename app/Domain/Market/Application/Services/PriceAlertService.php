@@ -2,6 +2,7 @@
 
 namespace App\Domain\Market\Application\Services;
 
+use App\Domain\Market\Application\Presenters\PriceAlertPresenter;
 use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlert;
 use App\Domain\Market\Infrastructure\Persistence\Models\ProviderMarket;
 use App\Models\User;
@@ -12,7 +13,10 @@ use Illuminate\Validation\ValidationException;
 
 class PriceAlertService
 {
-    public function __construct(private readonly AlertEntitlementService $entitlements) {}
+    public function __construct(
+        private readonly AlertEntitlementService $entitlements,
+        private readonly PriceAlertPresenter $presenter,
+    ) {}
 
     public function list(int $userId, int $perPage = 25): LengthAwarePaginator
     {
@@ -26,6 +30,11 @@ class PriceAlertService
             $this->entitlements->assertCanCreate($user);
             $this->validateScope($data);
             $alert = PriceAlert::create([...$data, 'user_id' => $userId]);
+            // Anchor progress displays to the market price at creation.
+            $baseline = $this->presenter->currentPrice($this->load($alert));
+            if ($baseline !== null) {
+                $alert->update(['baseline_price' => $baseline]);
+            }
             $alert->events()->create(['type' => 'created', 'occurred_at' => now()]);
 
             return $this->load($alert);

@@ -13,6 +13,8 @@ class AssetDTO
         public int $precision = 8,
         public string $status = 'active',
         public CurrencyType $type = CurrencyType::CRYPTO,
+        public bool $isBaseCurrency = false,
+        public ?array $translations = null,
         public ?array $metadata = null,
     ) {}
 
@@ -24,6 +26,8 @@ class AssetDTO
             precision: (int) ($data['precision'] ?? 8),
             status: $data['status'] ?? 'active',
             type: CurrencyType::from($data['type'] ?? CurrencyType::CRYPTO->value),
+            isBaseCurrency: (bool) ($data['is_base_currency'] ?? false),
+            translations: self::normalizeTranslations($data['translations'] ?? null),
             metadata: $data['metadata'] ?? null,
         );
     }
@@ -41,6 +45,8 @@ class AssetDTO
                 'precision' => $asset->precision,
                 'status' => $asset->status,
                 'type' => $asset->type->value,
+                'is_base_currency' => $asset->is_base_currency,
+                'translations' => $asset->translations,
                 'metadata' => $asset->metadata,
             ],
             $overrides,
@@ -55,7 +61,27 @@ class AssetDTO
             'precision' => $this->precision,
             'status' => $this->status,
             'type' => $this->type->value,
+            'is_base_currency' => $this->isBaseCurrency,
+            'translations' => $this->translations,
             'metadata' => $this->metadata,
         ];
+    }
+
+    private static function normalizeTranslations(?array $translations): ?array
+    {
+        if ($translations === null) {
+            return null;
+        }
+
+        $normalized = [];
+        foreach ($translations as $locale => $name) {
+            $locale = strtolower(trim((string) $locale));
+            $name = trim((string) $name);
+            if ($locale !== '' && $name !== '') {
+                $normalized[$locale] = $name;
+            }
+        }
+
+        return $normalized;
     }
 }

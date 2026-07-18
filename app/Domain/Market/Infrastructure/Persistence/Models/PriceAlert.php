@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PriceAlert extends Model
 {
-    protected $fillable = ['user_id', 'instrument_id', 'provider_market_id', 'scope', 'condition', 'target_price', 'status', 'repeat', 'notify_push', 'notify_in_app', 'last_triggered_at', 'expires_at', 'metadata'];
+    protected $fillable = ['user_id', 'instrument_id', 'provider_market_id', 'scope', 'condition', 'target_price', 'baseline_price', 'status', 'repeat', 'notify_push', 'notify_in_app', 'last_triggered_at', 'expires_at', 'metadata'];
 
-    protected $casts = ['target_price' => 'decimal:10', 'notify_push' => 'boolean', 'notify_in_app' => 'boolean', 'last_triggered_at' => 'datetime', 'expires_at' => 'datetime', 'metadata' => 'array'];
+    protected $casts = ['target_price' => 'decimal:10', 'baseline_price' => 'decimal:10', 'notify_push' => 'boolean', 'notify_in_app' => 'boolean', 'last_triggered_at' => 'datetime', 'expires_at' => 'datetime', 'metadata' => 'array'];
 
     public function instrument(): BelongsTo
     {

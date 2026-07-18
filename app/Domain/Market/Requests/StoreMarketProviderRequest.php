@@ -30,10 +30,13 @@ class StoreMarketProviderRequest extends FormRequest
             ],
             'slug' => ['nullable', 'string', 'max:255', 'unique:market_providers,slug'],
             'base_url' => ['required', 'url', 'max:255'],
+            'homepage_url' => ['nullable', 'url', 'max:2048'],
             'description' => ['nullable', 'string'],
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
             'is_default' => ['sometimes', 'boolean'],
             'priority' => ['sometimes', 'integer', 'min:0', 'max:65535'],
+            'translations' => ['nullable', 'array'],
+            'translations.*' => ['nullable', 'string', 'max:255'],
             'config' => ['nullable', 'array'],
         ];
     }

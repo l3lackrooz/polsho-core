@@ -12,6 +12,7 @@ use App\Domain\Asset\Infrastructure\Persistence\Models\Asset;
 use App\Domain\Asset\Requests\StoreAssetRequest;
 use App\Domain\Asset\Requests\UpdateAssetRequest;
 use App\Domain\Shared\Concerns\RespondsWithApi;
+use App\Domain\Shared\Services\BrandingStorage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -52,5 +53,25 @@ class AssetController extends Controller
         $action->execute($asset);
 
         return $this->respondMessage('Asset deleted.');
+    }
+
+    public function uploadLogo(Request $request, Asset $asset, BrandingStorage $branding): JsonResponse
+    {
+        $request->validate([
+            'logo' => ['required', 'file', 'mimes:png,jpg,jpeg,webp,svg', 'max:512'],
+        ]);
+
+        $branding->delete($asset->logo_path);
+        $asset->update(['logo_path' => $branding->store($request->file('logo'), $asset->symbol)]);
+
+        return $this->respond($asset->refresh());
+    }
+
+    public function deleteLogo(Asset $asset, BrandingStorage $branding): JsonResponse
+    {
+        $branding->delete($asset->logo_path);
+        $asset->update(['logo_path' => null]);
+
+        return $this->respond($asset->refresh());
     }
 }

@@ -14,6 +14,9 @@ class QuoteDTO
         public int $timestamp,       // epoch_ms
         public ?int $providerMarketId = null,
         public bool $isReference = false,
+        public ?string $providerName = null,
+        public ?array $providerTranslations = null,
+        public ?string $providerHomepageUrl = null,
     ) {}
 
     public function spread(): ?float
@@ -21,6 +24,7 @@ class QuoteDTO
         if ($this->bid <= 0 || $this->ask <= 0) {
             return null;
         }
+
         return $this->ask - $this->bid;
     }
 
@@ -29,23 +33,27 @@ class QuoteDTO
         if ($this->bid <= 0 || $this->ask <= 0) {
             return null;
         }
+
         return ($this->bid + $this->ask) / 2;
     }
 
     public function toArray(): array
     {
         return [
-            'instrument'         => $this->instrument,
-            'provider'           => $this->provider,
-            'bid'                => $this->bid,
-            'ask'                => $this->ask,
-            'last'               => $this->last,
-            'volume'             => $this->volume,
-            'mid'                => $this->mid(),
-            'spread'             => $this->spread(),
-            'timestamp'          => $this->timestamp,
+            'instrument' => $this->instrument,
+            'provider' => $this->provider,
+            'provider_name' => $this->providerName,
+            'provider_translations' => $this->providerTranslations,
+            'provider_homepage_url' => $this->providerHomepageUrl,
+            'bid' => $this->bid,
+            'ask' => $this->ask,
+            'last' => $this->last,
+            'volume' => $this->volume,
+            'mid' => $this->mid(),
+            'spread' => $this->spread(),
+            'timestamp' => $this->timestamp,
             'provider_market_id' => $this->providerMarketId,
-            'is_reference'       => $this->isReference,
+            'is_reference' => $this->isReference,
         ];
     }
 
@@ -61,6 +69,9 @@ class QuoteDTO
             timestamp: (int) $data['timestamp'],
             providerMarketId: $data['provider_market_id'] ?? null,
             isReference: (bool) ($data['is_reference'] ?? false),
+            providerName: $data['provider_name'] ?? null,
+            providerTranslations: $data['provider_translations'] ?? null,
+            providerHomepageUrl: $data['provider_homepage_url'] ?? null,
         );
     }
 }

@@ -7,6 +7,7 @@ use App\Domain\Market\Infrastructure\Persistence\Seeders\InstrumentSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\NewProvidersSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\ProviderSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\TgjuProviderSeeder;
+use App\Domain\Market\Infrastructure\Persistence\Seeders\TalaProviderSeeder;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
             InstrumentSeeder::class,
             NewProvidersSeeder::class,
             TgjuProviderSeeder::class,
+            TalaProviderSeeder::class,
         ]);
     }
 }

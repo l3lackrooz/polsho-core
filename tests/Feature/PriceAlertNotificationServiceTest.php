@@ -6,6 +6,7 @@ use App\Domain\Asset\Infrastructure\Persistence\Models\Asset;
 use App\Domain\Asset\Models\Instrument;
 use App\Domain\Market\Application\Jobs\SendPriceAlertPushJob;
 use App\Domain\Market\Application\Services\PriceAlertNotificationService;
+use App\Domain\Market\Events\PriceAlertNotificationCreated;
 use App\Domain\Market\Infrastructure\Notifications\PriceAlertTriggeredNotification;
 use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlert;
 use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlertEvent;
@@ -13,6 +14,7 @@ use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlertNotificationDe
 use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlertPushDelivery;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -25,6 +27,10 @@ class PriceAlertNotificationServiceTest extends TestCase
     public function test_stores_in_app_notification_and_queues_one_legacy_pushe_target(): void
     {
         Queue::fake();
+        $broadcasts = [];
+        Event::listen(PriceAlertNotificationCreated::class, function (PriceAlertNotificationCreated $broadcast) use (&$broadcasts): void {
+            $broadcasts[] = $broadcast;
+        });
         [$user, $event] = $this->triggeredEvent();
 
         app(PriceAlertNotificationService::class)->deliver($event->id);
@@ -46,6 +52,9 @@ class PriceAlertNotificationServiceTest extends TestCase
             'notifiable_id' => $user->id,
         ]);
         Queue::assertPushed(SendPriceAlertPushJob::class, 1);
+        $this->assertCount(1, $broadcasts);
+        $this->assertSame($user->id, $broadcasts[0]->userId);
+        $this->assertSame((string) $event->alert->id, $broadcasts[0]->notification['price_alert_id']);
     }
 
     public function test_creates_one_grouped_android_target_and_one_target_per_iphone(): void

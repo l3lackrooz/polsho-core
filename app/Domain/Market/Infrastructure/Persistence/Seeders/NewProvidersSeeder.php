@@ -24,6 +24,7 @@ class NewProvidersSeeder extends Seeder
         $providers = [
             [
                 'name' => 'Wallex',
+                'translations' => ['fa' => 'والکس', 'de' => 'Wallex'],
                 'slug' => 'wallex',
                 'driver' => WallexDriver::class,
                 'base_url' => 'https://api.wallex.ir',
@@ -38,6 +39,7 @@ class NewProvidersSeeder extends Seeder
             ],
             [
                 'name' => 'Bitpin',
+                'translations' => ['fa' => 'بیت پین', 'de' => 'Bitpin'],
                 'slug' => 'bitpin',
                 'driver' => BitpinDriver::class,
                 'base_url' => 'https://api.bitpin.ir',
@@ -52,6 +54,7 @@ class NewProvidersSeeder extends Seeder
             ],
             [
                 'name' => 'OMPFinex',
+                'translations' => ['fa' => 'او ام پی فینکس', 'de' => 'OMPFinex'],
                 'slug' => 'ompfinex',
                 'driver' => OmpfinexDriver::class,
                 'base_url' => 'https://api.ompfinex.com',
@@ -70,6 +73,7 @@ class NewProvidersSeeder extends Seeder
                 ['slug' => $definition['slug']],
                 [
                     'name' => $definition['name'],
+                    'translations' => json_encode($definition['translations']),
                     'driver' => $definition['driver'],
                     'base_url' => $definition['base_url'],
                     'status' => $definition['status'],

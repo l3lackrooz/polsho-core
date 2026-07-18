@@ -45,6 +45,7 @@ class PriceAlertPresenter
             'scope' => $alert->scope,
             'condition' => $alert->condition,
             'target_price' => $alert->target_price,
+            'baseline_price' => $alert->baseline_price,
             'current_price' => $this->currentPrice($alert),
             'status' => $alert->status,
             'repeat' => $alert->repeat,
@@ -62,7 +63,7 @@ class PriceAlertPresenter
         ];
     }
 
-    private function currentPrice(PriceAlert $alert): ?float
+    public function currentPrice(PriceAlert $alert): ?float
     {
         try {
             $aggregate = $this->aggregates->get($alert->instrument->symbol);

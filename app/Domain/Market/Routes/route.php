@@ -26,6 +26,9 @@ return function (): void {
             Route::middleware(EnsureAdmin::class)->group(function (): void {
                 // Before the resource so it isn't captured by providers/{provider}
                 Route::get('providers/drivers', [MarketProviderController::class, 'drivers']);
+                Route::post('providers/{provider}/sync', [MarketProviderController::class, 'sync']);
+                Route::post('providers/{provider}/logo', [MarketProviderController::class, 'uploadLogo']);
+                Route::delete('providers/{provider}/logo', [MarketProviderController::class, 'deleteLogo']);
                 Route::apiResource('providers', MarketProviderController::class);
                 Route::apiResource('provider-markets', ProviderMarketController::class);
                 Route::get('alert-deliveries', [PriceAlertNotificationDeliveryController::class, 'index']);

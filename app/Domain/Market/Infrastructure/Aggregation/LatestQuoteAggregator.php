@@ -71,6 +71,9 @@ class LatestQuoteAggregator
                 ?? ($p->priority / $maxPriority);
 
             $map[$p->slug] = [
+                'name' => $p->name,
+                'translations' => $p->translations,
+                'homepage_url' => $p->homepage_url,
                 'weight' => $weight,
                 'max_spread_ratio' => $p->config['max_spread_ratio'] ?? self::MAX_SPREAD_RATIO,
                 'max_deviation' => $p->config['max_deviation'] ?? self::MAX_DEVIATION,
@@ -132,6 +135,9 @@ class LatestQuoteAggregator
                 last: $isValidQuote && isset($quote['last']) ? (float) $quote['last'] : null,
                 volume: $isValidQuote && isset($quote['volume']) ? (float) $quote['volume'] : null,
                 timestamp: $isValidQuote ? (int) $quote['timestamp'] : null,
+                providerName: $providerConfig['name'],
+                providerTranslations: $providerConfig['translations'],
+                providerHomepageUrl: $providerConfig['homepage_url'],
             );
         }
 
@@ -173,6 +179,9 @@ class LatestQuoteAggregator
                 timestamp: (int) $data['timestamp'],
                 providerMarketId: $data['provider_market_id'] ?? null,
                 isReference: $isReference,
+                providerName: $providers[$provider]['name'],
+                providerTranslations: $providers[$provider]['translations'],
+                providerHomepageUrl: $providers[$provider]['homepage_url'],
             );
         }
 

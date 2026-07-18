@@ -3,14 +3,30 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PhoneVerificationController;
+use App\Http\Controllers\Backoffice\AppAnnouncementController;
+use App\Http\Controllers\Backoffice\AppVersionPolicyController;
+use App\Http\Controllers\PublicAppStatusController;
+use App\Http\Controllers\PublicBrandingController;
+use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Support\Facades\Route;
 
 (require __DIR__.'/../app/Domain/Market/Routes/route.php')();
 (require __DIR__.'/../app/Domain/Asset/Routes/route.php')();
+(require __DIR__.'/../app/Domain/Suggestion/Routes/route.php')();
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('pub/app-status', [PublicAppStatusController::class, 'show']);
+Route::get('pub/branding', [PublicBrandingController::class, 'show']);
+
+Route::prefix('backoffice')
+    ->middleware(['auth:sanctum', EnsureAdmin::class])
+    ->group(function (): void {
+        Route::apiResource('announcements', AppAnnouncementController::class);
+        Route::apiResource('version-policies', AppVersionPolicyController::class);
+    });
 
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register'])->middleware('throttle:5,1');

@@ -20,6 +20,8 @@ use App\Domain\Market\Infrastructure\Providers\Tabdeal\TabdealClient;
 use App\Domain\Market\Infrastructure\Providers\Tabdeal\TabdealMapper;
 use App\Domain\Market\Infrastructure\Providers\Tgju\TgjuClient;
 use App\Domain\Market\Infrastructure\Providers\Tgju\TgjuMapper;
+use App\Domain\Market\Infrastructure\Providers\Tala\TalaClient;
+use App\Domain\Market\Infrastructure\Providers\Tala\TalaMapper;
 use App\Domain\Market\Infrastructure\Providers\Wallex\WallexClient;
 use App\Domain\Market\Infrastructure\Providers\Wallex\WallexMapper;
 use App\Domain\Market\Infrastructure\Subscriptions\MarketSubscriptionFactory;
@@ -102,6 +104,14 @@ class ProviderFactory
                 mapper: new TgjuMapper(),
                 subscriptions: $this->subscriptions,
             ),
+            'tala' => new $provider->driver(
+                client: new TalaClient(
+                    baseUrl: $provider->base_url,
+                    timeout: $timeout,
+                ),
+                mapper: new TalaMapper(),
+                subscriptions: $this->subscriptions,
+            ),
             'sample_exchange' => new SampleExchangeDriver(
                 client: new SampleExchangeClient(
                     baseUrl: $provider->base_url,
@@ -112,7 +122,10 @@ class ProviderFactory
                 streamUrl: $streamUrl,
                 subscriptions: $this->subscriptions,
             ),
-            default => throw new InvalidArgumentException("Unknown provider driver [{$provider->driver}]"),
+            default => throw new InvalidArgumentException(
+                "Unknown provider key [{$providerKey}] for driver [{$provider->driver}]. "
+                .'The provider slug must match a registered provider key.',
+            ),
         };
     }
 }
