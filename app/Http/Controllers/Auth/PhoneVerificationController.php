@@ -37,6 +37,10 @@ class PhoneVerificationController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Verification code sent.',
+            'data' => [
+                'expires_in_seconds' => (int) config('phone_verification.code_ttl_seconds'),
+                'resend_after_seconds' => (int) config('phone_verification.resend_cooldown_seconds'),
+            ],
         ], 202);
     }
 

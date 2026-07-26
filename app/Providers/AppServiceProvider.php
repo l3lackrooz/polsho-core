@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\BotMessaging\BotMessagingManager;
+use App\Services\PhoneVerification\HttpPhoneVerificationSender;
 use App\Services\PhoneVerification\LogPhoneVerificationSender;
 use App\Services\PhoneVerification\PhoneVerificationSender;
 use Illuminate\Support\Facades\Schema;
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PhoneVerificationSender::class, function (): PhoneVerificationSender {
             return match (config('phone_verification.driver')) {
                 'log' => new LogPhoneVerificationSender,
+                'http' => new HttpPhoneVerificationSender,
                 default => throw new \LogicException('Unsupported phone verification driver.'),
             };
         });

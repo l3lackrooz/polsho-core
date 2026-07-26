@@ -30,7 +30,9 @@ class PhoneVerificationTest extends TestCase
         $this->actingAs($user, 'sanctum')
             ->postJson('/api/auth/phone/verification-code')
             ->assertAccepted()
-            ->assertJsonPath('success', true);
+            ->assertJsonPath('success', true)
+            ->assertJsonPath('data.expires_in_seconds', 600)
+            ->assertJsonPath('data.resend_after_seconds', 60);
 
         $record = PhoneVerificationCode::query()->sole();
         $this->assertNotSame($code, $record->code_hash);

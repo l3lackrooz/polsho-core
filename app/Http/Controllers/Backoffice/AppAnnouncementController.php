@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backoffice;
 
 use App\Domain\Shared\Concerns\RespondsWithApi;
+use App\Domain\Shared\Localization\LocalizedContent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAppAnnouncementRequest;
 use App\Http\Requests\UpdateAppAnnouncementRequest;
@@ -20,7 +21,7 @@ class AppAnnouncementController extends Controller
 
     public function store(StoreAppAnnouncementRequest $request): JsonResponse
     {
-        return $this->respond(AppAnnouncement::query()->create($request->validated()), 201);
+        return $this->respond(AppAnnouncement::query()->create($this->payload($request->validated())), 201);
     }
 
     public function show(AppAnnouncement $announcement): JsonResponse
@@ -30,7 +31,7 @@ class AppAnnouncementController extends Controller
 
     public function update(UpdateAppAnnouncementRequest $request, AppAnnouncement $announcement): JsonResponse
     {
-        $announcement->update($request->validated());
+        $announcement->update($this->payload($request->validated(), $announcement));
 
         return $this->respond($announcement->refresh());
     }
@@ -40,5 +41,26 @@ class AppAnnouncementController extends Controller
         $announcement->delete();
 
         return $this->respondMessage('Announcement deleted.');
+    }
+
+    /** @param array<string, mixed> $attributes */
+    private function payload(array $attributes, ?AppAnnouncement $current = null): array
+    {
+        foreach (['title', 'message', 'action_label'] as $field) {
+            $translationsField = "{$field}_translations";
+            if (array_key_exists($translationsField, $attributes)) {
+                $attributes[$translationsField] = LocalizedContent::map($attributes[$translationsField]);
+            }
+
+            if (array_key_exists($translationsField, $attributes) || ! array_key_exists($field, $attributes)) {
+                $translations = $attributes[$translationsField] ?? $current?->{$translationsField};
+                $fallback = $current?->{$field};
+                $attributes[$field] = LocalizedContent::text($translations, 'fa')
+                    ?? LocalizedContent::text($translations, 'en')
+                    ?? $fallback;
+            }
+        }
+
+        return $attributes;
     }
 }

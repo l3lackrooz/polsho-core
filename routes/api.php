@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\PhoneVerificationController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Backoffice\AppAnnouncementController;
 use App\Http\Controllers\Backoffice\AppVersionPolicyController;
 use App\Http\Controllers\PublicAppStatusController;
@@ -31,12 +32,15 @@ Route::prefix('backoffice')
 Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register'])->middleware('throttle:5,1');
     Route::post('login', [AuthController::class, 'login'])->middleware('throttle:10,1');
+    Route::post('forgot-password', [PasswordResetController::class, 'requestLink'])
+        ->middleware('throttle:5,1');
     Route::get('email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
+        Route::delete('account', [AuthController::class, 'destroy']);
         Route::get('me', [AuthController::class, 'me']);
         Route::post('email/verification-notification', [EmailVerificationController::class, 'resend'])
             ->middleware('throttle:6,1');

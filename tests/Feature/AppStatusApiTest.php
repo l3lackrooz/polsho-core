@@ -81,6 +81,25 @@ class AppStatusApiTest extends TestCase
             ->assertJsonPath('data.platform', 'ios');
     }
 
+    public function test_public_status_resolves_announcement_content_for_the_requested_locale(): void
+    {
+        AppAnnouncement::query()->create([
+            'title' => 'Persian fallback',
+            'message' => 'Persian fallback message',
+            'title_translations' => ['fa' => 'پیام فارسی', 'tr' => 'Türkçe duyuru'],
+            'message_translations' => ['fa' => 'متن فارسی', 'tr' => 'Türkçe mesaj'],
+            'action_label' => 'Open',
+            'action_label_translations' => ['tr' => 'Aç'],
+            'action_url' => 'https://example.com',
+        ]);
+
+        $this->getJson('/api/pub/app-status?platform=ios&version=1.0.0&build=1&locale=tr-TR')
+            ->assertOk()
+            ->assertJsonPath('data.announcements.0.title', 'Türkçe duyuru')
+            ->assertJsonPath('data.announcements.0.message', 'Türkçe mesaj')
+            ->assertJsonPath('data.announcements.0.action_label', 'Aç');
+    }
+
     public function test_backoffice_rejects_an_undismissable_announcement_without_a_cta(): void
     {
         $admin = User::factory()->create(['is_admin' => true]);

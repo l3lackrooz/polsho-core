@@ -5,6 +5,7 @@ namespace App\Domain\Market\Infrastructure\Persistence\Models;
 use App\Domain\Shared\Services\BrandingStorage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class MarketProvider extends Model
 {
@@ -41,5 +42,14 @@ class MarketProvider extends Model
     public function markets(): HasMany
     {
         return $this->hasMany(ProviderMarket::class, 'provider_id');
+    }
+
+    /**
+     * Public, editorial content for this provider. Runtime connection settings
+     * remain on the provider itself and are never exposed through this relation.
+     */
+    public function profile(): HasOne
+    {
+        return $this->hasOne(MarketProviderProfile::class, 'provider_id');
     }
 }

@@ -7,6 +7,35 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Polsho verification delivery
+
+Email verification uses Laravel's signed verification links. Production must
+set `APP_URL` to the public HTTPS API origin and configure a real mail transport
+through `MAIL_MAILER` and the matching SMTP or transactional-mail variables.
+
+Phone verification uses the log driver locally. Production can use the generic
+HTTPS gateway driver:
+
+```dotenv
+PHONE_VERIFICATION_DRIVER=http
+PHONE_VERIFICATION_HTTP_URL=https://sms-gateway.example.com/verification
+PHONE_VERIFICATION_HTTP_TOKEN=replace-me
+PHONE_VERIFICATION_HTTP_TEMPLATE=polsho-verification
+```
+
+The gateway receives an authenticated JSON request:
+
+```json
+{
+  "phone": "+989121234567",
+  "code": "123456",
+  "template": "polsho-verification"
+}
+```
+
+Any `2xx` response is accepted. Non-success responses fail the request and the
+unused verification-code record is removed, allowing the user to retry.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

@@ -65,6 +65,36 @@ class AuthenticationAndAlertEntitlementTest extends TestCase
         $this->assertNotNull($user->fresh()->email_verified_at);
     }
 
+    public function test_email_verification_link_renders_a_browser_confirmation_page(): void
+    {
+        $user = User::factory()->unverified()->create();
+        $verificationUrl = URL::temporarySignedRoute(
+            'verification.verify',
+            now()->addMinutes(10),
+            ['id' => $user->id, 'hash' => sha1($user->getEmailForVerification())],
+        );
+
+        $this->get($verificationUrl)
+            ->assertOk()
+            ->assertSee('Email verified')
+            ->assertSee($user->email);
+
+        $this->assertNotNull($user->fresh()->email_verified_at);
+    }
+
+    public function test_user_can_resend_the_email_verification_notification(): void
+    {
+        Notification::fake();
+        $user = User::factory()->unverified()->create();
+
+        $this->actingAs($user, 'sanctum')
+            ->postJson('/api/auth/email/verification-notification')
+            ->assertAccepted()
+            ->assertJsonPath('success', true);
+
+        Notification::assertSentTo($user, VerifyEmail::class);
+    }
+
     public function test_unverified_users_cannot_exceed_the_database_configured_alert_limit(): void
     {
         $user = User::factory()->create(['phone_verified_at' => null]);

@@ -5,4 +5,10 @@ return [
     'code_ttl_seconds' => (int) env('PHONE_VERIFICATION_CODE_TTL_SECONDS', 600),
     'resend_cooldown_seconds' => (int) env('PHONE_VERIFICATION_RESEND_COOLDOWN_SECONDS', 60),
     'max_attempts' => (int) env('PHONE_VERIFICATION_MAX_ATTEMPTS', 5),
+    'http' => [
+        'url' => env('PHONE_VERIFICATION_HTTP_URL'),
+        'token' => env('PHONE_VERIFICATION_HTTP_TOKEN'),
+        'template' => env('PHONE_VERIFICATION_HTTP_TEMPLATE', 'polsho-verification'),
+        'timeout_seconds' => (int) env('PHONE_VERIFICATION_HTTP_TIMEOUT', 10),
+    ],
 ];

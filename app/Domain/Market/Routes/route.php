@@ -2,9 +2,13 @@
 
 use App\Domain\Market\Controllers\MarketNotificationController;
 use App\Domain\Market\Controllers\MarketProviderController;
+use App\Domain\Market\Controllers\MarketProviderProfileController;
 use App\Domain\Market\Controllers\PriceAlertController;
 use App\Domain\Market\Controllers\PriceAlertNotificationDeliveryController;
 use App\Domain\Market\Controllers\ProviderMarketController;
+use App\Domain\Market\Controllers\ProviderProfileCacheController;
+use App\Domain\Market\Controllers\PublicMarketProviderProfileController;
+use App\Domain\Market\Controllers\PublicProviderMarketHistoryController;
 use App\Domain\Market\Controllers\PublicQuoteController;
 use App\Domain\Market\Controllers\PushDeviceController;
 use App\Domain\Market\Controllers\TestController;
@@ -17,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 return function (): void {
     Route::prefix('pub')->group(function () {
         Route::get('quotes', [PublicQuoteController::class, 'index']);
+        Route::get('providers', [PublicMarketProviderProfileController::class, 'index']);
+        Route::get('providers/{slug}', [PublicMarketProviderProfileController::class, 'show']);
+        Route::get('provider-markets/{providerMarket}/history', [PublicProviderMarketHistoryController::class, 'show']);
     });
 
     Route::prefix('market')->group(function () {
@@ -29,6 +36,10 @@ return function (): void {
                 Route::post('providers/{provider}/sync', [MarketProviderController::class, 'sync']);
                 Route::post('providers/{provider}/logo', [MarketProviderController::class, 'uploadLogo']);
                 Route::delete('providers/{provider}/logo', [MarketProviderController::class, 'deleteLogo']);
+                Route::get('providers/{provider}/profile', [MarketProviderProfileController::class, 'show']);
+                Route::put('providers/{provider}/profile', [MarketProviderProfileController::class, 'upsert']);
+                Route::delete('providers/{provider}/profile', [MarketProviderProfileController::class, 'destroy']);
+                Route::post('provider-profiles/cache/refresh', [ProviderProfileCacheController::class, 'refresh']);
                 Route::apiResource('providers', MarketProviderController::class);
                 Route::apiResource('provider-markets', ProviderMarketController::class);
                 Route::get('alert-deliveries', [PriceAlertNotificationDeliveryController::class, 'index']);

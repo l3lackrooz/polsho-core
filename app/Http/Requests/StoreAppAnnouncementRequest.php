@@ -19,9 +19,17 @@ class StoreAppAnnouncementRequest extends FormRequest
             'platform' => ['nullable', Rule::in(['android', 'ios'])],
             'presentation' => ['sometimes', Rule::in(['banner', 'modal'])],
             'type' => ['sometimes', Rule::in(['info', 'warning', 'critical'])],
-            'title' => ['required', 'string', 'max:255'],
-            'message' => ['required', 'string', 'max:4000'],
+            // Legacy text remains accepted so existing Backoffice clients and
+            // integrations can be migrated gradually.
+            'title' => ['nullable', 'string', 'max:255', 'required_without:title_translations'],
+            'title_translations' => ['nullable', 'array', 'max:6', 'required_without:title'],
+            'title_translations.*' => ['nullable', 'string', 'max:255'],
+            'message' => ['nullable', 'string', 'max:4000', 'required_without:message_translations'],
+            'message_translations' => ['nullable', 'array', 'max:6', 'required_without:message'],
+            'message_translations.*' => ['nullable', 'string', 'max:4000'],
             'action_label' => ['nullable', 'string', 'max:80', 'required_with:action_url'],
+            'action_label_translations' => ['nullable', 'array', 'max:6'],
+            'action_label_translations.*' => ['nullable', 'string', 'max:80'],
             'action_url' => ['nullable', 'url', 'max:2048'],
             'is_dismissible' => ['sometimes', 'boolean'],
             'is_active' => ['sometimes', 'boolean'],
@@ -46,6 +54,10 @@ class StoreAppAnnouncementRequest extends FormRequest
             $actionLabel = $this->input('action_label', $current?->action_label);
             if (! is_string($actionUrl) || $actionUrl === '') {
                 $validator->errors()->add('action_url', 'An undismissable announcement needs an action URL.');
+            }
+            if (! is_string($actionLabel) || $actionLabel === '') {
+                $actionLabel = $this->input('action_label_translations.fa')
+                    ?? $this->input('action_label_translations.en');
             }
             if (! is_string($actionLabel) || $actionLabel === '') {
                 $validator->errors()->add('action_label', 'An undismissable announcement needs an action label.');

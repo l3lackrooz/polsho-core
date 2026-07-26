@@ -12,8 +12,11 @@ class AppAnnouncement extends Model
         'presentation',
         'type',
         'title',
+        'title_translations',
         'message',
+        'message_translations',
         'action_label',
+        'action_label_translations',
         'action_url',
         'is_dismissible',
         'is_active',
@@ -29,6 +32,9 @@ class AppAnnouncement extends Model
             'is_active' => 'boolean',
             'starts_at' => 'datetime',
             'ends_at' => 'datetime',
+            'title_translations' => 'array',
+            'message_translations' => 'array',
+            'action_label_translations' => 'array',
         ];
     }
 

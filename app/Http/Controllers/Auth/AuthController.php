@@ -7,8 +7,10 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Services\AuthUserPresenter;
+use App\Services\DeleteUserAccount;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -71,6 +73,16 @@ class AuthController extends Controller
             'success' => true,
             'message' => 'Logged out.',
         ]);
+    }
+
+    /**
+     * Revoke access, disable account activity, and soft-delete the user.
+     */
+    public function destroy(Request $request, DeleteUserAccount $deleteUserAccount): Response
+    {
+        $deleteUserAccount->handle($request->user());
+
+        return response()->noContent();
     }
 
     /**
