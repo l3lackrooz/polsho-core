@@ -19,6 +19,8 @@ class MarketDataService
         $dto = $this->aggregator->aggregateInstrument($instrument);
 
         if (! $dto) {
+            $this->store->remove($instrument);
+
             return;
         }
 

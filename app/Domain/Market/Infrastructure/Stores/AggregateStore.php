@@ -32,4 +32,9 @@ class AggregateStore
 
         return $data ? json_decode($data, true) : null;
     }
+
+    public function remove(string $instrument): void
+    {
+        Redis::del(sprintf(self::KEY, $instrument));
+    }
 }

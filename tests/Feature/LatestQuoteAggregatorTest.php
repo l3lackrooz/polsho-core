@@ -82,7 +82,10 @@ class LatestQuoteAggregatorTest extends TestCase
             ),
         ]);
 
-        $this->assertNull($aggregated);
+        $this->assertNotNull($aggregated);
+        $this->assertNull($aggregated->bestBid);
+        $this->assertSame([], $aggregated->toArray()['providers']);
+        $this->assertSame('nobitex', $aggregated->toArray()['comparison_providers'][0]['provider']);
     }
 
     public function test_uses_a_reference_rate_as_the_best_quote_when_it_is_the_only_provider(): void
@@ -113,13 +116,7 @@ class LatestQuoteAggregatorTest extends TestCase
     public function test_includes_active_provider_markets_without_a_quote_for_comparison(): void
     {
         $provider = $this->createProvider('nobitex');
-        $base = Asset::query()->create(['symbol' => 'USDT', 'name' => 'Tether']);
-        $quote = Asset::query()->create(['symbol' => 'IRT', 'name' => 'Iranian Toman']);
-        $instrument = Instrument::query()->create([
-            'base_asset_id' => $base->id,
-            'quote_asset_id' => $quote->id,
-            'symbol' => 'USDT-IRT',
-        ]);
+        $instrument = $this->createInstrument('USDT-IRT');
         ProviderMarket::query()->create([
             'provider_id' => $provider->id,
             'instrument_id' => $instrument->id,
@@ -150,11 +147,57 @@ class LatestQuoteAggregatorTest extends TestCase
         ], $aggregated->toArray()['comparison_providers']);
     }
 
+    public function test_excludes_a_stale_quote_after_its_provider_market_is_detached(): void
+    {
+        $detachedProvider = $this->createProvider('nobitex');
+        $activeProvider = $this->createProvider('ramzinex');
+        $instrument = $this->createInstrument('USDT-IRR');
+
+        $detachedMarket = new ProviderMarket([
+            'provider_id' => $detachedProvider->id,
+            'instrument_id' => $instrument->id,
+            'remote_symbol' => 'usdt-irr',
+        ]);
+        $detachedMarket->id = 3;
+        $detachedMarket->save();
+        $detachedMarket->delete();
+
+        $activeMarket = new ProviderMarket([
+            'provider_id' => $activeProvider->id,
+            'instrument_id' => $instrument->id,
+            'remote_symbol' => 'usdt-irr',
+        ]);
+        $activeMarket->id = 11;
+        $activeMarket->save();
+
+        $timestamp = now()->getTimestampMs();
+        $aggregated = $this->aggregate([
+            'nobitex' => $this->quote('nobitex', 1_900_000, 1_900_100, $timestamp, 3),
+            'ramzinex' => $this->quote('ramzinex', 1_774_000, 1_774_300, $timestamp, 11),
+        ], attachMarkets: false);
+
+        $this->assertNotNull($aggregated);
+        $this->assertSame('ramzinex', $aggregated->bestBid?->provider);
+        $this->assertSame(
+            ['ramzinex'],
+            collect($aggregated->toArray()['providers'])->pluck('provider')->all(),
+        );
+        $this->assertSame(
+            ['ramzinex'],
+            collect($aggregated->toArray()['comparison_providers'])->pluck('provider')->all(),
+        );
+    }
+
     /** @param array<string, array<string, int|string|float|null>> $rows */
     private function aggregate(
         array $rows,
         string $instrument = 'USDT-IRR',
+        bool $attachMarkets = true,
     ): ?\App\Domain\Market\Application\DTO\AggregatedQuoteDTO {
+        if ($attachMarkets) {
+            $this->attachMarketsForRows($rows, $instrument);
+        }
+
         return (new LatestQuoteAggregator(new class($rows) extends LatestQuoteStore
         {
             /** @param array<string, array<string, int|string|float|null>> $rows */
@@ -177,6 +220,46 @@ class LatestQuoteAggregatorTest extends TestCase
             'base_url' => 'https://example.test',
             'config' => $config,
         ]);
+    }
+
+    /**
+     * @param  array<string, array<string, int|string|float|null>>  $rows
+     */
+    private function attachMarketsForRows(array $rows, string $instrumentSymbol): void
+    {
+        $instrument = $this->createInstrument($instrumentSymbol);
+
+        foreach ($rows as $providerSlug => $row) {
+            $provider = MarketProvider::query()->where('slug', $providerSlug)->firstOrFail();
+            $market = new ProviderMarket([
+                'provider_id' => $provider->id,
+                'instrument_id' => $instrument->id,
+                'remote_symbol' => strtolower($instrumentSymbol),
+            ]);
+            $market->id = (int) $row['provider_market_id'];
+            $market->save();
+        }
+    }
+
+    private function createInstrument(string $symbol): Instrument
+    {
+        [$baseSymbol, $quoteSymbol] = explode('-', $symbol, 2);
+        $base = Asset::query()->firstOrCreate(
+            ['symbol' => $baseSymbol],
+            ['name' => $baseSymbol],
+        );
+        $quote = Asset::query()->firstOrCreate(
+            ['symbol' => $quoteSymbol],
+            ['name' => $quoteSymbol],
+        );
+
+        return Instrument::query()->firstOrCreate(
+            ['symbol' => $symbol],
+            [
+                'base_asset_id' => $base->id,
+                'quote_asset_id' => $quote->id,
+            ],
+        );
     }
 
     /** @return array<string, int|string|float|null> */

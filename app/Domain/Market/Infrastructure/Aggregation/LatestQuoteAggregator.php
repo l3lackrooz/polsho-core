@@ -8,6 +8,7 @@ use App\Domain\Market\Application\DTO\QuoteDTO;
 use App\Domain\Market\Infrastructure\Persistence\Models\MarketProvider;
 use App\Domain\Market\Infrastructure\Persistence\Models\ProviderMarket;
 use App\Domain\Market\Infrastructure\Stores\LatestQuoteStore;
+use Illuminate\Support\Collection;
 
 class LatestQuoteAggregator
 {
@@ -28,8 +29,15 @@ class LatestQuoteAggregator
     {
         $rows = $this->quotes->getAll($instrument);
         $providers = $this->loadProviders();
-        $comparisonProviders = $this->comparisonProviders($instrument, $rows, $providers);
-        $quotes = $this->normalizeQuotes($rows, $providers);
+        $markets = $this->loadActiveMarkets($instrument);
+        $comparisonProviders = $this->comparisonProviders($markets, $rows, $providers);
+        $quotes = $this->normalizeQuotes(
+            $rows,
+            $providers,
+            $markets->pluck('id', 'provider_slug')->map(
+                static fn (mixed $id): int => (int) $id,
+            )->all(),
+        );
 
         if ($quotes === [] && $comparisonProviders === []) {
             return null;
@@ -85,17 +93,9 @@ class LatestQuoteAggregator
         return $map;
     }
 
-    /**
-     * @param  array<string, array<string, mixed>>  $rows
-     * @param  array<string, array<string, mixed>>  $providers
-     * @return ComparisonProviderQuoteDTO[]
-     */
-    private function comparisonProviders(
-        string $instrument,
-        array $rows,
-        array $providers,
-    ): array {
-        $markets = ProviderMarket::query()
+    private function loadActiveMarkets(string $instrument): Collection
+    {
+        return ProviderMarket::query()
             ->select([
                 'provider_markets.id',
                 'provider_markets.provider_id',
@@ -109,7 +109,18 @@ class LatestQuoteAggregator
             ->orderBy('market_providers.priority')
             ->orderBy('market_providers.slug')
             ->get();
+    }
 
+    /**
+     * @param  array<string, array<string, mixed>>  $rows
+     * @param  array<string, array<string, mixed>>  $providers
+     * @return ComparisonProviderQuoteDTO[]
+     */
+    private function comparisonProviders(
+        Collection $markets,
+        array $rows,
+        array $providers,
+    ): array {
         $comparisonProviders = [];
 
         foreach ($markets as $market) {
@@ -144,7 +155,12 @@ class LatestQuoteAggregator
         return $comparisonProviders;
     }
 
-    private function normalizeQuotes(array $rows, array $providers): array
+    /**
+     * @param  array<string, array<string, mixed>>  $rows
+     * @param  array<string, array<string, mixed>>  $providers
+     * @param  array<string, int>  $activeMarketIds
+     */
+    private function normalizeQuotes(array $rows, array $providers, array $activeMarketIds): array
     {
         $result = [];
         $nowMs = now()->getTimestampMs();
@@ -152,6 +168,13 @@ class LatestQuoteAggregator
         foreach ($rows as $provider => $data) {
 
             if (! isset($providers[$provider])) {
+                continue;
+            }
+
+            if (
+                ! isset($activeMarketIds[$provider])
+                || (int) ($data['provider_market_id'] ?? 0) !== $activeMarketIds[$provider]
+            ) {
                 continue;
             }
 
