@@ -4,11 +4,12 @@ namespace App\Domain\Market\Application\Jobs;
 
 use App\Domain\Market\Infrastructure\Persistence\Models\MarketProvider;
 use App\Domain\Market\Infrastructure\Providers\ProviderFactory;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Log;
 
-class SyncProviderQuotesJob implements ShouldQueue
+class SyncProviderQuotesJob implements ShouldBeUnique, ShouldQueue
 {
     use Queueable;
 
@@ -18,6 +19,11 @@ class SyncProviderQuotesJob implements ShouldQueue
         private readonly int $providerId,
     ) {
         $this->onQueue(config('queue.queues.market'));
+    }
+
+    public function uniqueId(): string
+    {
+        return 'provider-quotes:'.$this->providerId;
     }
 
     public function handle(ProviderFactory $providers): void
