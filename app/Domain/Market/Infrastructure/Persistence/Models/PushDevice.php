@@ -47,4 +47,9 @@ class PushDevice extends Model
     {
         return $this->hasMany(PriceAlertPushDelivery::class);
     }
+
+    public function liveActivityPushTokens(): HasMany
+    {
+        return $this->hasMany(LiveActivityPushToken::class);
+    }
 }

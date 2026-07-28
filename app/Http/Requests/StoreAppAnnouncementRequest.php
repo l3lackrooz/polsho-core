@@ -33,6 +33,7 @@ class StoreAppAnnouncementRequest extends FormRequest
             'action_url' => ['nullable', 'url', 'max:2048'],
             'is_dismissible' => ['sometimes', 'boolean'],
             'is_active' => ['sometimes', 'boolean'],
+            'publish_push' => ['sometimes', 'boolean'],
             'priority' => ['sometimes', 'integer', 'min:0', 'max:65535'],
             'starts_at' => ['nullable', 'date'],
             'ends_at' => ['nullable', 'date', 'after_or_equal:starts_at'],

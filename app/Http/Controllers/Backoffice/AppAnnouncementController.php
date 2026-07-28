@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backoffice;
 
 use App\Domain\Shared\Concerns\RespondsWithApi;
+use App\Domain\Market\Application\Jobs\SendAppAnnouncementPushJob;
 use App\Domain\Shared\Localization\LocalizedContent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAppAnnouncementRequest;
@@ -21,7 +22,10 @@ class AppAnnouncementController extends Controller
 
     public function store(StoreAppAnnouncementRequest $request): JsonResponse
     {
-        return $this->respond(AppAnnouncement::query()->create($this->payload($request->validated())), 201);
+        $announcement = AppAnnouncement::query()->create($this->payload($request->validated()));
+        if ($announcement->publish_push) SendAppAnnouncementPushJob::dispatch($announcement->id);
+
+        return $this->respond($announcement, 201);
     }
 
     public function show(AppAnnouncement $announcement): JsonResponse
@@ -32,6 +36,14 @@ class AppAnnouncementController extends Controller
     public function update(UpdateAppAnnouncementRequest $request, AppAnnouncement $announcement): JsonResponse
     {
         $announcement->update($this->payload($request->validated(), $announcement));
+
+        return $this->respond($announcement->refresh());
+    }
+
+    public function publishPush(AppAnnouncement $announcement): JsonResponse
+    {
+        $announcement->update(['publish_push' => true, 'push_status' => 'pending', 'push_sent_at' => null]);
+        SendAppAnnouncementPushJob::dispatch($announcement->id);
 
         return $this->respond($announcement->refresh());
     }

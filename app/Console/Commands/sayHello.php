@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Domain\Market\Application\Jobs\SendAppAnnouncementPushJob;
 use App\Domain\Market\Infrastructure\Persistence\Models\MarketProvider;
 use App\Domain\Market\Infrastructure\Providers\MarketProviderFactory;
 use App\Domain\Market\Infrastructure\Providers\ProviderFactory;
@@ -29,15 +30,16 @@ class sayHello extends Command
      */
     public function handle()
     {
-        $providers = app(ProviderFactory::class );
-        $provider = MarketProvider::query()
-            ->with([
-                'markets' => fn ($query) => $query->where('status', 'active')->with('instrument'),
-            ])
-            ->find(3);
+        SendAppAnnouncementPushJob::dispatch(5);
+        // $providers = app(ProviderFactory::class );
+        // $provider = MarketProvider::query()
+        //     ->with([
+        //         'markets' => fn ($query) => $query->where('status', 'active')->with('instrument'),
+        //     ])
+        //     ->find(3);
 
-        $driver = $providers->make($provider);
+        // $driver = $providers->make($provider);
 
-        $result = $driver->fetchPrices($provider->markets);
+        //$result = $driver->fetchPrices($provider->markets);
     }
 }

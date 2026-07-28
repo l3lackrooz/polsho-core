@@ -4,12 +4,16 @@ namespace App\Domain\Market\Application\DTO;
 
 class PushNotificationMessage
 {
-    /** @param array<string, mixed> $data */
+    /**
+     * @param array<string, mixed> $data
+     * @param array{attributes: array<string, mixed>, content_state: array<string, mixed>, timestamp: int}|null $liveActivityStart
+     */
     public function __construct(
         public readonly string $title,
         public readonly string $body,
         public readonly array $data,
         public readonly string $deepLink,
+        public readonly ?array $liveActivityStart = null,
     ) {}
 
     /** @return array<string, string> */

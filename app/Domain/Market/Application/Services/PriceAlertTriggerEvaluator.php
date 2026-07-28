@@ -8,8 +8,10 @@ use App\Domain\Market\Application\DTO\AlertEvaluationPriceDTO;
 use App\Domain\Market\Application\DTO\ComparisonProviderQuoteDTO;
 use App\Domain\Market\Application\DTO\QuoteDTO;
 use App\Domain\Market\Application\Jobs\SendPriceAlertNotificationJob;
+use App\Domain\Market\Application\Jobs\UpdatePriceAlertLiveActivityJob;
 use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlert;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -95,6 +97,9 @@ class PriceAlertTriggerEvaluator
 
             if (! $didTrigger) {
                 $alert->save();
+                if (Cache::add("live-activity-update:{$alert->id}", true, now()->addSeconds(15))) {
+                    UpdatePriceAlertLiveActivityJob::dispatch($alert->id, $quote->price, $quote->provider, $quote->timestamp)->afterCommit();
+                }
 
                 return false;
             }

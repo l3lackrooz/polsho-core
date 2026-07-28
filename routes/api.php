@@ -26,6 +26,7 @@ Route::prefix('backoffice')
     ->middleware(['auth:sanctum', EnsureAdmin::class])
     ->group(function (): void {
         Route::apiResource('announcements', AppAnnouncementController::class);
+        Route::post('announcements/{announcement}/publish-push', [AppAnnouncementController::class, 'publishPush']);
         Route::apiResource('version-policies', AppVersionPolicyController::class);
     });
 

@@ -17,7 +17,12 @@ class PriceAlertPushDeliveryService
     public function send(int $deliveryId): void
     {
         $delivery = PriceAlertPushDelivery::query()
-            ->with(['notificationDelivery.event.alert.instrument', 'pushDevice'])
+            ->with([
+                'notificationDelivery.event.alert.instrument',
+                'pushDevice.liveActivityPushTokens' => fn ($query) => $query
+                    ->where('enabled', true)
+                    ->latest('last_seen_at'),
+            ])
             ->find($deliveryId);
 
         if ($delivery === null || in_array($delivery->status, ['sent', 'skipped'], true)) {
@@ -38,6 +43,8 @@ class PriceAlertPushDeliveryService
             platform: $delivery->platform,
             address: $targetAddress,
             pushDeviceId: $delivery->push_device_id,
+            liveActivityPushToStartToken: $this->pushToStartToken($delivery),
+            liveActivityUpdateToken: $this->updateToken($delivery),
         );
         $event = $delivery->notificationDelivery->event;
         $result = $this->providers->provider($delivery->provider)->send(
@@ -61,6 +68,23 @@ class PriceAlertPushDeliveryService
             'sent_at' => $result->status === 'sent' ? now() : null,
         ]);
         $this->aggregate($delivery->notification_delivery_id);
+    }
+
+    private function pushToStartToken(PriceAlertPushDelivery $delivery): ?string
+    {
+        $token = $delivery->pushDevice?->liveActivityPushTokens->first()?->token;
+
+        return is_string($token) && $token !== '' ? $token : null;
+    }
+
+    private function updateToken(PriceAlertPushDelivery $delivery): ?string
+    {
+        $alertId = $delivery->notificationDelivery->event->price_alert_id;
+        $token = $delivery->pushDevice?->liveActivityPushTokens
+            ->first(fn ($item): bool => $item->kind === 'activity_update' && (int) $item->price_alert_id === (int) $alertId)
+            ?->token;
+
+        return is_string($token) && $token !== '' ? $token : null;
     }
 
     public function markFailed(int $deliveryId, Throwable $exception): void

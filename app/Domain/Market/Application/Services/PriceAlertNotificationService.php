@@ -3,6 +3,7 @@
 namespace App\Domain\Market\Application\Services;
 
 use App\Domain\Market\Application\Jobs\SendPriceAlertPushJob;
+use App\Domain\Market\Application\Jobs\EndPriceAlertLiveActivityJob;
 use App\Domain\Market\Application\Presenters\MarketNotificationPresenter;
 use App\Domain\Market\Events\PriceAlertNotificationCreated;
 use App\Domain\Market\Infrastructure\Notifications\PriceAlertTriggeredNotification;
@@ -96,6 +97,8 @@ class PriceAlertNotificationService
                 SendPriceAlertPushJob::dispatch($pushDelivery->id);
             }
         }
+
+        EndPriceAlertLiveActivityJob::dispatch($alert->id)->delay(now()->addHour());
 
         $this->pushDeliveries->aggregate($delivery->id);
     }

@@ -55,6 +55,7 @@ return function (): void {
 
     Route::prefix('push')->middleware('auth:sanctum')->group(function (): void {
         Route::put('devices/{installationId}', [PushDeviceController::class, 'upsert']);
+        Route::put('devices/{installationId}/live-activity-tokens', [PushDeviceController::class, 'upsertLiveActivityToken']);
         Route::delete('devices/{installationId}', [PushDeviceController::class, 'destroy']);
     });
 };

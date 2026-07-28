@@ -9,6 +9,8 @@ class PushNotificationTarget
         public readonly string $platform,
         public readonly string $address,
         public readonly ?int $pushDeviceId = null,
+        public readonly ?string $liveActivityPushToStartToken = null,
+        public readonly ?string $liveActivityUpdateToken = null,
     ) {}
 
     public function hash(): string

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Domain\Market\Infrastructure\Persistence\Models\PushDevice;
+use App\Domain\Market\Infrastructure\Persistence\Models\LiveActivityPushToken;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -93,6 +94,49 @@ class PushDeviceApiTest extends TestCase
             ])
             ->assertUnprocessable()
             ->assertJsonValidationErrors('provider_token');
+    }
+
+    public function test_an_ios_live_activity_token_can_be_registered_for_an_installation(): void
+    {
+        $user = User::factory()->create();
+        $installationId = (string) Str::uuid();
+
+        $this->actingAs($user, 'sanctum')
+            ->putJson("/api/push/devices/{$installationId}", [
+                'platform' => 'ios',
+                'provider' => 'fcm',
+                'provider_token' => 'fcm-token',
+            ])
+            ->assertCreated();
+
+        $this->actingAs($user, 'sanctum')
+            ->putJson("/api/push/devices/{$installationId}/live-activity-tokens", [
+                'kind' => 'push_to_start',
+                'token' => 'activity-start-token',
+            ])
+            ->assertOk()
+            ->assertJsonPath('data.kind', 'push_to_start')
+            ->assertJsonPath('data.enabled', true)
+            ->assertJsonMissingPath('data.token');
+
+        $token = LiveActivityPushToken::query()->sole();
+        $this->assertSame('activity-start-token', $token->token);
+        $this->assertSame(hash('sha256', 'activity-start-token'), $token->token_hash);
+        $this->assertNotSame(
+            'activity-start-token',
+            DB::table('live_activity_push_tokens')->whereKey($token->id)->value('token'),
+        );
+
+        $this->actingAs($user, 'sanctum')
+            ->putJson("/api/push/devices/{$installationId}/live-activity-tokens", [
+                'kind' => 'activity_update',
+                'activity_id' => 'activity-123',
+                'token' => 'activity-update-token',
+            ])
+            ->assertOk()
+            ->assertJsonPath('data.activity_id', 'activity-123');
+
+        $this->assertDatabaseCount('live_activity_push_tokens', 2);
     }
 
     public function test_an_installation_moves_to_the_current_user_and_can_be_disabled(): void

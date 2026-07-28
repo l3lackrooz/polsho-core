@@ -20,6 +20,9 @@ class AppAnnouncement extends Model
         'action_url',
         'is_dismissible',
         'is_active',
+        'publish_push',
+        'push_status',
+        'push_sent_at',
         'priority',
         'starts_at',
         'ends_at',
@@ -30,6 +33,8 @@ class AppAnnouncement extends Model
         return [
             'is_dismissible' => 'boolean',
             'is_active' => 'boolean',
+            'publish_push' => 'boolean',
+            'push_sent_at' => 'datetime',
             'starts_at' => 'datetime',
             'ends_at' => 'datetime',
             'title_translations' => 'array',
