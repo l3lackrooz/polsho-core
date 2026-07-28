@@ -12,7 +12,9 @@ class AggregateInstrumentJob implements ShouldQueue
 
     public function __construct(
         private string $instrument
-    ) {}
+    ) {
+        $this->onQueue(config('queue.queues.market'));
+    }
 
     public function handle(MarketDataService $service)
     {
