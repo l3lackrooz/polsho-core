@@ -2,22 +2,23 @@
 
 namespace App\Domain\Market\Infrastructure\Support\Utility;
 
-
 class CurrencyNormalizer
 {
-    public function normalize(string $quote): string
+    public function normalize(string $currency): string
     {
-        return match (strtoupper($quote)) {
-            'IRT', 'TOMAN' => 'IRT',
+        $currency = strtoupper(trim($currency));
+
+        return match ($currency) {
+            'IRT', 'TOMAN', 'TMN' => 'IRT',
             'IRR', 'RIAL', 'RLS' => 'IRR',
-            default => $quote,
+            default => $currency,
         };
     }
 
     public function convertPriceTo(string $source, string $target, float $price): float
     {
-        $source = strtoupper($source);
-        $target = strtoupper($target);
+        $source = $this->normalize($source);
+        $target = $this->normalize($target);
 
         if ($source === $target) {
             return $price;

@@ -4,19 +4,24 @@ namespace App\Domain\Market\Infrastructure\Providers\Tgju;
 
 use App\Domain\Market\Application\DTO\MarketSubscriptionDTO;
 use App\Domain\Market\Application\DTO\QuoteDTO;
+use App\Domain\Market\Infrastructure\Support\Utility\ProviderQuoteFactory;
 use Carbon\Carbon;
 use Throwable;
 
 class TgjuMapper
 {
+    public function __construct(
+        private readonly ProviderQuoteFactory $quotes = new ProviderQuoteFactory,
+    ) {}
+
     /**
      * TGJU semantics: reference rates, not an order book. Each row carries a
      * single price `p` (plus `h`/`l` day extremes), so bid and ask are both
      * set to that price. Prices arrive as strings with thousands separators
      * ("1,781,000") and occasionally stray whitespace.
      *
-     * @param array<string, array<string, mixed>> $rows keyed by remote symbol
-     * @param array<string, MarketSubscriptionDTO> $subscriptions keyed by remote symbol
+     * @param  array<string, array<string, mixed>>  $rows  keyed by remote symbol
+     * @param  array<string, MarketSubscriptionDTO>  $subscriptions  keyed by remote symbol
      * @return array<int, QuoteDTO>
      */
     public function mapSnapshot(array $rows, array $subscriptions, string $provider): array
@@ -26,7 +31,7 @@ class TgjuMapper
         foreach ($rows as $symbol => $row) {
             $symbol = (string) $symbol;
 
-            if ($symbol === '' || !isset($subscriptions[$symbol]) || !is_array($row)) {
+            if ($symbol === '' || ! isset($subscriptions[$symbol]) || ! is_array($row)) {
                 continue;
             }
 
@@ -36,15 +41,14 @@ class TgjuMapper
                 continue;
             }
 
-            $quotes[] = new QuoteDTO(
-                instrument: $subscriptions[$symbol]->instrument,
+            $quotes[] = $this->quotes->make(
+                subscription: $subscriptions[$symbol],
                 bid: $price,
                 ask: $price,
                 last: $price,
                 provider: $provider,
                 volume: null,
                 timestamp: $this->parseTimestamp($row['ts'] ?? null),
-                providerMarketId: $subscriptions[$symbol]->providerMarketId,
             );
         }
 
@@ -57,7 +61,7 @@ class TgjuMapper
             return (float) $value;
         }
 
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return null;
         }
 

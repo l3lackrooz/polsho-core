@@ -4,9 +4,14 @@ namespace App\Domain\Market\Infrastructure\Providers\Ompfinex;
 
 use App\Domain\Market\Application\DTO\MarketSubscriptionDTO;
 use App\Domain\Market\Application\DTO\QuoteDTO;
+use App\Domain\Market\Infrastructure\Support\Utility\ProviderQuoteFactory;
 
 class OmpfinexMapper
 {
+    public function __construct(
+        private readonly ProviderQuoteFactory $quotes = new ProviderQuoteFactory,
+    ) {}
+
     /**
      * The exact OMPFinex field names are unverified (see OmpfinexClient),
      * so each value is resolved from a list of likely keys, first hit wins.
@@ -22,8 +27,8 @@ class OmpfinexMapper
      * Markets are matched by OMPFinex numeric market id, which you store as
      * the remote_symbol in provider_markets (e.g. "11" for BTC/IRT).
      *
-     * @param array<int, array<string, mixed>> $rows from /v1/market data[]
-     * @param array<string, MarketSubscriptionDTO> $subscriptions keyed by remote symbol (market id as string)
+     * @param  array<int, array<string, mixed>>  $rows  from /v1/market data[]
+     * @param  array<string, MarketSubscriptionDTO>  $subscriptions  keyed by remote symbol (market id as string)
      * @return array<int, QuoteDTO>
      */
     public function mapSnapshot(array $rows, array $subscriptions, string $provider): array
@@ -33,7 +38,7 @@ class OmpfinexMapper
         foreach ($rows as $row) {
             $marketId = (string) ($row['id'] ?? '');
 
-            if ($marketId === '' || !isset($subscriptions[$marketId])) {
+            if ($marketId === '' || ! isset($subscriptions[$marketId])) {
                 continue;
             }
 
@@ -45,15 +50,14 @@ class OmpfinexMapper
                 continue;
             }
 
-            $quotes[] = new QuoteDTO(
-                instrument: $subscriptions[$marketId]->instrument,
+            $quotes[] = $this->quotes->make(
+                subscription: $subscriptions[$marketId],
                 bid: $bid ?? 0.0,
                 ask: $ask ?? 0.0,
                 last: $last,
                 provider: $provider,
                 volume: $this->firstNumeric($row, self::FIELD_CANDIDATES['volume']),
                 timestamp: (int) round(microtime(true) * 1000),
-                providerMarketId: $subscriptions[$marketId]->providerMarketId,
             );
         }
 
@@ -61,8 +65,8 @@ class OmpfinexMapper
     }
 
     /**
-     * @param array<string, mixed> $row
-     * @param array<int, string> $keys
+     * @param  array<string, mixed>  $row
+     * @param  array<int, string>  $keys
      */
     private function firstNumeric(array $row, array $keys): ?float
     {

@@ -4,9 +4,14 @@ namespace App\Domain\Market\Infrastructure\Providers\Tala;
 
 use App\Domain\Market\Application\DTO\MarketSubscriptionDTO;
 use App\Domain\Market\Application\DTO\QuoteDTO;
+use App\Domain\Market\Infrastructure\Support\Utility\ProviderQuoteFactory;
 
 class TalaMapper
 {
+    public function __construct(
+        private readonly ProviderQuoteFactory $quotes = new ProviderQuoteFactory,
+    ) {}
+
     /**
      * Configured remote symbols → the feed's actual row ids. The site's page
      * elements use short ids (geram18, bazartehran) while the /ajax/price
@@ -23,8 +28,8 @@ class TalaMapper
      * The board carries a single reference price per row, so each one is
      * represented as a symmetric bid/ask quote rather than an order book.
      *
-     * @param array<string, array<string, mixed>> $rows flattened /ajax/price rows
-     * @param array<string, MarketSubscriptionDTO> $subscriptions keyed by remote symbol
+     * @param  array<string, array<string, mixed>>  $rows  flattened /ajax/price rows
+     * @param  array<string, MarketSubscriptionDTO>  $subscriptions  keyed by remote symbol
      * @return array<int, QuoteDTO>
      */
     public function mapSnapshot(array $rows, array $subscriptions, string $provider): array
@@ -44,15 +49,14 @@ class TalaMapper
                 continue;
             }
 
-            $quotes[] = new QuoteDTO(
-                instrument: $subscription->instrument,
+            $quotes[] = $this->quotes->make(
+                subscription: $subscription,
                 bid: $price,
                 ask: $price,
                 last: $price,
                 provider: $provider,
                 volume: null,
                 timestamp: $this->parseTimestamp($row['m'] ?? null),
-                providerMarketId: $subscription->providerMarketId,
             );
         }
 
@@ -63,7 +67,7 @@ class TalaMapper
      * Exact feed id first, then the alias table, then the `gold_` group
      * prefix (so `ounce` or `24k` resolve without new aliases).
      *
-     * @param array<string, array<string, mixed>> $rows
+     * @param  array<string, array<string, mixed>>  $rows
      * @return array<string, mixed>|null
      */
     private function resolveRow(array $rows, string $remoteSymbol): ?array
@@ -89,7 +93,7 @@ class TalaMapper
             return (float) $value;
         }
 
-        if (!is_string($value)) {
+        if (! is_string($value)) {
             return null;
         }
 
