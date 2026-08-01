@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\PhoneVerificationController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Backoffice\AppAnnouncementController;
 use App\Http\Controllers\Backoffice\AppVersionPolicyController;
+use App\Http\Controllers\Backoffice\UserController;
 use App\Http\Controllers\PublicAppStatusController;
 use App\Http\Controllers\PublicBrandingController;
 use App\Http\Middleware\EnsureAdmin;
@@ -28,6 +29,7 @@ Route::prefix('backoffice')
         Route::apiResource('announcements', AppAnnouncementController::class);
         Route::post('announcements/{announcement}/publish-push', [AppAnnouncementController::class, 'publishPush']);
         Route::apiResource('version-policies', AppVersionPolicyController::class);
+        Route::get('users', [UserController::class, 'index']);
     });
 
 Route::prefix('auth')->group(function () {

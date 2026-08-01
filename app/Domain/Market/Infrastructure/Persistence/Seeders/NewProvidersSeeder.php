@@ -4,6 +4,7 @@ namespace App\Domain\Market\Infrastructure\Persistence\Seeders;
 
 use App\Domain\Market\Infrastructure\Providers\Bitpin\BitpinDriver;
 use App\Domain\Market\Infrastructure\Providers\Ompfinex\OmpfinexDriver;
+use App\Domain\Market\Infrastructure\Providers\OkEx\OkExDriver;
 use App\Domain\Market\Infrastructure\Providers\Wallex\WallexDriver;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -50,6 +51,19 @@ class NewProvidersSeeder extends Seeder
                     'btc-irt' => 'BTC_IRT',
                     'btc-usdt' => 'BTC_USDT',
                     'usdt-irt' => 'USDT_IRT',
+                ],
+            ],
+            [
+                'name' => 'OK-EX',
+                'translations' => ['fa' => 'اوکی اکس', 'de' => 'OK-EX'],
+                'slug' => 'ok-ex',
+                'driver' => OkExDriver::class,
+                'base_url' => 'https://sapi.ok-ex.io',
+                'status' => 'active',
+                'priority' => 5,
+                // OK-EX spot uses hyphenated, USDT-quoted symbols.
+                'markets' => [
+                    'btc-usdt' => 'BTC-USDT',
                 ],
             ],
             [

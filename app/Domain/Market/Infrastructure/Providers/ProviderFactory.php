@@ -9,6 +9,8 @@ use App\Domain\Market\Infrastructure\Providers\Bitpin\BitpinMapper;
 use App\Domain\Market\Infrastructure\Providers\Nobitex\NobitexClient;
 use App\Domain\Market\Infrastructure\Providers\Nobitex\NobitexDriver;
 use App\Domain\Market\Infrastructure\Providers\Nobitex\NobitexMapper;
+use App\Domain\Market\Infrastructure\Providers\OkEx\OkExClient;
+use App\Domain\Market\Infrastructure\Providers\OkEx\OkExMapper;
 use App\Domain\Market\Infrastructure\Providers\Ompfinex\OmpfinexClient;
 use App\Domain\Market\Infrastructure\Providers\Ompfinex\OmpfinexMapper;
 use App\Domain\Market\Infrastructure\Providers\Ramzinex\RamzinexClient;
@@ -85,6 +87,14 @@ class ProviderFactory
                     timeout: $timeout,
                 ),
                 mapper: new BitpinMapper(),
+                subscriptions: $this->subscriptions,
+            ),
+            'ok-ex' => new $provider->driver(
+                client: new OkExClient(
+                    baseUrl: $provider->base_url,
+                    timeout: $timeout,
+                ),
+                mapper: new OkExMapper(),
                 subscriptions: $this->subscriptions,
             ),
             'wallex' => new $provider->driver(
