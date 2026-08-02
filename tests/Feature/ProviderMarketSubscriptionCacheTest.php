@@ -49,4 +49,38 @@ class ProviderMarketSubscriptionCacheTest extends TestCase
         $this->assertSame('USDT-IRR', $subscription->instrument);
         $this->assertSame('crypto-tether-irr', $subscription->remoteSymbol);
     }
+
+    public function test_updating_or_deleting_a_market_refreshes_its_cached_mapping_immediately(): void
+    {
+        $provider = MarketProvider::query()->create([
+            'name' => 'OK-EX',
+            'slug' => 'ok-ex',
+            'driver' => 'Tests\\FakeOkExDriver',
+            'base_url' => 'https://example.test',
+        ]);
+        $btc = Asset::query()->create(['symbol' => 'BTC', 'name' => 'Bitcoin']);
+        $usdt = Asset::query()->create(['symbol' => 'USDT', 'name' => 'Tether']);
+        $instrument = Instrument::query()->create([
+            'base_asset_id' => $btc->id,
+            'quote_asset_id' => $usdt->id,
+            'symbol' => 'BTC-USDT',
+        ]);
+        $market = ProviderMarket::query()->create([
+            'provider_id' => $provider->id,
+            'instrument_id' => $instrument->id,
+            'remote_symbol' => 'WRONG-SYMBOL',
+        ]);
+        $subscriptions = app(MarketSubscriptionFactory::class);
+
+        $this->assertSame('WRONG-SYMBOL', $subscriptions->forProvider('BTC-USDT', 'ok-ex')->remoteSymbol);
+
+        $market->update(['remote_symbol' => 'BTC-USDT']);
+
+        $this->assertSame('BTC-USDT', $subscriptions->forProvider('BTC-USDT', 'ok-ex')->remoteSymbol);
+
+        $market->delete();
+
+        $this->expectException(\InvalidArgumentException::class);
+        $subscriptions->forProvider('BTC-USDT', 'ok-ex');
+    }
 }
