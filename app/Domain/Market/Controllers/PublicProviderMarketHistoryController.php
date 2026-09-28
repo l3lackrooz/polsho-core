@@ -26,17 +26,33 @@ class PublicProviderMarketHistoryController extends Controller
             '30d' => [$end->copy()->subDays(30), 21600, 3600],
             default => [$end->copy()->subDay(), 300, 300],
         };
-        $key = "provider-history:v2:{$providerMarket->id}:{$range}";
+        $key = "provider-history:v3:{$providerMarket->id}:{$range}";
         $data = Cache::remember($key, $ttl, function () use ($providerMarket, $start, $end, $bucket): array {
-            $rows = DB::table('market_snapshots')
-                ->where('provider_market_id', $providerMarket->id)
-                ->whereBetween('captured_at', [$start, $end])
-                ->orderBy('captured_at')->orderBy('id')
-                ->select(['captured_at', 'bid', 'ask', 'last_price'])->cursor();
             $points = [];
-            foreach ($rows as $row) {
+            // Seek the last usable quote in each bucket using the existing
+            // (provider_market_id, captured_at) index. This bounds the work to
+            // at most 289 small seeks instead of hydrating months of snapshots.
+            $firstSlot = intdiv($start->timestamp, $bucket) * $bucket;
+            for ($slot = $firstSlot; $slot <= $end->timestamp; $slot += $bucket) {
+                $bucketStart = $start->copy()->setTimestamp($slot)->startOfSecond();
+                $bucketEnd = $bucketStart->copy()->addSeconds($bucket);
+                $lower = $bucketStart->greaterThan($start) ? $bucketStart : $start;
+                $row = DB::table('market_snapshots')
+                    ->where('provider_market_id', $providerMarket->id)
+                    ->where('captured_at', '>=', $lower)
+                    ->where('captured_at', '<', $bucketEnd)
+                    ->where('captured_at', '<=', $end)
+                    ->where(function ($query): void {
+                        $query->where('bid', '>', 0)
+                            ->orWhere('ask', '>', 0)
+                            ->orWhere('last_price', '>', 0);
+                    })
+                    ->orderByDesc('captured_at')->orderByDesc('id')
+                    ->first(['captured_at', 'bid', 'ask', 'last_price']);
+                if ($row === null) {
+                    continue;
+                }
                 $time = \Carbon\Carbon::parse($row->captured_at)->timestamp;
-                $slot = intdiv($time, $bucket) * $bucket;
                 $buy = $this->price($row->ask) ?? $this->price($row->last_price);
                 $sell = $this->price($row->bid) ?? $this->price($row->last_price);
                 $price = $this->price($row->last_price)

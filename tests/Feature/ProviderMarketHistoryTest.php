@@ -71,6 +71,24 @@ class ProviderMarketHistoryTest extends TestCase
         $this->getJson($url)->assertJsonCount(0, 'data.points')->assertJsonPath('data.latest_timestamp', null);
     }
 
+    public function test_bucket_uses_latest_valid_quote_even_when_insert_order_differs(): void
+    {
+        $this->travelTo(now()->setTime(12, 15, 30));
+        $market = $this->market();
+        $this->snapshot($market, now()->subSeconds(10), 1200);
+        // An older quote can be ingested later; ID alone is not recency.
+        $this->snapshot($market, now()->subSeconds(20), 1000);
+        DB::table('market_snapshots')->insert([
+            'provider_market_id' => $market->id, 'captured_at' => now()->subSeconds(5),
+            'bid' => 0, 'ask' => -1, 'last_price' => null,
+            'created_at' => now(), 'updated_at' => now(),
+        ]);
+        $this->getJson("/api/pub/provider-markets/{$market->id}/history?range=1h")
+            ->assertOk()->assertJsonCount(1, 'data.points')
+            ->assertJsonPath('data.points.0.price', 1200)
+            ->assertJsonPath('data.points.0.timestamp', now()->subSeconds(10)->getTimestampMs());
+    }
+
     public function test_invalid_range_is_rejected(): void
     {
         $market = $this->market();
