@@ -26,12 +26,14 @@ class PublicProviderMarketHistoryController extends Controller
             '30d' => [$end->copy()->subDays(30), 21600, 3600],
             default => [$end->copy()->subDay(), 300, 300],
         };
-        $key = "provider-history:v3:{$providerMarket->id}:{$range}";
+        $key = "provider-history:v4:{$providerMarket->id}:{$range}";
         $data = Cache::remember($key, $ttl, function () use ($providerMarket, $start, $end, $bucket): array {
             $points = [];
-            // Seek the last usable quote in each bucket using the existing
-            // (provider_market_id, captured_at) index. This bounds the work to
-            // at most 289 small seeks instead of hydrating months of snapshots.
+            // Select IDs with the covering (provider_market_id, captured_at)
+            // index first, then hydrate only the sampled rows in one batch.
+            // Selecting price columns during each backward seek causes costly
+            // table reads on MySQL even though the query has LIMIT 1.
+            $windows = [];
             $firstSlot = intdiv($start->timestamp, $bucket) * $bucket;
             for ($slot = $firstSlot; $slot <= $end->timestamp; $slot += $bucket) {
                 $bucketStart = $start->copy()->setTimestamp($slot)->startOfSecond();
@@ -42,15 +44,42 @@ class PublicProviderMarketHistoryController extends Controller
                     ->where('captured_at', '>=', $lower)
                     ->where('captured_at', '<', $bucketEnd)
                     ->where('captured_at', '<=', $end)
-                    ->where(function ($query): void {
-                        $query->where('bid', '>', 0)
-                            ->orWhere('ask', '>', 0)
-                            ->orWhere('last_price', '>', 0);
-                    })
                     ->orderByDesc('captured_at')->orderByDesc('id')
-                    ->first(['captured_at', 'bid', 'ask', 'last_price']);
+                    ->first(['id', 'captured_at']);
+                if ($row !== null) {
+                    $windows[$slot] = [$row->id, $lower, $bucketEnd];
+                }
+            }
+            if ($windows === []) {
+                return [];
+            }
+            $rows = DB::table('market_snapshots')
+                ->whereIn('id', array_column($windows, 0))
+                ->get(['id', 'captured_at', 'bid', 'ask', 'last_price'])
+                ->keyBy('id');
+            foreach ($windows as $slot => [$id, $lower, $bucketEnd]) {
+                $row = $rows->get($id);
                 if ($row === null) {
                     continue;
+                }
+                if ($this->price($row->bid) === null && $this->price($row->ask) === null && $this->price($row->last_price) === null) {
+                    // Preserve the previous valid sample when a feed ends a
+                    // bucket with an unusable quote. This is the rare path.
+                    $row = DB::table('market_snapshots')
+                        ->where('provider_market_id', $providerMarket->id)
+                        ->where('captured_at', '>=', $lower)
+                        ->where('captured_at', '<', $bucketEnd)
+                        ->where('captured_at', '<=', $end)
+                        ->where(function ($query): void {
+                            $query->where('bid', '>', 0)
+                                ->orWhere('ask', '>', 0)
+                                ->orWhere('last_price', '>', 0);
+                        })
+                        ->orderByDesc('captured_at')->orderByDesc('id')
+                        ->first(['captured_at', 'bid', 'ask', 'last_price']);
+                    if ($row === null) {
+                        continue;
+                    }
                 }
                 $time = \Carbon\Carbon::parse($row->captured_at)->timestamp;
                 $buy = $this->price($row->ask) ?? $this->price($row->last_price);
