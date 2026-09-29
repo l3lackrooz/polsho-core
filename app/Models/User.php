@@ -21,6 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var list<string>
      */
+    protected $attributes = ['market_milestones_enabled' => true];
+
     protected $fillable = [
         'name',
         'email',
@@ -50,6 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'phone_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_admin' => 'boolean',
+            'market_milestones_enabled' => 'boolean',
         ];
     }
 

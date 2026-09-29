@@ -60,7 +60,7 @@ class PushePushNotificationSender implements PushNotificationProvider
                     'show_foreground' => false,
                 ],
                 'priority' => 3,
-                'time_to_live' => 3600,
+                'time_to_live' => $message->expiresAt === null ? 3600 : max(0, $message->expiresAt - time()),
             ]);
 
         if ($response->successful()) {

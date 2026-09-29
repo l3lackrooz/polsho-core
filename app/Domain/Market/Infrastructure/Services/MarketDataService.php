@@ -31,6 +31,7 @@ class MarketDataService
 
         if ($changed) {
             EvaluatePriceAlertsJob::dispatch($dto->toArray());
+            \App\Domain\Market\Application\Milestones\EvaluateMilestonesJob::dispatch($dto->toArray());
             event(new MarketDataUpdated($dto));
         }
     }

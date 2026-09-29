@@ -103,6 +103,7 @@ return [
 
     'queues' => [
         'market' => env('MARKET_QUEUE_NAME', 'market'),
+        'notifications' => env('NOTIFICATIONS_QUEUE_NAME', 'notifications'),
     ],
 
     /*

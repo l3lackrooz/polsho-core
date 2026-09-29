@@ -52,6 +52,17 @@ class FcmPushNotificationSenderTest extends TestCase
         });
     }
 
+    public function test_milestone_expiration_is_sent_to_apns(): void
+    {
+        $this->app->instance(FcmAccessTokenProvider::class, new FakeFcmAccessTokenProvider);
+        config(['services.fcm.enabled' => true, 'services.fcm.project_id' => 'test', 'services.fcm.base_url' => 'https://fcm.test/v1']);
+        Http::fake(['https://fcm.test/*' => Http::response(['name' => 'milestone-1'])]);
+        $expiry = now()->addMinutes(5)->timestamp;
+        app(FcmPushNotificationSender::class)->send(new PushNotificationTarget('fcm', 'ios', 'test-token'),
+            new PushNotificationMessage('Milestone', 'Crossed 254000', ['event_id' => '1'], 'polsho://', expiresAt: $expiry));
+        Http::assertSent(fn (Request $request) => $request['message']['apns']['headers']['apns-expiration'] === (string) $expiry);
+    }
+
     public function test_marks_an_unregistered_fcm_token_as_an_invalid_target(): void
     {
         $this->app->instance(FcmAccessTokenProvider::class, new FakeFcmAccessTokenProvider);

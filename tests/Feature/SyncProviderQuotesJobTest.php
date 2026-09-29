@@ -8,8 +8,8 @@ use App\Domain\Market\Application\Jobs\AggregateInstrumentJob;
 use App\Domain\Market\Application\Jobs\SyncProviderQuotesJob;
 use App\Domain\Market\Infrastructure\Persistence\Models\MarketProvider;
 use App\Domain\Market\Infrastructure\Persistence\Models\ProviderMarket;
-use App\Domain\Market\Infrastructure\Providers\Tala\TalaDriver;
 use App\Domain\Market\Infrastructure\Providers\ProviderFactory;
+use App\Domain\Market\Infrastructure\Providers\Tala\TalaDriver;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Http;
@@ -22,7 +22,8 @@ class SyncProviderQuotesJobTest extends TestCase
     public function test_empty_provider_response_reaggregates_markets_without_failing(): void
     {
         Bus::fake();
-        Http::fake(['https://www.tala.ir/banner' => Http::response(['banner' => []])]);
+        Http::preventStrayRequests();
+        Http::fake(['https://www.tala.ir/ajax/price' => Http::response(['banner' => []])]);
 
         $provider = MarketProvider::query()->create([
             'name' => 'Tala.ir',

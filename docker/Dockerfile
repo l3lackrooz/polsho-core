@@ -37,6 +37,7 @@ RUN composer install --no-dev --optimize-autoloader
 # Supervisor confrig
 
 COPY ./docker/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./docker/milestone-worker.conf /etc/supervisor/conf.d/milestone-worker.conf
 
 EXPOSE 8000
 EXPOSE 8081

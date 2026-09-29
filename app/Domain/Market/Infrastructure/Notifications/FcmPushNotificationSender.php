@@ -93,6 +93,10 @@ class FcmPushNotificationSender implements PushNotificationProvider
             ];
         }
 
+        if ($message->expiresAt !== null) {
+            $fcmMessage['apns']['headers']['apns-expiration'] = (string) $message->expiresAt;
+        }
+
         $response = $this->http
             ->acceptJson()
             ->withToken($this->tokens->token())

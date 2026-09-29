@@ -47,6 +47,15 @@ class PushePushNotificationSenderTest extends TestCase
         });
     }
 
+    public function test_milestone_expiration_limits_pushe_lifetime(): void
+    {
+        config(['services.pushe.enabled' => true, 'services.pushe.app_id' => 'test', 'services.pushe.token' => 'test', 'services.pushe.base_url' => 'https://pushe.test']);
+        Http::fake(['https://pushe.test/*' => Http::response(['id' => 'milestone-1'])]);
+        app(PushePushNotificationSender::class)->send(new PushNotificationTarget('pushe', 'android', 'test-user'),
+            new PushNotificationMessage('Milestone', 'Crossed 254000', [], 'polsho://', expiresAt: time() + 300));
+        Http::assertSent(fn (Request $request) => $request['time_to_live'] > 0 && $request['time_to_live'] <= 300);
+    }
+
     public function test_skips_delivery_without_credentials(): void
     {
         config()->set('services.pushe.enabled', true);

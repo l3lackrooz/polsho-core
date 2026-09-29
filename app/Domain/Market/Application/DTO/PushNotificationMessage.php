@@ -14,6 +14,7 @@ class PushNotificationMessage
         public readonly array $data,
         public readonly string $deepLink,
         public readonly ?array $liveActivityStart = null,
+        public readonly ?int $expiresAt = null,
     ) {}
 
     /** @return array<string, string> */

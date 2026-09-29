@@ -20,12 +20,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware('auth:sanctum')->group(function (): void {
+    Route::get('notification-preferences', [\App\Domain\Market\Controllers\NotificationPreferencesController::class, 'show']);
+    Route::patch('notification-preferences', [\App\Domain\Market\Controllers\NotificationPreferencesController::class, 'update']);
+});
+
 Route::get('pub/app-status', [PublicAppStatusController::class, 'show']);
 Route::get('pub/branding', [PublicBrandingController::class, 'show']);
 
 Route::prefix('backoffice')
     ->middleware(['auth:sanctum', EnsureAdmin::class])
     ->group(function (): void {
+        Route::get('milestones', [\App\Domain\Market\Application\Milestones\MilestoneController::class, 'index']);
+        Route::get('instruments/{instrument}/milestones', [\App\Domain\Market\Application\Milestones\MilestoneController::class, 'show']);
+        Route::put('instruments/{instrument}/milestones', [\App\Domain\Market\Application\Milestones\MilestoneController::class, 'update']);
+        Route::get('instruments/{instrument}/milestones/events', [\App\Domain\Market\Application\Milestones\MilestoneController::class, 'events']);
         Route::apiResource('announcements', AppAnnouncementController::class);
         Route::post('announcements/{announcement}/publish-push', [AppAnnouncementController::class, 'publishPush']);
         Route::apiResource('version-policies', AppVersionPolicyController::class);
