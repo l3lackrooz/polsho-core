@@ -14,6 +14,8 @@ return new class extends Migration
             'enabled' => false, 'state' => null, 'configured_at' => now()->getTimestampMs(), 'revision' => DB::raw('revision + 1')]);
         Schema::table('market_milestone_events', function (Blueprint $table) {
             $table->json('matches')->nullable();
+            // MySQL needs a separate index for the rule foreign key while replacing the unique key.
+            $table->index('rule_id', 'milestone_events_rule_index');
             $table->dropUnique('milestone_event_unique');
             $table->unique(['rule_id', 'revision', 'quote_timestamp', 'price_source'], 'milestone_event_unique');
         });
