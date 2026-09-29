@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Domain\Market\Infrastructure\Persistence\Models\PushDevice;
 use App\Domain\Market\Infrastructure\Persistence\Models\LiveActivityPushToken;
+use App\Domain\Market\Infrastructure\Persistence\Models\PushDevice;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -62,7 +62,20 @@ class PushDeviceApiTest extends TestCase
 
         $this->assertDatabaseCount('push_devices', 1);
         $this->assertSame('rotated-fcm-token', $device->refresh()->provider_token);
+        $this->assertSame('fa-IR', $device->locale);
         $this->assertSame(hash('sha256', 'rotated-fcm-token'), $device->token_hash);
+    }
+
+    public function test_language_can_change_and_is_not_inherited_by_a_new_account(): void
+    {
+        $user = User::factory()->create();
+        $nextUser = User::factory()->create();
+        $url = '/api/push/devices/'.Str::uuid();
+        $data = ['platform' => 'android', 'provider' => 'pushe'];
+        $this->actingAs($user, 'sanctum')->putJson($url, [...$data, 'locale' => 'fa'])->assertCreated();
+        $this->putJson($url, [...$data, 'locale' => 'en'])->assertOk()->assertJsonPath('data.locale', 'en');
+        $this->putJson($url, $data)->assertOk()->assertJsonPath('data.locale', 'en');
+        $this->actingAs($nextUser, 'sanctum')->putJson($url, $data)->assertOk()->assertJsonPath('data.locale', null);
     }
 
     public function test_platform_provider_contract_is_enforced(): void

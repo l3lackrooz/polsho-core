@@ -96,3 +96,21 @@ or an isolated database, never by modifying production market quotes.
 `php artisan test --filter=MarketMilestoneTest` exercises round crossings,
 confirmation, reversals, gaps, decimals, permissions, rule resets, fanout,
 retry/expiry, device eligibility and outbox recovery without real push sends.
+
+## Push language
+
+The app sends its resolved UI locale when registering iOS and Android devices,
+including automatic device-language mode. It refreshes registration after an app
+language or system-language change and on resume (also retrying offline failures).
+Registration updates are serialized so a slow older language cannot overwrite the
+latest selection. Older clients omitting locale preserve a known preference for
+the same account, but account reassignment never inherits the previous account's language.
+
+Milestone deliveries resolve language again at send time, even if already queued.
+Personal price-alert pushes support Persian and English. Announcement pushes use
+the stored title/message translations with the existing content fallback policy.
+iOS targets each device independently. Pushe targets the Android account group,
+using its most recently active Android installation with a known locale.
+Unknown locales continue to fall back to English. Existing builds that never
+reported a locale need an app update and an authenticated launch to populate it;
+there is no safe language backfill from the currently stored registration data.

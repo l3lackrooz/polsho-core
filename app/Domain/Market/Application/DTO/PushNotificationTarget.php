@@ -11,6 +11,7 @@ class PushNotificationTarget
         public readonly ?int $pushDeviceId = null,
         public readonly ?string $liveActivityPushToStartToken = null,
         public readonly ?string $liveActivityUpdateToken = null,
+        public readonly string $locale = 'en',
     ) {}
 
     public function hash(): string

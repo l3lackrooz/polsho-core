@@ -427,6 +427,21 @@ class MarketMilestoneTest extends TestCase
         $this->assertArrayNotHasKey('best_sell', $this->rule->fresh()->state);
     }
 
+    public function test_queued_milestone_uses_latest_device_language_at_send_time(): void
+    {
+        $user = $this->deviceUser();
+        $user->pushDevices()->update(['locale' => 'en']);
+        $event = $this->event();
+        (new FanoutMilestoneJob($event->id))->handle(app(PushNotificationTargetResolver::class));
+        $delivery = MilestoneDelivery::firstOrFail();
+        $this->assertSame('en', $delivery->locale);
+        $user->pushDevices()->update(['locale' => 'fa_IR']);
+        $provider = $this->provider();
+        (new SendMilestoneJob($delivery->id))->handle(new PushProviderRegistry([$provider]), app(PushNotificationTargetResolver::class));
+        $this->assertSame('fa-ir', $delivery->fresh()->locale);
+        $this->assertStringContainsString('بهترین قیمت خرید', $provider->message->title);
+    }
+
     private function provider(): PushNotificationProvider
     {
         return new class implements PushNotificationProvider

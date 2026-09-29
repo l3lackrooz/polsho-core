@@ -17,11 +17,16 @@ class PushNotificationTargetResolver
         $active = $devices->where('enabled', true);
         $targets = [];
 
-        if ($active->contains(fn ($device): bool => $device->platform === 'android' && $device->provider === 'pushe')) {
+        // Pushe targets an account group, so its most recently active Android
+        // installation with a known language determines the group's language.
+        $android = $active->where('platform', 'android')->where('provider', 'pushe')
+            ->sortByDesc('last_seen_at');
+        if ($android->isNotEmpty()) {
             $targets[] = new PushNotificationTarget(
                 provider: 'pushe',
                 platform: 'android',
                 address: PriceAlertNotificationService::recipientId((int) $user->id),
+                locale: $this->locale($android->first(fn ($device) => filled($device->locale))?->locale),
             );
         }
 
@@ -40,6 +45,7 @@ class PushNotificationTargetResolver
                 platform: 'ios',
                 address: $token,
                 pushDeviceId: (int) $device->id,
+                locale: $this->locale($device->locale),
             );
         }
 
@@ -52,5 +58,10 @@ class PushNotificationTargetResolver
         }
 
         return $targets;
+    }
+
+    private function locale(?string $locale): string
+    {
+        return filled($locale) ? strtolower(str_replace('_', '-', trim($locale))) : 'en';
     }
 }

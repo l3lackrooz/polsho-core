@@ -12,6 +12,7 @@ class PriceAlertPushDeliveryService
     public function __construct(
         private readonly PushProviderRegistry $providers,
         private readonly PriceAlertPushMessageFactory $messages,
+        private readonly PushNotificationTargetResolver $targets,
     ) {}
 
     public function send(int $deliveryId): void
@@ -37,6 +38,14 @@ class PriceAlertPushDeliveryService
             return;
         }
 
+        $event = $delivery->notificationDelivery->event;
+        $locale = $delivery->pushDevice?->locale ?? 'en';
+        if ($event->alert->user !== null) {
+            $currentTarget = collect($this->targets->forUser($event->alert->user))->first(
+                fn ($target) => $target->provider === $delivery->provider && $target->address === $targetAddress,
+            );
+            $locale = $currentTarget?->locale ?? $locale;
+        }
         $delivery->increment('attempts');
         $target = new PushNotificationTarget(
             provider: $delivery->provider,
@@ -45,11 +54,11 @@ class PriceAlertPushDeliveryService
             pushDeviceId: $delivery->push_device_id,
             liveActivityPushToStartToken: $this->pushToStartToken($delivery),
             liveActivityUpdateToken: $this->updateToken($delivery),
+            locale: $locale,
         );
-        $event = $delivery->notificationDelivery->event;
         $result = $this->providers->provider($delivery->provider)->send(
             $target,
-            $this->messages->make($event),
+            $this->messages->make($event, $locale),
         );
 
         if ($result->invalidTarget && $delivery->pushDevice !== null) {

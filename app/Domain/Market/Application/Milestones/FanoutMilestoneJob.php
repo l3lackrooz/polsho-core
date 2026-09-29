@@ -56,7 +56,7 @@ class FanoutMilestoneJob implements ShouldBeUniqueUntilProcessing, ShouldQueue
                     ], [
                         'user_id' => $user->id, 'push_device_id' => $target->pushDeviceId,
                         'platform' => $target->platform, 'address' => $target->address,
-                        'locale' => $device->locale ?: 'en', 'available_at' => now(),
+                        'locale' => $target->locale, 'available_at' => now(),
                     ]);
                     SendMilestoneJob::dispatch($delivery->id)->afterCommit();
                 }

@@ -69,7 +69,11 @@ class SendMilestoneJob implements ShouldBeUniqueUntilProcessing, ShouldQueue
                 return;
             }
             $event = $delivery->event;
-            $fa = str_starts_with(strtolower($delivery->locale), 'fa');
+            // Re-resolve language at send time, including already queued pushes.
+            if ($delivery->locale !== $target->locale) {
+                $delivery->update(['locale' => $target->locale]);
+            }
+            $fa = explode('-', $target->locale)[0] === 'fa';
             $level = rtrim(rtrim(number_format((float) $event->level, 8, '.', ','), '0'), '.');
             $price = rtrim(rtrim(number_format((float) $event->price, 8, '.', ','), '0'), '.');
             $unit = $event->quote_unit === 'IRT' ? ($fa ? 'تومان' : 'toman') : $event->quote_unit;

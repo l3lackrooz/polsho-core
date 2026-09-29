@@ -5,6 +5,7 @@ namespace App\Domain\Market\Application\Jobs;
 use App\Domain\Market\Application\DTO\PushNotificationMessage;
 use App\Domain\Market\Application\Services\PushNotificationTargetResolver;
 use App\Domain\Market\Application\Services\PushProviderRegistry;
+use App\Domain\Shared\Localization\LocalizedContent;
 use App\Models\AppAnnouncement;
 use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -17,11 +18,12 @@ class SendAppAnnouncementPushJob implements ShouldBeUnique, ShouldQueue
     use Queueable;
 
     public int $tries = 3;
+
     public int $uniqueFor = 3600;
 
     public function __construct(private readonly int $announcementId)
     {
-        Log::info("start the pusn notification step 1");
+        Log::info('start the pusn notification step 1');
 
         $this->onQueue(config('queue.queues.market'));
     }
@@ -52,16 +54,15 @@ class SendAppAnnouncementPushJob implements ShouldBeUnique, ShouldQueue
         Log::info('start the push notification step 3');
         $announcement->update(['push_status' => 'sending']);
         Log::info('start the push notification step 4');
-        $message = new PushNotificationMessage(
-            title: $announcement->title,
-            body: $announcement->message,
-            data: ['type' => 'app_announcement', 'announcement_id' => $announcement->id, 'route' => $announcement->action_url ?? ''],
-            deepLink: $announcement->action_url ?? 'polsho://',
-        );
-        Log::info('start the push notification step 5');
-        User::query()->select('id')->chunkById(100, function ($users) use ($targets, $providers, $message): void {
+        User::query()->select('id')->chunkById(100, function ($users) use ($targets, $providers, $announcement): void {
             foreach ($users as $user) {
                 foreach ($targets->forUser($user) as $target) {
+                    $message = new PushNotificationMessage(
+                        title: LocalizedContent::text($announcement->title_translations, $target->locale) ?? $announcement->title,
+                        body: LocalizedContent::text($announcement->message_translations, $target->locale) ?? $announcement->message,
+                        data: ['type' => 'app_announcement', 'announcement_id' => $announcement->id, 'route' => $announcement->action_url ?? ''],
+                        deepLink: $announcement->action_url ?? 'polsho://',
+                    );
                     $providers->provider($target->provider)->send($target, $message);
                 }
             }

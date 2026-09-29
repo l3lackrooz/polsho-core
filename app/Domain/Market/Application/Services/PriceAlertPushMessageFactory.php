@@ -7,7 +7,7 @@ use App\Domain\Market\Infrastructure\Persistence\Models\PriceAlertEvent;
 
 class PriceAlertPushMessageFactory
 {
-    public function make(PriceAlertEvent $event): PushNotificationMessage
+    public function make(PriceAlertEvent $event, string $locale = 'en'): PushNotificationMessage
     {
         $alert = $event->alert;
         $payload = is_array($event->payload) ? $event->payload : [];
@@ -25,8 +25,15 @@ class PriceAlertPushMessageFactory
             ? sprintf('%s reached your target.', $pair)
             : sprintf('%s reached %s.', $pair, number_format($price, 8, '.', ','));
 
+        $fa = explode('-', str_replace('_', '-', strtolower($locale)))[0] === 'fa';
+        if ($fa) {
+            $body = $price === null ? "{$pair} به قیمت هدف شما رسید."
+                : $pair.' به قیمت '.rtrim(rtrim(number_format($price, 8, '.', ','), '0'), '.').' رسید.';
+            $body = strtr($body, ['0' => '۰', '1' => '۱', '2' => '۲', '3' => '۳', '4' => '۴', '5' => '۵', '6' => '۶', '7' => '۷', '8' => '۸', '9' => '۹']);
+        }
+
         return new PushNotificationMessage(
-            title: 'Price alert triggered',
+            title: $fa ? 'هشدار قیمت فعال شد' : 'Price alert triggered',
             body: $body,
             data: [
                 'type' => 'price_alert.triggered',

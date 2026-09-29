@@ -30,6 +30,7 @@ class PriceAlertPushDeliveryServiceTest extends TestCase
         app(PriceAlertPushDeliveryService::class)->send($delivery->id);
 
         $this->assertSame('ios-token', $provider->target?->address);
+        $this->assertSame('Price alert triggered', $provider->message->title);
         $this->assertSame('price_alert.triggered', $provider->message?->data['type']);
         $this->assertSame('/alerts/'.$delivery->notificationDelivery->event->alert->id, $provider->message?->data['route']);
         $this->assertSame('sent', $delivery->refresh()->status);
@@ -53,6 +54,19 @@ class PriceAlertPushDeliveryServiceTest extends TestCase
         $this->assertFalse($delivery->pushDevice->refresh()->enabled);
         $this->assertNull($delivery->pushDevice->provider_token);
         $this->assertNotNull($delivery->pushDevice->invalidated_at);
+    }
+
+    public function test_personal_alert_push_uses_persian_device_language(): void
+    {
+        $provider = new RecordingPushProvider(PushNotificationDeliveryResult::sent('fcm-persian'));
+        $this->app->instance(PushProviderRegistry::class, new PushProviderRegistry([$provider]));
+        $delivery = $this->delivery();
+        $delivery->pushDevice->update(['locale' => 'fa-IR']);
+        app(PriceAlertPushDeliveryService::class)->send($delivery->id);
+        $this->assertSame('هشدار قیمت فعال شد', $provider->message->title);
+        $this->assertStringContainsString('۹۲,۱۰۰', $provider->message->body);
+        $this->assertSame('price_alert.triggered', $provider->message->data['type']);
+        $this->assertSame(92100.0, $provider->message->liveActivityStart['content_state']['current_price']);
     }
 
     private function delivery(): PriceAlertPushDelivery

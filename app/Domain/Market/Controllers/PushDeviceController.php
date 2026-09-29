@@ -46,6 +46,10 @@ class PushDeviceController extends Controller
                     ]);
             }
 
+            // Older clients omit locale during token refresh. Preserve a known
+            // preference only for the same account; never inherit another user's.
+            $locale = $data['locale'] ?? ($device->user_id === $request->user()->id ? $device->locale : null);
+
             $device->fill([
                 'user_id' => $request->user()->id,
                 'platform' => $data['platform'],
@@ -54,7 +58,7 @@ class PushDeviceController extends Controller
                 'token_hash' => $tokenHash,
                 'enabled' => true,
                 'app_version' => $data['app_version'] ?? null,
-                'locale' => $data['locale'] ?? null,
+                'locale' => $locale,
                 'last_seen_at' => now(),
                 'invalidated_at' => null,
             ]);
