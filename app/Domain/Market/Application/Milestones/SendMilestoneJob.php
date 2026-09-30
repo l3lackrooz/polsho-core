@@ -78,7 +78,8 @@ class SendMilestoneJob implements ShouldBeUniqueUntilProcessing, ShouldQueue
             $price = rtrim(rtrim(number_format((float) $event->price, 8, '.', ','), '0'), '.');
             $unit = $event->quote_unit === 'IRT' ? ($fa ? 'تومان' : 'toman') : $event->quote_unit;
             $arrow = $event->direction === 'up' ? '↑' : '↓';
-            $time = $event->created_at->copy()->timezone($fa ? 'Asia/Tehran' : 'UTC')->format('H:i');
+            $time = $event->created_at->copy()->timezone('Asia/Tehran')->format('H:i');
+            $timeLabel = $time.' '.($fa ? 'تهران' : 'Tehran');
             $mode = match ($event->price_source) {
                 'best_buy' => $fa ? 'بهترین قیمت خرید' : 'best buy',
                 'best_sell' => $fa ? 'بهترین قیمت فروش' : 'best sell',
@@ -86,7 +87,7 @@ class SendMilestoneJob implements ShouldBeUniqueUntilProcessing, ShouldQueue
             };
             $source = $event->provider_name ?: $event->provider;
             $title = $fa ? "{$mode} {$event->symbol} به {$level} {$unit} رسید {$arrow}" : "{$event->symbol} {$mode} crossed {$level} {$unit} {$arrow}";
-            $body = $fa ? "{$source}: {$price} {$unit} · {$time} تهران" : "{$source}: {$price} {$unit} · {$time} UTC";
+            $body = "{$source}: {$price} {$unit} · {$timeLabel}";
             $matches = $event->matches ?? [];
             if (count($matches) > 1) {
                 $title = $fa ? "بهترین قیمت‌های {$event->symbol} از {$level} {$unit} عبور کردند {$arrow}"
@@ -98,7 +99,7 @@ class SendMilestoneJob implements ShouldBeUniqueUntilProcessing, ShouldQueue
                     $exchange = $match['provider_name'] ?: $match['provider'];
                     $lines[] = "{$label} · {$exchange}: {$observed} {$unit}";
                 }
-                $body = implode(' | ', $lines)." · {$time}";
+                $body = implode(' | ', $lines)." · {$timeLabel}";
             }
             if ($fa) {
                 $title = strtr($title, ['0' => '۰', '1' => '۱', '2' => '۲', '3' => '۳', '4' => '۴', '5' => '۵', '6' => '۶', '7' => '۷', '8' => '۸', '9' => '۹']);

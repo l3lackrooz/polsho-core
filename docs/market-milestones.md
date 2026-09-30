@@ -52,7 +52,9 @@ cannot promise exactly once. Event IDs are included in iOS data payloads.
 Audience uses the existing authenticated device registry: enabled registered
 users' devices whose account has `market_milestones_enabled = true`, with no legacy fallback for users lacking devices. Android uses
 existing Pushe user grouping; iOS uses individual FCM tokens. Persian device locales
-receive Persian copy; other locales receive English. No push is sent merely by
+receive Persian copy; other locales receive English. Notification times always use
+`Asia/Tehran`, with a Tehran label in both languages. The backoffice milestone
+history uses the same timezone, independent of the browser timezone. No push is sent merely by
 saving a rule. Broadcasts use their own queue to avoid blocking market ingestion.
 
 ## Deploy

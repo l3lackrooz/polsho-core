@@ -394,6 +394,7 @@ class MarketMilestoneTest extends TestCase
         $this->assertStringContainsString('۲۵۴,۱۲۰', $provider->message->body);
         $this->assertStringContainsString('۲۵۴,۰۲۰', $provider->message->body);
         $this->assertCount(2, $provider->message->data['matches']);
+        $this->assertStringEndsWith(' تهران', $provider->message->body);
     }
 
     public function test_different_levels_at_the_same_timestamp_preserve_both_events(): void
@@ -440,6 +441,22 @@ class MarketMilestoneTest extends TestCase
         (new SendMilestoneJob($delivery->id))->handle(new PushProviderRegistry([$provider]), app(PushNotificationTargetResolver::class));
         $this->assertSame('fa-ir', $delivery->fresh()->locale);
         $this->assertStringContainsString('بهترین قیمت خرید', $provider->message->title);
+    }
+
+    public function test_notification_time_uses_tehran_in_english_and_persian_even_across_midnight(): void
+    {
+        $this->travelTo(\Illuminate\Support\Carbon::parse('2026-09-29 22:00:00', 'UTC'));
+        $english = $this->deviceUser();
+        $english->pushDevices()->update(['locale' => 'en']);
+        $this->deviceUser();
+        $event = $this->event();
+        (new FanoutMilestoneJob($event->id))->handle(app(PushNotificationTargetResolver::class));
+        foreach (MilestoneDelivery::all() as $delivery) {
+            $provider = $this->provider();
+            (new SendMilestoneJob($delivery->id))->handle(new PushProviderRegistry([$provider]), app(PushNotificationTargetResolver::class));
+            $this->assertStringContainsString($delivery->locale === 'en' ? '01:30 Tehran' : '۰۱:۳۰ تهران', $provider->message->body);
+            $this->assertSame((string) $event->quote_timestamp, $provider->message->data['quote_timestamp']);
+        }
     }
 
     private function provider(): PushNotificationProvider
