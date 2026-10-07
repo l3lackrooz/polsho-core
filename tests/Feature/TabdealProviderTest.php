@@ -4,12 +4,15 @@ namespace Tests\Feature;
 
 use App\Domain\Asset\Infrastructure\Persistence\Models\Asset;
 use App\Domain\Asset\Models\Instrument;
+use App\Domain\Market\Infrastructure\Aggregation\LatestQuoteAggregator;
 use App\Domain\Market\Infrastructure\Persistence\Models\MarketProvider;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\TabdealProviderSeeder;
 use App\Domain\Market\Infrastructure\Providers\ProviderFactory;
 use App\Domain\Market\Infrastructure\Providers\Tabdeal\TabdealClient;
 use App\Domain\Market\Infrastructure\Providers\Tabdeal\TabdealDriver;
 use App\Domain\Market\Infrastructure\Providers\Tabdeal\TabdealMapper;
+use App\Domain\Market\Infrastructure\Stores\AggregateStore;
+use App\Domain\Market\Infrastructure\Stores\LatestQuoteStore;
 use App\Domain\Market\Infrastructure\Subscriptions\MarketSubscriptionFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -23,7 +26,8 @@ class TabdealProviderTest extends TestCase
 
     private const URL = 'https://api-web.tabdeal.org/r/plots/currencies/dynamic-info/';
 
-    public function test_seeded_provider_fetches_all_mapped_markets_in_one_request(): void
+    #[DataProvider('remoteSymbols')]
+    public function test_seeded_provider_fetches_all_mapped_markets_in_one_request(string $usdtRemoteSymbol): void
     {
         Http::preventStrayRequests();
         $this->freezeTime();
@@ -51,6 +55,16 @@ class TabdealProviderTest extends TestCase
         $this->assertSame('active', $provider->status);
         $this->assertSame('تبدیل', $provider->translations['fa']);
         $this->assertSame(TabdealDriver::class, $provider->driver);
+        if ($usdtRemoteSymbol !== 'USDTIRT') {
+            $oldMarket = $provider->markets()->where('remote_symbol', 'USDTIRT')->firstOrFail();
+            $instrumentId = $oldMarket->instrument_id;
+            $oldMarket->delete();
+            $provider->markets()->create([
+                'instrument_id' => $instrumentId,
+                'remote_symbol' => $usdtRemoteSymbol,
+                'status' => 'active',
+            ]);
+        }
         Http::fake([self::URL => Http::response(['currencies' => [
             'BTC' => [
                 'IRT' => ['price' => '21982777473', 'high_24' => '23421321000'],
@@ -73,7 +87,9 @@ class TabdealProviderTest extends TestCase
             $this->assertDatabaseHas('provider_markets', [
                 'id' => $quote->providerMarketId,
                 'provider_id' => $provider->id,
-                'remote_symbol' => str_replace('-', '', $quote->instrument),
+                'remote_symbol' => $quote->instrument === 'USDT-IRT'
+                    ? $usdtRemoteSymbol
+                    : str_replace('-', '', $quote->instrument),
             ]);
         }
         $this->assertSame(21982777473.0, $quotes[0]->last);
@@ -81,6 +97,31 @@ class TabdealProviderTest extends TestCase
         $this->assertSame(262749.0, $quotes[2]->last);
         Http::assertSentCount(1);
         Http::assertSent(fn ($request) => $request->url() === self::URL && $request->method() === 'GET');
+
+        // Exercise the aggregator and the actual app API, not only the feed mapper.
+        $store = $this->mock(LatestQuoteStore::class);
+        $aggregates = $this->mock(AggregateStore::class);
+        foreach ($quotes as $quote) {
+            $store->shouldReceive('getAll')->with($quote->instrument)
+                ->andReturn(['tabdeal' => $quote->toArray()]);
+            $aggregate = app(LatestQuoteAggregator::class)->aggregateInstrument($quote->instrument);
+            $this->assertNotNull($aggregate);
+            $aggregates->shouldReceive('get')->with($quote->instrument)->andReturn($aggregate->toArray());
+        }
+
+        $this->getJson('/api/pub/quotes?instruments=USDT-IRT')
+            ->assertOk()
+            ->assertJsonPath('data.0.comparison_providers.0.provider', 'tabdeal')
+            ->assertJsonPath('data.0.comparison_providers.0.bid', 262749)
+            ->assertJsonPath('data.0.comparison_providers.0.ask', 262749)
+            ->assertJsonPath('data.0.comparison_providers.0.timestamp', now()->getTimestampMs())
+            ->assertJsonPath('data.0.comparison_providers.0.provider_market_id', $quotes[2]->providerMarketId)
+            ->assertJsonPath('data.0.providers.0.provider', 'tabdeal');
+    }
+
+    public static function remoteSymbols(): array
+    {
+        return [['USDTIRT'], ['USDT/IRT'], ['USDT-IRT'], ['usdt_irt']];
     }
 
     public function test_empty_subscriptions_do_not_fetch_the_api(): void

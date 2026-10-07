@@ -51,6 +51,9 @@ php artisan market:sync tabdeal --now
 ```
 
 Additional markets use concatenated remote symbols, such as `ETHIRT` or `ETHUSDT`.
+Separated forms such as `USDT/IRT`, `USDT-IRT` and `USDT_IRT` are also accepted.
+The provider config enables `allow_zero_spread` so its last-price snapshots remain
+visible in the public quotes API. Other exchanges retain the normal spread checks.
 
 ## About Laravel
 

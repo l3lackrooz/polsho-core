@@ -20,6 +20,12 @@ class TabdealMapper
     public function mapSnapshot(array $rows, array $subscriptions, string $provider): array
     {
         $quotes = [];
+        $normalizedSubscriptions = [];
+        foreach ($subscriptions as $symbol => $subscription) {
+            $normalizedSymbol = str_replace(['/', '-', '_', ':'], '', strtoupper(trim($symbol)));
+            $normalizedSubscriptions[$normalizedSymbol] = $subscription;
+        }
+
         foreach ($rows as $base => $markets) {
             if (! is_array($markets)) {
                 continue;
@@ -27,7 +33,7 @@ class TabdealMapper
 
             foreach ($markets as $quote => $row) {
                 $symbol = $base.$quote;
-                if (! isset($subscriptions[$symbol]) || ! is_array($row)) {
+                if (! isset($normalizedSubscriptions[$symbol]) || ! is_array($row)) {
                     continue;
                 }
 
@@ -39,7 +45,7 @@ class TabdealMapper
                 // This feed supplies last prices only, without order-book
                 // bid/ask, volume or exchange timestamps. IRT is in toman.
                 $quotes[] = $this->quotes->make(
-                    subscription: $subscriptions[$symbol],
+                    subscription: $normalizedSubscriptions[$symbol],
                     bid: (float) $price,
                     ask: (float) $price,
                     last: (float) $price,

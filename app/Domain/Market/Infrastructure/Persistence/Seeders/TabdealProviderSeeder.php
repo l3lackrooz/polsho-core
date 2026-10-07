@@ -24,7 +24,8 @@ class TabdealProviderSeeder extends Seeder
                 'status' => 'active',
                 'is_default' => false,
                 'priority' => 6,
-                'config' => ['rest' => ['timeout' => 10]],
+                // The dynamic-info feed supplies last prices without an order book.
+                'config' => ['rest' => ['timeout' => 10], 'allow_zero_spread' => true],
             ],
         );
 

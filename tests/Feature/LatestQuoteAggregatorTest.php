@@ -15,6 +15,24 @@ class LatestQuoteAggregatorTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_zero_spread_requires_provider_opt_in_and_reversed_prices_stay_invalid(): void
+    {
+        $this->createProvider('tabdeal', ['allow_zero_spread' => true]);
+        $this->createProvider('nobitex');
+        $this->createProvider('invalid', ['allow_zero_spread' => true]);
+        $aggregate = $this->aggregate([
+            'tabdeal' => $this->quote('tabdeal', 265000, 265000, now()->getTimestampMs(), 1),
+            'nobitex' => $this->quote('nobitex', 265000, 265000, now()->getTimestampMs(), 2),
+            'invalid' => $this->quote('invalid', 265001, 265000, now()->getTimestampMs(), 3),
+        ]);
+
+        $this->assertSame(['tabdeal'], array_column($aggregate->toArray()['providers'], 'provider'));
+        $comparison = collect($aggregate->toArray()['comparison_providers'])->keyBy('provider');
+        $this->assertSame(265000.0, $comparison['tabdeal']['bid']);
+        $this->assertNull($comparison['nobitex']['bid']);
+        $this->assertNull($comparison['invalid']['bid']);
+    }
+
     public function test_includes_reference_quotes_without_using_them_for_best_prices(): void
     {
         $this->createProvider('tgju', [

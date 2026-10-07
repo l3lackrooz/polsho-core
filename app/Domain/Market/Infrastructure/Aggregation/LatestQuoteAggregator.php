@@ -86,6 +86,7 @@ class LatestQuoteAggregator
                 'max_spread_ratio' => $p->config['max_spread_ratio'] ?? self::MAX_SPREAD_RATIO,
                 'max_deviation' => $p->config['max_deviation'] ?? self::MAX_DEVIATION,
                 'is_reference' => (bool) ($p->config['is_reference'] ?? false),
+                'allow_zero_spread' => (bool) ($p->config['allow_zero_spread'] ?? false),
                 'max_quote_age_ms' => $maxQuoteAgeSeconds * 1_000,
             ];
         }
@@ -135,7 +136,7 @@ class LatestQuoteAggregator
             $isCurrentMarket = is_array($quote)
                 && (int) ($quote['provider_market_id'] ?? 0) === (int) $market->id;
             $isValidQuote = $isCurrentMarket
-                && $this->isValidQuote($quote, $providerConfig['is_reference']);
+                && $this->isValidQuote($quote, $providerConfig['is_reference'], $providerConfig['allow_zero_spread']);
 
             $comparisonProviders[] = new ComparisonProviderQuoteDTO(
                 provider: $provider,
@@ -180,7 +181,7 @@ class LatestQuoteAggregator
 
             $isReference = $providers[$provider]['is_reference'];
 
-            if (! $this->isValidQuote($data, $isReference)) {
+            if (! $this->isValidQuote($data, $isReference, $providers[$provider]['allow_zero_spread'])) {
                 continue;
             }
 
@@ -211,7 +212,7 @@ class LatestQuoteAggregator
         return $result;
     }
 
-    private function isValidQuote(array $quote, bool $isReference): bool
+    private function isValidQuote(array $quote, bool $isReference, bool $allowZeroSpread): bool
     {
         if (! isset($quote['bid'], $quote['ask'])) {
             return false;
@@ -228,7 +229,7 @@ class LatestQuoteAggregator
             return false;
         }
 
-        return $isReference || $ask > $bid;
+        return $isReference || $allowZeroSpread || $ask > $bid;
     }
 
     private function isFreshTimestamp(mixed $timestamp, int $nowMs, int $maxAgeMs): bool
