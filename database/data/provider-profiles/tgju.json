@@ -1,0 +1,208 @@
+{
+  "type": "reference_source",
+  "publication_status": "draft",
+  "summary": {
+    "fa": "شبکه اطلاع‌رسانی طلا، سکه و ارز (TGJU)، منبع نمایش قیمت، نمودار و اخبار بازارهای مالی است.",
+    "en": "TGJU is a financial information service publishing market prices, charts and news on gold, currencies and other assets.",
+    "de": "TGJU ist ein Finanzinformationsdienst mit Marktpreisen, Charts und Nachrichten zu Gold, Währungen und weiteren Anlageklassen.",
+    "tr": "TGJU; altın, döviz ve diğer varlıklar için piyasa fiyatları, grafikler ve haberler yayımlayan bir finansal bilgi hizmetidir.",
+    "ar": "TGJU شبكة معلومات مالية تنشر أسعار الأسواق والرسوم البيانية والأخبار عن الذهب والعملات وأصول أخرى.",
+    "fr": "TGJU est un service d’information financière publiant des cours, graphiques et actualités sur l’or, les devises et d’autres actifs."
+  },
+  "description": {
+    "fa": "شبکه اطلاع‌رسانی طلا، سکه و ارز (TGJU) داده‌های بازار طلا و سکه، ارز، رمزارزها، بورس و بازارهای جهانی را همراه با نمودار و اخبار ارائه می‌کند. در پولشو، TGJU به‌عنوان منبع مرجع قیمت نمایش داده می‌شود.\n\nقوانین tgju.org این وب‌سایت را رسانه اطلاع‌رسانی معرفی می‌کند و داده‌های آن، پیشنهاد یا تضمین انجام معامله با همان قیمت نیستند. واحد قیمت، زمان آخرین به‌روزرسانی و مشخصات هر نماد را در صفحه همان نماد بررسی کنید. امکانات وب‌سایت شامل نمودار، داده‌های تاریخی، هشدار قیمت و ابزارهای بازار است؛ راهنمای خدمات و اپلیکیشن‌ها در لینک‌های رسمی آمده‌اند.",
+    "en": "TGJU publishes prices, charts and news covering gold, coins, currencies, cryptocurrencies, equities and global markets. Polsho lists TGJU as a reference price source.\n\nThe terms of tgju.org describe an information service; its data is not an offer or a guarantee that a trade can execute at the displayed price. Check each instrument’s unit, latest update time and specifications on its own page. Website tools include charts, historical data, price alerts and market tools. Official links provide service help and mobile app options.",
+    "de": "TGJU veröffentlicht Preise, Charts und Nachrichten zu Gold, Münzen, Währungen, Kryptowährungen, Aktien und globalen Märkten. Polsho führt TGJU als Referenzquelle für Preise.\n\nDie Bedingungen von tgju.org beschreiben einen Informationsdienst; die Daten sind weder ein Angebot noch eine Garantie für die Ausführung zum angezeigten Preis. Einheit, Aktualisierungszeit und Eigenschaften sollten auf der jeweiligen Instrumentenseite geprüft werden. Die Website bietet Charts, historische Daten, Preisalarme und Marktwerkzeuge. Offizielle Links führen zu Hilfe und mobilen Angeboten.",
+    "tr": "TGJU; altın, sikke, döviz, kripto para, hisse ve küresel piyasalar için fiyatlar, grafikler ve haberler yayımlar. Polsho, TGJU’yu referans fiyat kaynağı olarak gösterir.\n\nTgju.org koşulları bir bilgi hizmetini tanımlar; veriler, gösterilen fiyattan işlem yapılacağına ilişkin teklif veya garanti değildir. Her varlığın birimini, son güncelleme zamanını ve özelliklerini kendi sayfasında kontrol edin. Sitede grafikler, geçmiş veriler, fiyat uyarıları ve piyasa araçları bulunur. Resmî bağlantılar yardım ve mobil uygulama seçeneklerini içerir.",
+    "ar": "تنشر TGJU الأسعار والرسوم البيانية والأخبار عن الذهب والمسكوكات والعملات والعملات المشفرة والأسهم والأسواق العالمية. يعرضها بولشو بوصفها مصدراً مرجعياً للأسعار.\n\nتصف شروط tgju.org الموقع بأنه خدمة معلومات؛ ولا تمثل بياناته عرضاً أو ضماناً لتنفيذ صفقة بالسعر المعروض. راجع وحدة السعر ووقت التحديث ومواصفات كل أداة في صفحتها. تشمل الأدوات الرسوم البيانية والبيانات التاريخية وتنبيهات الأسعار وأدوات السوق. توفر الروابط الرسمية المساعدة وخيارات تطبيقات الهاتف.",
+    "fr": "TGJU publie des cours, graphiques et actualités sur l’or, les pièces, les devises, les cryptomonnaies, les actions et les marchés mondiaux. Polsho présente TGJU comme une source de prix de référence.\n\nLes conditions de tgju.org décrivent un service d’information ; ses données ne constituent ni une offre ni une garantie d’exécution au prix affiché. Vérifiez l’unité, l’heure de mise à jour et les caractéristiques sur la page de chaque instrument. Le site propose graphiques, historiques, alertes de prix et outils de marché. Les liens officiels donnent accès à l’aide et aux applications mobiles."
+  },
+  "seo_title": {
+    "fa": "TGJU | قیمت طلا، سکه، ارز و بازارها",
+    "en": "TGJU | Gold, Currency and Market Prices",
+    "de": "TGJU | Gold-, Devisen- und Marktpreise",
+    "tr": "TGJU | Altın, Döviz ve Piyasa Fiyatları",
+    "ar": "TGJU | أسعار الذهب والعملات والأسواق",
+    "fr": "TGJU | Cours de l’or, des devises et des marchés"
+  },
+  "seo_description": {
+    "fa": "شبکه اطلاع‌رسانی طلا، سکه و ارز (TGJU)، منبع نمایش قیمت، نمودار و اخبار بازارهای مالی است.",
+    "en": "TGJU is a financial information service publishing market prices, charts and news on gold, currencies and other assets.",
+    "de": "TGJU ist ein Finanzinformationsdienst mit Marktpreisen, Charts und Nachrichten zu Gold, Währungen und weiteren Anlageklassen.",
+    "tr": "TGJU; altın, döviz ve diğer varlıklar için piyasa fiyatları, grafikler ve haberler yayımlayan bir finansal bilgi hizmetidir.",
+    "ar": "TGJU شبكة معلومات مالية تنشر أسعار الأسواق والرسوم البيانية والأخبار عن الذهب والعملات وأصول أخرى.",
+    "fr": "TGJU est un service d’information financière publiant des cours, graphiques et actualités sur l’or, les devises et d’autres actifs."
+  },
+  "legal_name": null,
+  "country_code": "IR",
+  "founded_year": null,
+  "kyc_required": null,
+  "fee_url": null,
+  "support_url": "https://www.tgju.org/contact",
+  "terms_url": "https://www.tgju.org/terms",
+  "android_app_url": "https://play.google.com/store/apps/details?id=com.vandaw.tgju",
+  "ios_app_url": "https://www.tgju.org/applications/#ios-dl",
+  "facts": [
+    {
+      "key": "role",
+      "label": {
+        "fa": "نوع منبع",
+        "en": "Type",
+        "de": "Typ",
+        "tr": "Tür",
+        "ar": "النوع",
+        "fr": "Type"
+      },
+      "value": {
+        "fa": "مرجع قیمت",
+        "en": "Price source",
+        "de": "Preisquelle",
+        "tr": "Fiyat kaynağı",
+        "ar": "مرجع أسعار",
+        "fr": "Source de prix"
+      }
+    },
+    {
+      "key": "gold",
+      "label": {
+        "fa": "طلا و سکه",
+        "en": "Gold/Coins",
+        "de": "Gold",
+        "tr": "Altın",
+        "ar": "الذهب",
+        "fr": "Or"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "fx",
+      "label": {
+        "fa": "ارز",
+        "en": "FX",
+        "de": "Devisen",
+        "tr": "Döviz",
+        "ar": "العملات",
+        "fr": "Devises"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "crypto",
+      "label": {
+        "fa": "رمزارز",
+        "en": "Crypto",
+        "de": "Krypto",
+        "tr": "Kripto",
+        "ar": "كريبتو",
+        "fr": "Crypto"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "charts",
+      "label": {
+        "fa": "نمودار",
+        "en": "Charts",
+        "de": "Charts",
+        "tr": "Grafikler",
+        "ar": "الرسوم",
+        "fr": "Graphiques"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "history",
+      "label": {
+        "fa": "تاریخچه",
+        "en": "History",
+        "de": "Historie",
+        "tr": "Geçmiş",
+        "ar": "السجل",
+        "fr": "Historique"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "fa": "وب‌سایت رسمی",
+        "en": "Official website",
+        "de": "Offizielle Website",
+        "tr": "Resmî site",
+        "ar": "الموقع الرسمي",
+        "fr": "Site officiel"
+      },
+      "url": "https://www.tgju.org"
+    },
+    {
+      "label": {
+        "fa": "قوانین و احراز هویت",
+        "en": "Terms and verification",
+        "de": "Bedingungen und Verifizierung",
+        "tr": "Koşullar ve doğrulama",
+        "ar": "الشروط والتحقق",
+        "fr": "Conditions et vérification"
+      },
+      "url": "https://www.tgju.org/terms"
+    },
+    {
+      "label": {
+        "fa": "پشتیبانی",
+        "en": "Support",
+        "de": "Support",
+        "tr": "Destek",
+        "ar": "الدعم",
+        "fr": "Assistance"
+      },
+      "url": "https://www.tgju.org/contact"
+    },
+    {
+      "label": {
+        "fa": "اپلیکیشن‌های رسمی",
+        "en": "Official apps",
+        "de": "Offizielle Apps",
+        "tr": "Resmî uygulamalar",
+        "ar": "التطبيقات الرسمية",
+        "fr": "Applications officielles"
+      },
+      "url": "https://www.tgju.org/applications"
+    }
+  ],
+  "last_reviewed_at": "2026-10-07"
+}

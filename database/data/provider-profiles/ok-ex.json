@@ -1,0 +1,241 @@
+{
+  "type": "exchange",
+  "publication_status": "draft",
+  "summary": {
+    "fa": "اوکی اکسچنج، صرافی ایرانی با تبادل سریع، بازار اسپات تتری و معاملات تعهدی است.",
+    "en": "OK-EX is an Iranian cryptocurrency exchange offering quick swaps, a USDT spot market and leveraged trading.",
+    "de": "OK-EX ist eine iranische Kryptobörse mit Soforttausch, USDT-Spotmarkt und gehebeltem Handel.",
+    "tr": "OK-EX, hızlı takas, USDT spot piyasası ve kaldıraçlı işlemler sunan İran merkezli bir kripto borsasıdır.",
+    "ar": "أوكي إكسچنج منصة إيرانية للعملات المشفرة تقدم التبادل السريع وسوقاً فورية بعملة USDT وتداولاً بالرافعة.",
+    "fr": "OK-EX est une plateforme iranienne de cryptomonnaies proposant l’échange rapide, un marché spot en USDT et le trading avec effet de levier."
+  },
+  "description": {
+    "fa": "اوکی اکسچنج از سال ۱۳۹۶ فعالیت می‌کند و طبق قوانین رسمی، خدمات آن توسط شرکت آماتیس ایرانیان ارائه می‌شود. تبادل سریع برای خرید و فروش مستقیم و بازار تتری برای ثبت سفارش ارائه شده‌اند. معاملات تعهدی شرایط و هزینه‌های جداگانه دارند و جدول کارمزدها سطوح عادی و VIP را مشخص می‌کند.\n\nاستفاده از خدمات معاملاتی و واریز و برداشت تابع احراز هویت و محدودیت‌های حساب است. کارمزد و هزینه برداشت را پیش از ثبت سفارش در صفحه رسمی کارمزدها و حساب کاربری بررسی کنید؛ هزینه شبکه با ارز و شبکه انتقال تغییر می‌کند.\n\nدسترسی از طریق وب و نسخه‌های موبایل معرفی‌شده در منابع رسمی فراهم است. لینک‌های پشتیبانی، قوانین و مستندات API در منابع این پروفایل آمده‌اند.",
+    "en": "OK-EX began operating in 1396 (2017–2018). Its terms name آماتیس ایرانیان as its operator. It offers quick buy/sell swaps and a USDT order market. Leveraged positions have separate conditions and charges; the fee schedule distinguishes regular and VIP account levels.\n\nTrading, deposits and withdrawals are subject to identity verification and account limits. Check the official fee page and your account for trading and withdrawal charges before placing an order; network costs vary by asset and transfer network.\n\nAccess is available through the website and officially listed mobile options. Support, terms and API documentation are linked in this profile’s sources.",
+    "de": "OK-EX ist seit 1396 (2017–2018) tätig. Die Bedingungen nennen آماتیس ایرانیان als Betreiber. Angeboten werden Sofortkäufe und -verkäufe sowie ein USDT-Ordermarkt. Gehebelte Positionen haben eigene Bedingungen und Kosten; die Gebührenübersicht unterscheidet reguläre Konten und VIP-Stufen.\n\nHandel sowie Ein- und Auszahlungen unterliegen der Identitätsprüfung und Kontolimits. Handels- und Auszahlungsgebühren sollten vor einer Order auf der offiziellen Gebührenseite und im Konto geprüft werden; Netzwerkkosten hängen von Kryptowährung und Netzwerk ab.\n\nDer Zugang erfolgt über die Website und offiziell aufgeführte mobile Angebote. Support, Bedingungen und API-Dokumentation sind in den Quellen dieses Profils verlinkt.",
+    "tr": "OK-EX, 1396 (2017–2018) yılından beri faaliyet gösterir. Koşullarda işletmeci olarak آماتیس ایرانیان belirtilir. Hızlı alım satım ve USDT emir piyasası sunar. Kaldıraçlı pozisyonların ayrı koşulları ve ücretleri vardır; ücret tablosu standart ve VIP hesap seviyelerini ayırır.\n\nİşlem, yatırma ve çekme hizmetleri kimlik doğrulamasına ve hesap limitlerine tabidir. Emir vermeden önce resmî ücret sayfasından ve hesabınızdan işlem ve çekim ücretlerini kontrol edin; ağ masrafları varlığa ve transfer ağına göre değişir.\n\nWeb sitesi ve resmî mobil seçenekler üzerinden erişim sağlanır. Destek, koşullar ve API belgeleri profil kaynaklarında bağlantı olarak sunulmuştur.",
+    "ar": "بدأت أوكي إكسچنج نشاطها عام 1396 (2017–2018). وتذكر الشروط شركة آماتیس ایرانیان بوصفها المشغّل. تقدم شراءً وبيعاً سريعاً وسوق أوامر بعملة USDT. للمراكز ذات الرافعة شروط وتكاليف منفصلة، ويميّز جدول الرسوم بين الحسابات العادية ومستويات VIP.\n\nتخضع خدمات التداول والإيداع والسحب للتحقق من الهوية وحدود الحساب. راجع صفحة الرسوم الرسمية وحسابك لمعرفة رسوم التداول والسحب قبل وضع أمر؛ تختلف تكاليف الشبكة بحسب العملة وشبكة التحويل.\n\nيتوفر الوصول عبر الموقع وخيارات الهاتف المعلنة رسمياً. ترد روابط الدعم والشروط ووثائق API ضمن مصادر هذا الملف.",
+    "fr": "OK-EX exerce depuis 1396 (2017–2018). Ses conditions désignent آماتیس ایرانیان comme exploitant. La plateforme propose l’achat et la vente rapides ainsi qu’un marché d’ordres en USDT. Les positions avec levier ont leurs propres conditions et frais ; le barème distingue les comptes ordinaires et les niveaux VIP.\n\nLe trading, les dépôts et les retraits sont soumis à la vérification d’identité et aux limites du compte. Consultez la page officielle des frais et votre compte avant de passer un ordre ; les frais de réseau varient selon l’actif et le réseau de transfert.\n\nL’accès est proposé sur le Web et via les options mobiles officielles. Les sources du profil incluent l’assistance, les conditions et la documentation API."
+  },
+  "seo_title": {
+    "fa": "اوکی اکسچنج | معرفی، کارمزد و خدمات",
+    "en": "OK-EX | Overview, Fees and Services",
+    "de": "OK-EX | Überblick, Gebühren und Dienste",
+    "tr": "OK-EX | Tanıtım, Ücretler ve Hizmetler",
+    "ar": "OK-EX | التعريف والرسوم والخدمات",
+    "fr": "OK-EX | Présentation, frais et services"
+  },
+  "seo_description": {
+    "fa": "اوکی اکسچنج، صرافی ایرانی با تبادل سریع، بازار اسپات تتری و معاملات تعهدی است.",
+    "en": "OK-EX is an Iranian cryptocurrency exchange offering quick swaps, a USDT spot market and leveraged trading.",
+    "de": "OK-EX ist eine iranische Kryptobörse mit Soforttausch, USDT-Spotmarkt und gehebeltem Handel.",
+    "tr": "OK-EX, hızlı takas, USDT spot piyasası ve kaldıraçlı işlemler sunan İran merkezli bir kripto borsasıdır.",
+    "ar": "أوكي إكسچنج منصة إيرانية للعملات المشفرة تقدم التبادل السريع وسوقاً فورية بعملة USDT وتداولاً بالرافعة.",
+    "fr": "OK-EX est une plateforme iranienne de cryptomonnaies proposant l’échange rapide, un marché spot en USDT et le trading avec effet de levier."
+  },
+  "legal_name": null,
+  "country_code": "IR",
+  "founded_year": null,
+  "kyc_required": true,
+  "fee_url": "https://ok-ex.io/info/fees",
+  "support_url": "https://ok-ex.io/support/contact",
+  "terms_url": "https://ok-ex.io/info/terms/",
+  "android_app_url": "https://myket.ir/app/co.okex.app",
+  "ios_app_url": "https://ok-ex.io/install-pwa",
+  "facts": [
+    {
+      "key": "markets",
+      "label": {
+        "fa": "بازارها",
+        "en": "Markets",
+        "de": "Märkte",
+        "tr": "Piyasalar",
+        "ar": "الأسواق",
+        "fr": "Marchés"
+      },
+      "value": {
+        "fa": "USDT",
+        "en": "USDT",
+        "de": "USDT",
+        "tr": "USDT",
+        "ar": "USDT",
+        "fr": "USDT"
+      }
+    },
+    {
+      "key": "kyc",
+      "label": {
+        "fa": "احراز هویت",
+        "en": "KYC",
+        "de": "KYC",
+        "tr": "KYC",
+        "ar": "التحقق",
+        "fr": "KYC"
+      },
+      "value": {
+        "fa": "الزامی",
+        "en": "Required",
+        "de": "Erforderlich",
+        "tr": "Gerekli",
+        "ar": "مطلوب",
+        "fr": "Obligatoire"
+      }
+    },
+    {
+      "key": "spot",
+      "label": {
+        "fa": "اسپات",
+        "en": "Spot",
+        "de": "Spot",
+        "tr": "Spot",
+        "ar": "فوري",
+        "fr": "Spot"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "margin",
+      "label": {
+        "fa": "اهرم",
+        "en": "Margin",
+        "de": "Margin",
+        "tr": "Marjin",
+        "ar": "الهامش",
+        "fr": "Marge"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "api",
+      "label": {
+        "fa": "API",
+        "en": "API",
+        "de": "API",
+        "tr": "API",
+        "ar": "API",
+        "fr": "API"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "access",
+      "label": {
+        "fa": "دسترسی",
+        "en": "Access",
+        "de": "Zugang",
+        "tr": "Erişim",
+        "ar": "الوصول",
+        "fr": "Accès"
+      },
+      "value": {
+        "fa": "وب و موبایل",
+        "en": "Web / Mobile",
+        "de": "Web / Mobil",
+        "tr": "Web / Mobil",
+        "ar": "ويب / هاتف",
+        "fr": "Web / Mobile"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "fa": "وب‌سایت رسمی",
+        "en": "Official website",
+        "de": "Offizielle Website",
+        "tr": "Resmî site",
+        "ar": "الموقع الرسمي",
+        "fr": "Site officiel"
+      },
+      "url": "https://ok-ex.io"
+    },
+    {
+      "label": {
+        "fa": "درباره ما",
+        "en": "About",
+        "de": "Über uns",
+        "tr": "Hakkında",
+        "ar": "حول المنصة",
+        "fr": "À propos"
+      },
+      "url": "https://ok-ex.io/support/about-us"
+    },
+    {
+      "label": {
+        "fa": "کارمزدهای رسمی",
+        "en": "Official fees",
+        "de": "Offizielle Gebühren",
+        "tr": "Resmî ücretler",
+        "ar": "الرسوم الرسمية",
+        "fr": "Frais officiels"
+      },
+      "url": "https://ok-ex.io/info/fees"
+    },
+    {
+      "label": {
+        "fa": "قوانین و احراز هویت",
+        "en": "Terms and verification",
+        "de": "Bedingungen und Verifizierung",
+        "tr": "Koşullar ve doğrulama",
+        "ar": "الشروط والتحقق",
+        "fr": "Conditions et vérification"
+      },
+      "url": "https://ok-ex.io/info/terms/"
+    },
+    {
+      "label": {
+        "fa": "پشتیبانی",
+        "en": "Support",
+        "de": "Support",
+        "tr": "Destek",
+        "ar": "الدعم",
+        "fr": "Assistance"
+      },
+      "url": "https://ok-ex.io/support/contact"
+    },
+    {
+      "label": {
+        "fa": "اپلیکیشن‌های رسمی",
+        "en": "Official apps",
+        "de": "Offizielle Apps",
+        "tr": "Resmî uygulamalar",
+        "ar": "التطبيقات الرسمية",
+        "fr": "Applications officielles"
+      },
+      "url": "https://ok-ex.io/download"
+    },
+    {
+      "label": {
+        "fa": "مستندات API",
+        "en": "API documentation",
+        "de": "API-Dokumentation",
+        "tr": "API belgeleri",
+        "ar": "وثائق API",
+        "fr": "Documentation API"
+      },
+      "url": "https://docs.ok-ex.io/"
+    }
+  ],
+  "last_reviewed_at": "2026-10-07"
+}

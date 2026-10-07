@@ -1,0 +1,241 @@
+{
+  "type": "exchange",
+  "publication_status": "draft",
+  "summary": {
+    "fa": "بیت‌پین، صرافی ایرانی با معاملات اسپات و تعهدی، خرید آسان و API برای مدیریت حساب و سفارش‌ها است.",
+    "en": "Bitpin is an Iranian cryptocurrency exchange offering spot and leveraged trading, easy buy/sell and an account and trading API.",
+    "de": "Bitpin ist eine iranische Kryptobörse mit Spot- und gehebeltem Handel, einfachem Kauf und Verkauf sowie einer Konto- und Handels-API.",
+    "tr": "Bitpin; spot ve kaldıraçlı işlemler, kolay alım satım ve hesap ile işlem API’si sunan İran merkezli bir kripto borsasıdır.",
+    "ar": "بيت‌بين منصة إيرانية للعملات المشفرة تقدم التداول الفوري وبالرافعة والشراء والبيع المبسّط وواجهة API للحساب والتداول.",
+    "fr": "Bitpin est une plateforme iranienne proposant le trading spot et avec levier, l’achat et la vente simplifiés et une API de compte et de trading."
+  },
+  "description": {
+    "fa": "بیت‌پین محصول شرکت سنا ایمن مبادله منطقه آزاد انزلی است. صفحه رسمی درباره ما، آغاز فعالیت در فروردین ۱۴۰۰ را ثبت کرده است. خدمات شامل بازار اسپات، معاملات تعهدی و خرید آسان است؛ امکاناتی مانند استیکینگ و وام نیز با شرایط اختصاصی ارائه می‌شوند. پشتیبانی از طریق support@bitpin.ir و شماره ۰۲۱۷۲۸۰۲ در دسترس است.\n\nاستفاده از خدمات معاملاتی و واریز و برداشت تابع احراز هویت و محدودیت‌های حساب است. کارمزد و هزینه برداشت را پیش از ثبت سفارش در صفحه رسمی کارمزدها و حساب کاربری بررسی کنید؛ هزینه شبکه با ارز و شبکه انتقال تغییر می‌کند.\n\nدسترسی از طریق وب و نسخه‌های موبایل معرفی‌شده در منابع رسمی فراهم است. لینک‌های پشتیبانی، قوانین و مستندات API در منابع این پروفایل آمده‌اند.",
+    "en": "Bitpin is operated by سنا ایمن مبادله منطقه آزاد انزلی. Its about page records its launch in Farvardin 1400 (March–April 2021). Services include spot markets, leveraged trading and easy buy/sell; staking and loans have separate conditions. Support is available at support@bitpin.ir and +98 21 72802.\n\nTrading, deposits and withdrawals are subject to identity verification and account limits. Check the official fee page and your account for trading and withdrawal charges before placing an order; network costs vary by asset and transfer network.\n\nAccess is available through the website and officially listed mobile options. Support, terms and API documentation are linked in this profile’s sources.",
+    "de": "Bitpin wird von سنا ایمن مبادله منطقه آزاد انزلی betrieben. Laut Unternehmensseite startete die Plattform im Farvardin 1400 (März–April 2021). Sie bietet Spotmärkte, gehebelten Handel und einfachen Kauf und Verkauf. Für Staking und Kredite gelten gesonderte Bedingungen. Support: support@bitpin.ir und +98 21 72802.\n\nHandel sowie Ein- und Auszahlungen unterliegen der Identitätsprüfung und Kontolimits. Handels- und Auszahlungsgebühren sollten vor einer Order auf der offiziellen Gebührenseite und im Konto geprüft werden; Netzwerkkosten hängen von Kryptowährung und Netzwerk ab.\n\nDer Zugang erfolgt über die Website und offiziell aufgeführte mobile Angebote. Support, Bedingungen und API-Dokumentation sind in den Quellen dieses Profils verlinkt.",
+    "tr": "Bitpin, سنا ایمن مبادله منطقه آزاد انزلی tarafından işletilir. Hakkında sayfası açılışı Ferverdin 1400 (Mart–Nisan 2021) olarak belirtir. Spot piyasalar, kaldıraçlı işlem ve kolay alım satım sunar; staking ve kredilerin ayrı koşulları vardır. Destek: support@bitpin.ir ve +98 21 72802.\n\nİşlem, yatırma ve çekme hizmetleri kimlik doğrulamasına ve hesap limitlerine tabidir. Emir vermeden önce resmî ücret sayfasından ve hesabınızdan işlem ve çekim ücretlerini kontrol edin; ağ masrafları varlığa ve transfer ağına göre değişir.\n\nWeb sitesi ve resmî mobil seçenekler üzerinden erişim sağlanır. Destek, koşullar ve API belgeleri profil kaynaklarında bağlantı olarak sunulmuştur.",
+    "ar": "تدير بيت‌بين شركة سنا ایمن مبادله منطقه آزاد انزلی. تسجل صفحة التعريف إطلاقها في فروردين 1400 (مارس–أبريل 2021). تشمل خدماتها أسواقاً فورية وتداولاً بالرافعة وشراءً وبيعاً مبسّطاً؛ ويخضع التحصيص والقروض لشروط منفصلة. الدعم: support@bitpin.ir و‎+98 21 72802.\n\nتخضع خدمات التداول والإيداع والسحب للتحقق من الهوية وحدود الحساب. راجع صفحة الرسوم الرسمية وحسابك لمعرفة رسوم التداول والسحب قبل وضع أمر؛ تختلف تكاليف الشبكة بحسب العملة وشبكة التحويل.\n\nيتوفر الوصول عبر الموقع وخيارات الهاتف المعلنة رسمياً. ترد روابط الدعم والشروط ووثائق API ضمن مصادر هذا الملف.",
+    "fr": "Bitpin est exploitée par سنا ایمن مبادله منطقه آزاد انزلی. Sa page de présentation situe son lancement en Farvardin 1400 (mars–avril 2021). Elle propose des marchés spot, le trading avec levier et l’achat et la vente simplifiés ; le staking et les prêts ont des conditions propres. Assistance : support@bitpin.ir et +98 21 72802.\n\nLe trading, les dépôts et les retraits sont soumis à la vérification d’identité et aux limites du compte. Consultez la page officielle des frais et votre compte avant de passer un ordre ; les frais de réseau varient selon l’actif et le réseau de transfert.\n\nL’accès est proposé sur le Web et via les options mobiles officielles. Les sources du profil incluent l’assistance, les conditions et la documentation API."
+  },
+  "seo_title": {
+    "fa": "بیت‌پین | معرفی، کارمزد و خدمات",
+    "en": "Bitpin | Overview, Fees and Services",
+    "de": "Bitpin | Überblick, Gebühren und Dienste",
+    "tr": "Bitpin | Tanıtım, Ücretler ve Hizmetler",
+    "ar": "Bitpin | التعريف والرسوم والخدمات",
+    "fr": "Bitpin | Présentation, frais et services"
+  },
+  "seo_description": {
+    "fa": "بیت‌پین، صرافی ایرانی با معاملات اسپات و تعهدی، خرید آسان و API برای مدیریت حساب و سفارش‌ها است.",
+    "en": "Bitpin is an Iranian cryptocurrency exchange offering spot and leveraged trading, easy buy/sell and an account and trading API.",
+    "de": "Bitpin ist eine iranische Kryptobörse mit Spot- und gehebeltem Handel, einfachem Kauf und Verkauf sowie einer Konto- und Handels-API.",
+    "tr": "Bitpin; spot ve kaldıraçlı işlemler, kolay alım satım ve hesap ile işlem API’si sunan İran merkezli bir kripto borsasıdır.",
+    "ar": "بيت‌بين منصة إيرانية للعملات المشفرة تقدم التداول الفوري وبالرافعة والشراء والبيع المبسّط وواجهة API للحساب والتداول.",
+    "fr": "Bitpin est une plateforme iranienne proposant le trading spot et avec levier, l’achat et la vente simplifiés et une API de compte et de trading."
+  },
+  "legal_name": null,
+  "country_code": "IR",
+  "founded_year": 2021,
+  "kyc_required": true,
+  "fee_url": "https://bitpin.ir/fee/",
+  "support_url": "https://bitpin.ir/support/",
+  "terms_url": "https://bitpin.ir/rules/",
+  "android_app_url": "https://bitpin.ir/app-download/",
+  "ios_app_url": "https://bitpin.ir/app-download/",
+  "facts": [
+    {
+      "key": "markets",
+      "label": {
+        "fa": "بازارها",
+        "en": "Markets",
+        "de": "Märkte",
+        "tr": "Piyasalar",
+        "ar": "الأسواق",
+        "fr": "Marchés"
+      },
+      "value": {
+        "fa": "تومان / USDT",
+        "en": "Toman / USDT",
+        "de": "Toman / USDT",
+        "tr": "Tümen / USDT",
+        "ar": "تومان / USDT",
+        "fr": "Toman / USDT"
+      }
+    },
+    {
+      "key": "kyc",
+      "label": {
+        "fa": "احراز هویت",
+        "en": "KYC",
+        "de": "KYC",
+        "tr": "KYC",
+        "ar": "التحقق",
+        "fr": "KYC"
+      },
+      "value": {
+        "fa": "الزامی",
+        "en": "Required",
+        "de": "Erforderlich",
+        "tr": "Gerekli",
+        "ar": "مطلوب",
+        "fr": "Obligatoire"
+      }
+    },
+    {
+      "key": "spot",
+      "label": {
+        "fa": "اسپات",
+        "en": "Spot",
+        "de": "Spot",
+        "tr": "Spot",
+        "ar": "فوري",
+        "fr": "Spot"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "margin",
+      "label": {
+        "fa": "اهرم",
+        "en": "Margin",
+        "de": "Margin",
+        "tr": "Marjin",
+        "ar": "الهامش",
+        "fr": "Marge"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "api",
+      "label": {
+        "fa": "API",
+        "en": "API",
+        "de": "API",
+        "tr": "API",
+        "ar": "API",
+        "fr": "API"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "access",
+      "label": {
+        "fa": "دسترسی",
+        "en": "Access",
+        "de": "Zugang",
+        "tr": "Erişim",
+        "ar": "الوصول",
+        "fr": "Accès"
+      },
+      "value": {
+        "fa": "وب و موبایل",
+        "en": "Web / Mobile",
+        "de": "Web / Mobil",
+        "tr": "Web / Mobil",
+        "ar": "ويب / هاتف",
+        "fr": "Web / Mobile"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "fa": "وب‌سایت رسمی",
+        "en": "Official website",
+        "de": "Offizielle Website",
+        "tr": "Resmî site",
+        "ar": "الموقع الرسمي",
+        "fr": "Site officiel"
+      },
+      "url": "https://bitpin.ir"
+    },
+    {
+      "label": {
+        "fa": "درباره ما",
+        "en": "About",
+        "de": "Über uns",
+        "tr": "Hakkında",
+        "ar": "حول المنصة",
+        "fr": "À propos"
+      },
+      "url": "https://bitpin.ir/aboutus/"
+    },
+    {
+      "label": {
+        "fa": "کارمزدهای رسمی",
+        "en": "Official fees",
+        "de": "Offizielle Gebühren",
+        "tr": "Resmî ücretler",
+        "ar": "الرسوم الرسمية",
+        "fr": "Frais officiels"
+      },
+      "url": "https://bitpin.ir/fee/"
+    },
+    {
+      "label": {
+        "fa": "قوانین و احراز هویت",
+        "en": "Terms and verification",
+        "de": "Bedingungen und Verifizierung",
+        "tr": "Koşullar ve doğrulama",
+        "ar": "الشروط والتحقق",
+        "fr": "Conditions et vérification"
+      },
+      "url": "https://bitpin.ir/rules/"
+    },
+    {
+      "label": {
+        "fa": "پشتیبانی",
+        "en": "Support",
+        "de": "Support",
+        "tr": "Destek",
+        "ar": "الدعم",
+        "fr": "Assistance"
+      },
+      "url": "https://bitpin.ir/support/"
+    },
+    {
+      "label": {
+        "fa": "اپلیکیشن‌های رسمی",
+        "en": "Official apps",
+        "de": "Offizielle Apps",
+        "tr": "Resmî uygulamalar",
+        "ar": "التطبيقات الرسمية",
+        "fr": "Applications officielles"
+      },
+      "url": "https://bitpin.ir/app-download/"
+    },
+    {
+      "label": {
+        "fa": "مستندات API",
+        "en": "API documentation",
+        "de": "API-Dokumentation",
+        "tr": "API belgeleri",
+        "ar": "وثائق API",
+        "fr": "Documentation API"
+      },
+      "url": "https://docs.bitpin.ir/"
+    }
+  ],
+  "last_reviewed_at": "2026-10-07"
+}

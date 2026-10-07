@@ -1,0 +1,249 @@
+{
+  "type": "exchange",
+  "publication_status": "draft",
+  "summary": {
+    "fa": "او ام پی فینکس، صرافی ایرانی با بازارهای رمزارزی، سفارش‌های متنوع، معاملات تعهدی، ربات و API است.",
+    "en": "OMPFinex is an Iranian cryptocurrency exchange with multiple order types, leveraged trading, trading bots and API access.",
+    "de": "OMPFinex ist eine iranische Kryptobörse mit verschiedenen Ordertypen, gehebeltem Handel, Trading-Bots und API-Zugang.",
+    "tr": "OMPFinex; çeşitli emir türleri, kaldıraçlı işlemler, işlem botları ve API erişimi sunan İran merkezli bir kripto borsasıdır.",
+    "ar": "أو إم بي فينكس منصة إيرانية للعملات المشفرة تقدم أنواع أوامر متعددة وتداولاً بالرافعة وروبوتات تداول وواجهة API.",
+    "fr": "OMPFinex est une plateforme iranienne de cryptomonnaies proposant plusieurs types d’ordres, le trading avec levier, des robots et une API."
+  },
+  "description": {
+    "fa": "وب‌سایت او ام پی فینکس، شرکت مدیریت صادرات اوژن مشرق پارس را به‌عنوان شرکت صاحب سامانه معرفی می‌کند. این پلتفرم بازارهای تومانی و تتری و سفارش‌های Limit، Market، Stop Limit، Stop Market و OCO دارد. صفحه درباره ما، ربات معامله‌گر با سفارش‌گذاری بر اساس قیمت جهانی و درصد انتخابی کاربر را معرفی می‌کند. پشتیبانی با شماره ۰۲۱۵۲۶۹۴۰۰۰ ارائه می‌شود.\n\nاستفاده از خدمات معاملاتی و واریز و برداشت تابع احراز هویت و محدودیت‌های حساب است. کارمزد و هزینه برداشت را پیش از ثبت سفارش در صفحه رسمی کارمزدها و حساب کاربری بررسی کنید؛ هزینه شبکه با ارز و شبکه انتقال تغییر می‌کند.\n\nدسترسی از طریق وب و نسخه‌های موبایل معرفی‌شده در منابع رسمی فراهم است. لینک‌های پشتیبانی، قوانین و مستندات API در منابع این پروفایل آمده‌اند.",
+    "en": "OMPFinex’s website identifies مدیریت صادرات اوژن مشرق پارس as the company behind the service. The platform offers toman and USDT markets with limit, market, stop-limit, stop-market and OCO orders. Its about page describes a trading bot that places orders using global prices and a user-selected percentage. Support phone: +98 21 52694000.\n\nTrading, deposits and withdrawals are subject to identity verification and account limits. Check the official fee page and your account for trading and withdrawal charges before placing an order; network costs vary by asset and transfer network.\n\nAccess is available through the website and officially listed mobile options. Support, terms and API documentation are linked in this profile’s sources.",
+    "de": "Die Website von OMPFinex nennt مدیریت صادرات اوژن مشرق پارس als Unternehmen hinter dem Dienst. Die Plattform bietet Toman- und USDT-Märkte mit Limit-, Market-, Stop-Limit-, Stop-Market- und OCO-Orders. Die Unternehmensseite beschreibt einen Trading-Bot, der Orders anhand globaler Preise und eines vom Nutzer gewählten Prozentsatzes platziert. Support: +98 21 52694000.\n\nHandel sowie Ein- und Auszahlungen unterliegen der Identitätsprüfung und Kontolimits. Handels- und Auszahlungsgebühren sollten vor einer Order auf der offiziellen Gebührenseite und im Konto geprüft werden; Netzwerkkosten hängen von Kryptowährung und Netzwerk ab.\n\nDer Zugang erfolgt über die Website und offiziell aufgeführte mobile Angebote. Support, Bedingungen und API-Dokumentation sind in den Quellen dieses Profils verlinkt.",
+    "tr": "OMPFinex’in sitesi işletmeci şirketi مدیریت صادرات اوژن مشرق پارس olarak belirtir. Platform tümen ve USDT piyasalarında limit, piyasa, stop-limit, stop-market ve OCO emirleri sunar. Hakkında sayfası, küresel fiyatlar ve kullanıcının seçtiği yüzde üzerinden emir veren bir işlem botunu tanıtır. Destek telefonu: +98 21 52694000.\n\nİşlem, yatırma ve çekme hizmetleri kimlik doğrulamasına ve hesap limitlerine tabidir. Emir vermeden önce resmî ücret sayfasından ve hesabınızdan işlem ve çekim ücretlerini kontrol edin; ağ masrafları varlığa ve transfer ağına göre değişir.\n\nWeb sitesi ve resmî mobil seçenekler üzerinden erişim sağlanır. Destek, koşullar ve API belgeleri profil kaynaklarında bağlantı olarak sunulmuştur.",
+    "ar": "يعرّف موقع أو إم بي فينكس الشركة المشغلة باسم مدیریت صادرات اوژن مشرق پارس. توفر المنصة أسواق التومان وUSDT وأوامر الحد والسوق ووقف الحد ووقف السوق وOCO. وتعرض صفحة التعريف روبوت تداول يضع أوامر باستخدام الأسعار العالمية ونسبة يختارها المستخدم. هاتف الدعم: ‎+98 21 52694000.\n\nتخضع خدمات التداول والإيداع والسحب للتحقق من الهوية وحدود الحساب. راجع صفحة الرسوم الرسمية وحسابك لمعرفة رسوم التداول والسحب قبل وضع أمر؛ تختلف تكاليف الشبكة بحسب العملة وشبكة التحويل.\n\nيتوفر الوصول عبر الموقع وخيارات الهاتف المعلنة رسمياً. ترد روابط الدعم والشروط ووثائق API ضمن مصادر هذا الملف.",
+    "fr": "Le site d’OMPFinex désigne مدیریت صادرات اوژن مشرق پارس comme société exploitante. La plateforme propose des marchés en tomans et en USDT avec ordres à cours limité, au marché, stop-limit, stop-market et OCO. Sa page de présentation décrit un robot qui place des ordres selon les cours mondiaux et un pourcentage choisi par l’utilisateur. Assistance : +98 21 52694000.\n\nLe trading, les dépôts et les retraits sont soumis à la vérification d’identité et aux limites du compte. Consultez la page officielle des frais et votre compte avant de passer un ordre ; les frais de réseau varient selon l’actif et le réseau de transfert.\n\nL’accès est proposé sur le Web et via les options mobiles officielles. Les sources du profil incluent l’assistance, les conditions et la documentation API."
+  },
+  "seo_title": {
+    "fa": "او ام پی فینکس | معرفی، کارمزد و خدمات",
+    "en": "OMPFinex | Overview, Fees and Services",
+    "de": "OMPFinex | Überblick, Gebühren und Dienste",
+    "tr": "OMPFinex | Tanıtım, Ücretler ve Hizmetler",
+    "ar": "OMPFinex | التعريف والرسوم والخدمات",
+    "fr": "OMPFinex | Présentation, frais et services"
+  },
+  "seo_description": {
+    "fa": "او ام پی فینکس، صرافی ایرانی با بازارهای رمزارزی، سفارش‌های متنوع، معاملات تعهدی، ربات و API است.",
+    "en": "OMPFinex is an Iranian cryptocurrency exchange with multiple order types, leveraged trading, trading bots and API access.",
+    "de": "OMPFinex ist eine iranische Kryptobörse mit verschiedenen Ordertypen, gehebeltem Handel, Trading-Bots und API-Zugang.",
+    "tr": "OMPFinex; çeşitli emir türleri, kaldıraçlı işlemler, işlem botları ve API erişimi sunan İran merkezli bir kripto borsasıdır.",
+    "ar": "أو إم بي فينكس منصة إيرانية للعملات المشفرة تقدم أنواع أوامر متعددة وتداولاً بالرافعة وروبوتات تداول وواجهة API.",
+    "fr": "OMPFinex est une plateforme iranienne de cryptomonnaies proposant plusieurs types d’ordres, le trading avec levier, des robots et une API."
+  },
+  "legal_name": null,
+  "country_code": "IR",
+  "founded_year": null,
+  "kyc_required": true,
+  "fee_url": "https://www.ompfinex.com/commission",
+  "support_url": "https://www.ompfinex.com/contact-us",
+  "terms_url": "https://www.ompfinex.com/policy",
+  "android_app_url": "https://go.ompfinex.com/myket",
+  "ios_app_url": "https://sibche.com/applications/ompfinex",
+  "facts": [
+    {
+      "key": "markets",
+      "label": {
+        "fa": "بازارها",
+        "en": "Markets",
+        "de": "Märkte",
+        "tr": "Piyasalar",
+        "ar": "الأسواق",
+        "fr": "Marchés"
+      },
+      "value": {
+        "fa": "تومان / USDT",
+        "en": "Toman / USDT",
+        "de": "Toman / USDT",
+        "tr": "Tümen / USDT",
+        "ar": "تومان / USDT",
+        "fr": "Toman / USDT"
+      }
+    },
+    {
+      "key": "kyc",
+      "label": {
+        "fa": "احراز هویت",
+        "en": "KYC",
+        "de": "KYC",
+        "tr": "KYC",
+        "ar": "التحقق",
+        "fr": "KYC"
+      },
+      "value": {
+        "fa": "الزامی",
+        "en": "Required",
+        "de": "Erforderlich",
+        "tr": "Gerekli",
+        "ar": "مطلوب",
+        "fr": "Obligatoire"
+      }
+    },
+    {
+      "key": "spot",
+      "label": {
+        "fa": "اسپات",
+        "en": "Spot",
+        "de": "Spot",
+        "tr": "Spot",
+        "ar": "فوري",
+        "fr": "Spot"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "margin",
+      "label": {
+        "fa": "اهرم",
+        "en": "Margin",
+        "de": "Margin",
+        "tr": "Marjin",
+        "ar": "الهامش",
+        "fr": "Marge"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "api",
+      "label": {
+        "fa": "API",
+        "en": "API",
+        "de": "API",
+        "tr": "API",
+        "ar": "API",
+        "fr": "API"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "access",
+      "label": {
+        "fa": "دسترسی",
+        "en": "Access",
+        "de": "Zugang",
+        "tr": "Erişim",
+        "ar": "الوصول",
+        "fr": "Accès"
+      },
+      "value": {
+        "fa": "وب و موبایل",
+        "en": "Web / Mobile",
+        "de": "Web / Mobil",
+        "tr": "Web / Mobil",
+        "ar": "ويب / هاتف",
+        "fr": "Web / Mobile"
+      }
+    },
+    {
+      "key": "bots",
+      "label": {
+        "fa": "ربات",
+        "en": "Bots",
+        "de": "Bots",
+        "tr": "Botlar",
+        "ar": "الروبوتات",
+        "fr": "Robots"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "fa": "وب‌سایت رسمی",
+        "en": "Official website",
+        "de": "Offizielle Website",
+        "tr": "Resmî site",
+        "ar": "الموقع الرسمي",
+        "fr": "Site officiel"
+      },
+      "url": "https://www.ompfinex.com"
+    },
+    {
+      "label": {
+        "fa": "درباره ما",
+        "en": "About",
+        "de": "Über uns",
+        "tr": "Hakkında",
+        "ar": "حول المنصة",
+        "fr": "À propos"
+      },
+      "url": "https://www.ompfinex.com/about-us"
+    },
+    {
+      "label": {
+        "fa": "کارمزدهای رسمی",
+        "en": "Official fees",
+        "de": "Offizielle Gebühren",
+        "tr": "Resmî ücretler",
+        "ar": "الرسوم الرسمية",
+        "fr": "Frais officiels"
+      },
+      "url": "https://www.ompfinex.com/commission"
+    },
+    {
+      "label": {
+        "fa": "قوانین و احراز هویت",
+        "en": "Terms and verification",
+        "de": "Bedingungen und Verifizierung",
+        "tr": "Koşullar ve doğrulama",
+        "ar": "الشروط والتحقق",
+        "fr": "Conditions et vérification"
+      },
+      "url": "https://www.ompfinex.com/policy"
+    },
+    {
+      "label": {
+        "fa": "پشتیبانی",
+        "en": "Support",
+        "de": "Support",
+        "tr": "Destek",
+        "ar": "الدعم",
+        "fr": "Assistance"
+      },
+      "url": "https://www.ompfinex.com/contact-us"
+    },
+    {
+      "label": {
+        "fa": "مستندات API",
+        "en": "API documentation",
+        "de": "API-Dokumentation",
+        "tr": "API belgeleri",
+        "ar": "وثائق API",
+        "fr": "Documentation API"
+      },
+      "url": "https://docs.ompfinex.com/"
+    }
+  ],
+  "last_reviewed_at": "2026-10-07"
+}

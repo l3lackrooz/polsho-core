@@ -1,0 +1,241 @@
+{
+  "type": "exchange",
+  "publication_status": "draft",
+  "summary": {
+    "fa": "والکس، صرافی ایرانی برای معاملات رمزارز، خرید و فروش آنی و استفاده از ابزارهای معاملاتی و API است.",
+    "en": "Wallex is an Iranian cryptocurrency exchange with spot trading, instant buy/sell, trading tools and API access.",
+    "de": "Wallex ist eine iranische Kryptobörse mit Spot-Handel, Sofortkauf und -verkauf, Handelswerkzeugen und API-Zugang.",
+    "tr": "Wallex; spot işlem, anında alım satım, işlem araçları ve API erişimi sunan İran merkezli bir kripto borsasıdır.",
+    "ar": "والكس منصة إيرانية للعملات المشفرة تقدم التداول الفوري والشراء والبيع المباشر وأدوات التداول وواجهة API.",
+    "fr": "Wallex est une plateforme iranienne de cryptomonnaies avec marché spot, achat et vente instantanés, outils de trading et API."
+  },
+  "description": {
+    "fa": "والکس در صفحه درباره ما، شرکت خلق ثروت سرزمین پارسه را معرفی می‌کند. این پلتفرم بازارهای رمزارزی، خرید و فروش آنی و معاملات تعهدی دارد. ابزارهای سفارش‌گذاری و API برای مدیریت معاملات در دسترس‌اند. پشتیبانی از طریق مرکز راهنما و شماره ۰۲۱۹۱۰۰۶۵۵۵ ارائه می‌شود.\n\nاستفاده از خدمات معاملاتی و واریز و برداشت تابع احراز هویت و محدودیت‌های حساب است. کارمزد و هزینه برداشت را پیش از ثبت سفارش در صفحه رسمی کارمزدها و حساب کاربری بررسی کنید؛ هزینه شبکه با ارز و شبکه انتقال تغییر می‌کند.\n\nدسترسی از طریق وب و نسخه‌های موبایل معرفی‌شده در منابع رسمی فراهم است. لینک‌های پشتیبانی، قوانین و مستندات API در منابع این پروفایل آمده‌اند.",
+    "en": "Wallex’s about page identifies خلق ثروت سرزمین پارسه as the company behind the platform. Services include cryptocurrency markets, instant buy/sell and leveraged trading. Order tools and an API support trade management. Help is available through the help centre and +98 21 91006555.\n\nTrading, deposits and withdrawals are subject to identity verification and account limits. Check the official fee page and your account for trading and withdrawal charges before placing an order; network costs vary by asset and transfer network.\n\nAccess is available through the website and officially listed mobile options. Support, terms and API documentation are linked in this profile’s sources.",
+    "de": "Die Unternehmensseite von Wallex nennt خلق ثروت سرزمین پارسه als Betreiber. Das Angebot umfasst Kryptomärkte, Sofortkauf und -verkauf sowie gehebelten Handel. Orderwerkzeuge und eine API ermöglichen die Handelsverwaltung. Hilfe gibt es im Hilfezentrum und unter +98 21 91006555.\n\nHandel sowie Ein- und Auszahlungen unterliegen der Identitätsprüfung und Kontolimits. Handels- und Auszahlungsgebühren sollten vor einer Order auf der offiziellen Gebührenseite und im Konto geprüft werden; Netzwerkkosten hängen von Kryptowährung und Netzwerk ab.\n\nDer Zugang erfolgt über die Website und offiziell aufgeführte mobile Angebote. Support, Bedingungen und API-Dokumentation sind in den Quellen dieses Profils verlinkt.",
+    "tr": "Wallex’in hakkında sayfası, platformun arkasındaki şirketi خلق ثروت سرزمین پارسه olarak belirtir. Kripto piyasaları, anında alım satım ve kaldıraçlı işlemler sunulur. Emir araçları ve API ile işlemler yönetilebilir. Yardım merkezi ve +98 21 91006555 üzerinden destek sağlanır.\n\nİşlem, yatırma ve çekme hizmetleri kimlik doğrulamasına ve hesap limitlerine tabidir. Emir vermeden önce resmî ücret sayfasından ve hesabınızdan işlem ve çekim ücretlerini kontrol edin; ağ masrafları varlığa ve transfer ağına göre değişir.\n\nWeb sitesi ve resmî mobil seçenekler üzerinden erişim sağlanır. Destek, koşullar ve API belgeleri profil kaynaklarında bağlantı olarak sunulmuştur.",
+    "ar": "تعرّف صفحة والكس بالشركة المشغلة باسم خلق ثروت سرزمین پارسه. تشمل الخدمات أسواق العملات المشفرة والشراء والبيع المباشر والتداول بالرافعة. تتوفر أدوات للأوامر وواجهة API لإدارة التداول. يتاح الدعم عبر مركز المساعدة والرقم ‎+98 21 91006555.\n\nتخضع خدمات التداول والإيداع والسحب للتحقق من الهوية وحدود الحساب. راجع صفحة الرسوم الرسمية وحسابك لمعرفة رسوم التداول والسحب قبل وضع أمر؛ تختلف تكاليف الشبكة بحسب العملة وشبكة التحويل.\n\nيتوفر الوصول عبر الموقع وخيارات الهاتف المعلنة رسمياً. ترد روابط الدعم والشروط ووثائق API ضمن مصادر هذا الملف.",
+    "fr": "La page de présentation de Wallex désigne خلق ثروت سرزمین پارسه comme société exploitante. L’offre comprend des marchés de cryptomonnaies, l’achat et la vente instantanés et le trading avec levier. Des outils d’ordres et une API permettent de gérer les opérations. L’assistance est disponible dans le centre d’aide et au +98 21 91006555.\n\nLe trading, les dépôts et les retraits sont soumis à la vérification d’identité et aux limites du compte. Consultez la page officielle des frais et votre compte avant de passer un ordre ; les frais de réseau varient selon l’actif et le réseau de transfert.\n\nL’accès est proposé sur le Web et via les options mobiles officielles. Les sources du profil incluent l’assistance, les conditions et la documentation API."
+  },
+  "seo_title": {
+    "fa": "والکس | معرفی، کارمزد و خدمات",
+    "en": "Wallex | Overview, Fees and Services",
+    "de": "Wallex | Überblick, Gebühren und Dienste",
+    "tr": "Wallex | Tanıtım, Ücretler ve Hizmetler",
+    "ar": "Wallex | التعريف والرسوم والخدمات",
+    "fr": "Wallex | Présentation, frais et services"
+  },
+  "seo_description": {
+    "fa": "والکس، صرافی ایرانی برای معاملات رمزارز، خرید و فروش آنی و استفاده از ابزارهای معاملاتی و API است.",
+    "en": "Wallex is an Iranian cryptocurrency exchange with spot trading, instant buy/sell, trading tools and API access.",
+    "de": "Wallex ist eine iranische Kryptobörse mit Spot-Handel, Sofortkauf und -verkauf, Handelswerkzeugen und API-Zugang.",
+    "tr": "Wallex; spot işlem, anında alım satım, işlem araçları ve API erişimi sunan İran merkezli bir kripto borsasıdır.",
+    "ar": "والكس منصة إيرانية للعملات المشفرة تقدم التداول الفوري والشراء والبيع المباشر وأدوات التداول وواجهة API.",
+    "fr": "Wallex est une plateforme iranienne de cryptomonnaies avec marché spot, achat et vente instantanés, outils de trading et API."
+  },
+  "legal_name": null,
+  "country_code": "IR",
+  "founded_year": null,
+  "kyc_required": true,
+  "fee_url": "https://wallex.ir/commission",
+  "support_url": "https://wallex.ir/help/",
+  "terms_url": "https://wallex.ir/policies",
+  "android_app_url": "https://wallex.ir/landing/download",
+  "ios_app_url": "https://wallex.ir/landing/download",
+  "facts": [
+    {
+      "key": "markets",
+      "label": {
+        "fa": "بازارها",
+        "en": "Markets",
+        "de": "Märkte",
+        "tr": "Piyasalar",
+        "ar": "الأسواق",
+        "fr": "Marchés"
+      },
+      "value": {
+        "fa": "تومان / USDT",
+        "en": "Toman / USDT",
+        "de": "Toman / USDT",
+        "tr": "Tümen / USDT",
+        "ar": "تومان / USDT",
+        "fr": "Toman / USDT"
+      }
+    },
+    {
+      "key": "kyc",
+      "label": {
+        "fa": "احراز هویت",
+        "en": "KYC",
+        "de": "KYC",
+        "tr": "KYC",
+        "ar": "التحقق",
+        "fr": "KYC"
+      },
+      "value": {
+        "fa": "الزامی",
+        "en": "Required",
+        "de": "Erforderlich",
+        "tr": "Gerekli",
+        "ar": "مطلوب",
+        "fr": "Obligatoire"
+      }
+    },
+    {
+      "key": "spot",
+      "label": {
+        "fa": "اسپات",
+        "en": "Spot",
+        "de": "Spot",
+        "tr": "Spot",
+        "ar": "فوري",
+        "fr": "Spot"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "margin",
+      "label": {
+        "fa": "اهرم",
+        "en": "Margin",
+        "de": "Margin",
+        "tr": "Marjin",
+        "ar": "الهامش",
+        "fr": "Marge"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "api",
+      "label": {
+        "fa": "API",
+        "en": "API",
+        "de": "API",
+        "tr": "API",
+        "ar": "API",
+        "fr": "API"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "access",
+      "label": {
+        "fa": "دسترسی",
+        "en": "Access",
+        "de": "Zugang",
+        "tr": "Erişim",
+        "ar": "الوصول",
+        "fr": "Accès"
+      },
+      "value": {
+        "fa": "وب و موبایل",
+        "en": "Web / Mobile",
+        "de": "Web / Mobil",
+        "tr": "Web / Mobil",
+        "ar": "ويب / هاتف",
+        "fr": "Web / Mobile"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "fa": "وب‌سایت رسمی",
+        "en": "Official website",
+        "de": "Offizielle Website",
+        "tr": "Resmî site",
+        "ar": "الموقع الرسمي",
+        "fr": "Site officiel"
+      },
+      "url": "https://wallex.ir"
+    },
+    {
+      "label": {
+        "fa": "درباره ما",
+        "en": "About",
+        "de": "Über uns",
+        "tr": "Hakkında",
+        "ar": "حول المنصة",
+        "fr": "À propos"
+      },
+      "url": "https://wallex.ir/about-us"
+    },
+    {
+      "label": {
+        "fa": "کارمزدهای رسمی",
+        "en": "Official fees",
+        "de": "Offizielle Gebühren",
+        "tr": "Resmî ücretler",
+        "ar": "الرسوم الرسمية",
+        "fr": "Frais officiels"
+      },
+      "url": "https://wallex.ir/commission"
+    },
+    {
+      "label": {
+        "fa": "قوانین و احراز هویت",
+        "en": "Terms and verification",
+        "de": "Bedingungen und Verifizierung",
+        "tr": "Koşullar ve doğrulama",
+        "ar": "الشروط والتحقق",
+        "fr": "Conditions et vérification"
+      },
+      "url": "https://wallex.ir/policies"
+    },
+    {
+      "label": {
+        "fa": "پشتیبانی",
+        "en": "Support",
+        "de": "Support",
+        "tr": "Destek",
+        "ar": "الدعم",
+        "fr": "Assistance"
+      },
+      "url": "https://wallex.ir/help/"
+    },
+    {
+      "label": {
+        "fa": "اپلیکیشن‌های رسمی",
+        "en": "Official apps",
+        "de": "Offizielle Apps",
+        "tr": "Resmî uygulamalar",
+        "ar": "التطبيقات الرسمية",
+        "fr": "Applications officielles"
+      },
+      "url": "https://wallex.ir/landing/download"
+    },
+    {
+      "label": {
+        "fa": "مستندات API",
+        "en": "API documentation",
+        "de": "API-Dokumentation",
+        "tr": "API belgeleri",
+        "ar": "وثائق API",
+        "fr": "Documentation API"
+      },
+      "url": "https://developers.wallex.ir/"
+    }
+  ],
+  "last_reviewed_at": "2026-10-07"
+}

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Domain\Asset\Infrastructure\Persistence\Seeders\AssetSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\InstrumentSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\NewProvidersSeeder;
-use App\Domain\Market\Infrastructure\Persistence\Seeders\NobitexProviderProfileSeeder;
+use App\Domain\Market\Infrastructure\Persistence\Seeders\OfficialProviderProfilesSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\ProviderSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\RamzinexProviderProfileSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\TabdealProviderSeeder;
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             TabdealProviderSeeder::class,
             TgjuProviderSeeder::class,
             TalaProviderSeeder::class,
-            NobitexProviderProfileSeeder::class,
+            OfficialProviderProfilesSeeder::class,
             RamzinexProviderProfileSeeder::class,
         ]);
     }

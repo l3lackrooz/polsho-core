@@ -1,0 +1,241 @@
+{
+  "type": "exchange",
+  "publication_status": "draft",
+  "summary": {
+    "fa": "نوبیتکس، بازار ایرانی مبادله رمزارز با بازارهای تومانی و تتری، معاملات اسپات و تعهدی و دسترسی API است.",
+    "en": "Nobitex is an Iranian cryptocurrency marketplace with toman and USDT markets, spot and leveraged trading, and API access.",
+    "de": "Nobitex ist ein iranischer Kryptomarktplatz mit Toman- und USDT-Märkten, Spot- und gehebeltem Handel sowie API-Zugang.",
+    "tr": "Nobitex; tümen ve USDT piyasaları, spot ve kaldıraçlı işlemler ve API erişimi sunan İran merkezli bir kripto platformudur.",
+    "ar": "نوبيتكس سوق إيرانية للعملات المشفرة بأسواق التومان وUSDT وتداول فوري وبالرافعة وإمكانية الوصول عبر API.",
+    "fr": "Nobitex est un marché iranien de cryptomonnaies avec des marchés en tomans et en USDT, du trading spot et avec levier et une API."
+  },
+  "description": {
+    "fa": "نوبیتکس نام تجاری شرکت راهکار فناوری نویان است که طبق صفحه رسمی درباره ما، در تابستان ۱۳۹۶ شکل گرفت. کاربران در بازارهای تومانی و تتری سفارش خرید و فروش ثبت می‌کنند. کارمزدها به حجم معاملات ۳۰ روز گذشته، بازار و نقش میکر یا تیکر وابسته‌اند. خدمات تعهدی و استخر مشارکت شرایط اختصاصی دارند.\n\nاستفاده از خدمات معاملاتی و واریز و برداشت تابع احراز هویت و محدودیت‌های حساب است. کارمزد و هزینه برداشت را پیش از ثبت سفارش در صفحه رسمی کارمزدها و حساب کاربری بررسی کنید؛ هزینه شبکه با ارز و شبکه انتقال تغییر می‌کند.\n\nدسترسی از طریق وب و نسخه‌های موبایل معرفی‌شده در منابع رسمی فراهم است. لینک‌های پشتیبانی، قوانین و مستندات API در منابع این پروفایل آمده‌اند.",
+    "en": "Nobitex is the trading name of راهکار فناوری نویان, established in summer 1396 (2017), according to its about page. Users place orders in toman and USDT markets. Fees depend on the preceding 30 days’ trading volume, the market and maker or taker role. Leveraged trading and participation pools have separate terms.\n\nTrading, deposits and withdrawals are subject to identity verification and account limits. Check the official fee page and your account for trading and withdrawal charges before placing an order; network costs vary by asset and transfer network.\n\nAccess is available through the website and officially listed mobile options. Support, terms and API documentation are linked in this profile’s sources.",
+    "de": "Nobitex ist der Handelsname von راهکار فناوری نویان, laut Unternehmensseite im Sommer 1396 (2017) gegründet. Nutzer handeln in Toman- und USDT-Märkten. Gebühren richten sich nach dem Handelsvolumen der letzten 30 Tage, dem Markt und der Maker- oder Taker-Rolle. Für gehebelten Handel und Beteiligungspools gelten eigene Bedingungen.\n\nHandel sowie Ein- und Auszahlungen unterliegen der Identitätsprüfung und Kontolimits. Handels- und Auszahlungsgebühren sollten vor einer Order auf der offiziellen Gebührenseite und im Konto geprüft werden; Netzwerkkosten hängen von Kryptowährung und Netzwerk ab.\n\nDer Zugang erfolgt über die Website und offiziell aufgeführte mobile Angebote. Support, Bedingungen und API-Dokumentation sind in den Quellen dieses Profils verlinkt.",
+    "tr": "Nobitex, hakkında sayfasına göre 1396 yazında (2017) kurulan راهکار فناوری نویان şirketinin ticari adıdır. Kullanıcılar tümen ve USDT piyasalarında emir verir. Ücretler son 30 günlük işlem hacmine, piyasaya ve maker/taker rolüne bağlıdır. Kaldıraçlı işlemler ve katılım havuzları ayrı koşullara tabidir.\n\nİşlem, yatırma ve çekme hizmetleri kimlik doğrulamasına ve hesap limitlerine tabidir. Emir vermeden önce resmî ücret sayfasından ve hesabınızdan işlem ve çekim ücretlerini kontrol edin; ağ masrafları varlığa ve transfer ağına göre değişir.\n\nWeb sitesi ve resmî mobil seçenekler üzerinden erişim sağlanır. Destek, koşullar ve API belgeleri profil kaynaklarında bağlantı olarak sunulmuştur.",
+    "ar": "نوبيتكس الاسم التجاري لشركة راهکار فناوری نویان التي تأسست صيف 1396 (2017) وفق صفحة التعريف. يضع المستخدمون أوامر في أسواق التومان وUSDT. تعتمد الرسوم على حجم التداول خلال آخر 30 يوماً والسوق ودور صانع السيولة أو آخذها. للتداول بالرافعة ومجمعات المشاركة شروط خاصة.\n\nتخضع خدمات التداول والإيداع والسحب للتحقق من الهوية وحدود الحساب. راجع صفحة الرسوم الرسمية وحسابك لمعرفة رسوم التداول والسحب قبل وضع أمر؛ تختلف تكاليف الشبكة بحسب العملة وشبكة التحويل.\n\nيتوفر الوصول عبر الموقع وخيارات الهاتف المعلنة رسمياً. ترد روابط الدعم والشروط ووثائق API ضمن مصادر هذا الملف.",
+    "fr": "Nobitex est le nom commercial de راهکار فناوری نویان, créée durant l’été 1396 (2017), selon sa page de présentation. Les utilisateurs passent des ordres sur les marchés en tomans et en USDT. Les frais dépendent du volume des 30 derniers jours, du marché et du rôle maker ou taker. Le trading avec levier et les pools de participation ont des conditions propres.\n\nLe trading, les dépôts et les retraits sont soumis à la vérification d’identité et aux limites du compte. Consultez la page officielle des frais et votre compte avant de passer un ordre ; les frais de réseau varient selon l’actif et le réseau de transfert.\n\nL’accès est proposé sur le Web et via les options mobiles officielles. Les sources du profil incluent l’assistance, les conditions et la documentation API."
+  },
+  "seo_title": {
+    "fa": "نوبیتکس | معرفی، کارمزد و خدمات",
+    "en": "Nobitex | Overview, Fees and Services",
+    "de": "Nobitex | Überblick, Gebühren und Dienste",
+    "tr": "Nobitex | Tanıtım, Ücretler ve Hizmetler",
+    "ar": "Nobitex | التعريف والرسوم والخدمات",
+    "fr": "Nobitex | Présentation, frais et services"
+  },
+  "seo_description": {
+    "fa": "نوبیتکس، بازار ایرانی مبادله رمزارز با بازارهای تومانی و تتری، معاملات اسپات و تعهدی و دسترسی API است.",
+    "en": "Nobitex is an Iranian cryptocurrency marketplace with toman and USDT markets, spot and leveraged trading, and API access.",
+    "de": "Nobitex ist ein iranischer Kryptomarktplatz mit Toman- und USDT-Märkten, Spot- und gehebeltem Handel sowie API-Zugang.",
+    "tr": "Nobitex; tümen ve USDT piyasaları, spot ve kaldıraçlı işlemler ve API erişimi sunan İran merkezli bir kripto platformudur.",
+    "ar": "نوبيتكس سوق إيرانية للعملات المشفرة بأسواق التومان وUSDT وتداول فوري وبالرافعة وإمكانية الوصول عبر API.",
+    "fr": "Nobitex est un marché iranien de cryptomonnaies avec des marchés en tomans et en USDT, du trading spot et avec levier et une API."
+  },
+  "legal_name": null,
+  "country_code": "IR",
+  "founded_year": 2017,
+  "kyc_required": true,
+  "fee_url": "https://nobitex.ir/pricing/",
+  "support_url": "https://nobitex.ir/contact/",
+  "terms_url": "https://nobitex.ir/policies/?tab=terms",
+  "android_app_url": "https://myket.ir/app/market.nobitex",
+  "ios_app_url": "https://sibapp.com/applications/NobitexExchange",
+  "facts": [
+    {
+      "key": "markets",
+      "label": {
+        "fa": "بازارها",
+        "en": "Markets",
+        "de": "Märkte",
+        "tr": "Piyasalar",
+        "ar": "الأسواق",
+        "fr": "Marchés"
+      },
+      "value": {
+        "fa": "تومان / USDT",
+        "en": "Toman / USDT",
+        "de": "Toman / USDT",
+        "tr": "Tümen / USDT",
+        "ar": "تومان / USDT",
+        "fr": "Toman / USDT"
+      }
+    },
+    {
+      "key": "kyc",
+      "label": {
+        "fa": "احراز هویت",
+        "en": "KYC",
+        "de": "KYC",
+        "tr": "KYC",
+        "ar": "التحقق",
+        "fr": "KYC"
+      },
+      "value": {
+        "fa": "الزامی",
+        "en": "Required",
+        "de": "Erforderlich",
+        "tr": "Gerekli",
+        "ar": "مطلوب",
+        "fr": "Obligatoire"
+      }
+    },
+    {
+      "key": "spot",
+      "label": {
+        "fa": "اسپات",
+        "en": "Spot",
+        "de": "Spot",
+        "tr": "Spot",
+        "ar": "فوري",
+        "fr": "Spot"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "margin",
+      "label": {
+        "fa": "اهرم",
+        "en": "Margin",
+        "de": "Margin",
+        "tr": "Marjin",
+        "ar": "الهامش",
+        "fr": "Marge"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "api",
+      "label": {
+        "fa": "API",
+        "en": "API",
+        "de": "API",
+        "tr": "API",
+        "ar": "API",
+        "fr": "API"
+      },
+      "value": {
+        "fa": "دارد",
+        "en": "Available",
+        "de": "Verfügbar",
+        "tr": "Var",
+        "ar": "متاح",
+        "fr": "Disponible"
+      }
+    },
+    {
+      "key": "access",
+      "label": {
+        "fa": "دسترسی",
+        "en": "Access",
+        "de": "Zugang",
+        "tr": "Erişim",
+        "ar": "الوصول",
+        "fr": "Accès"
+      },
+      "value": {
+        "fa": "وب و موبایل",
+        "en": "Web / Mobile",
+        "de": "Web / Mobil",
+        "tr": "Web / Mobil",
+        "ar": "ويب / هاتف",
+        "fr": "Web / Mobile"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "fa": "وب‌سایت رسمی",
+        "en": "Official website",
+        "de": "Offizielle Website",
+        "tr": "Resmî site",
+        "ar": "الموقع الرسمي",
+        "fr": "Site officiel"
+      },
+      "url": "https://nobitex.ir"
+    },
+    {
+      "label": {
+        "fa": "درباره ما",
+        "en": "About",
+        "de": "Über uns",
+        "tr": "Hakkında",
+        "ar": "حول المنصة",
+        "fr": "À propos"
+      },
+      "url": "https://nobitex.ir/about/"
+    },
+    {
+      "label": {
+        "fa": "کارمزدهای رسمی",
+        "en": "Official fees",
+        "de": "Offizielle Gebühren",
+        "tr": "Resmî ücretler",
+        "ar": "الرسوم الرسمية",
+        "fr": "Frais officiels"
+      },
+      "url": "https://nobitex.ir/pricing/"
+    },
+    {
+      "label": {
+        "fa": "قوانین و احراز هویت",
+        "en": "Terms and verification",
+        "de": "Bedingungen und Verifizierung",
+        "tr": "Koşullar ve doğrulama",
+        "ar": "الشروط والتحقق",
+        "fr": "Conditions et vérification"
+      },
+      "url": "https://nobitex.ir/policies/?tab=terms"
+    },
+    {
+      "label": {
+        "fa": "پشتیبانی",
+        "en": "Support",
+        "de": "Support",
+        "tr": "Destek",
+        "ar": "الدعم",
+        "fr": "Assistance"
+      },
+      "url": "https://nobitex.ir/contact/"
+    },
+    {
+      "label": {
+        "fa": "اپلیکیشن‌های رسمی",
+        "en": "Official apps",
+        "de": "Offizielle Apps",
+        "tr": "Resmî uygulamalar",
+        "ar": "التطبيقات الرسمية",
+        "fr": "Applications officielles"
+      },
+      "url": "https://nobitex.ir/app-download/"
+    },
+    {
+      "label": {
+        "fa": "مستندات API",
+        "en": "API documentation",
+        "de": "API-Dokumentation",
+        "tr": "API belgeleri",
+        "ar": "وثائق API",
+        "fr": "Documentation API"
+      },
+      "url": "https://apidocs.nobitex.ir/"
+    }
+  ],
+  "last_reviewed_at": "2026-10-07"
+}

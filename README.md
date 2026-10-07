@@ -93,6 +93,30 @@ authenticated admin `PUT /api/market/providers/{id}/profile` endpoint. The paylo
 uses `draft`; preserve the existing publication status if updating a published
 profile. Review and publish through Backoffice when ready.
 
+## Other provider profiles
+
+The `ok-ex`, `wallex`, `bitpin`, `nobitex`, `ompfinex`, `tabdeal` and `tgju`
+JSON files in `database/data/provider-profiles/` contain editorial copy in all
+six supported locales, reviewed against their linked official sources on
+2026-10-07. TGJU is a `reference_source`; the others are exchanges.
+Unconfirmed founding years remain null. Verified corporate names appear in
+About copy; `legal_name` stays null because the current mobile Details row
+does not wrap its value. Facts use labels of at most 10 characters and values
+of at most 15 characters for the same reason. Some app links open official
+download pages or a PWA rather than a platform store.
+
+Create missing drafts for existing providers with:
+
+```sh
+php artisan db:seed --class='App\Domain\Market\Infrastructure\Persistence\Seeders\OfficialProviderProfilesSeeder'
+```
+
+This seed preserves existing editorial records and all provider configuration.
+The legacy Nobitex-only seeder now loads the complete Nobitex JSON. Existing
+profiles can be updated through the same admin endpoint described above;
+preserve their publication status and refresh `ProviderProfileVersion` after
+any direct database import. Publishing is a separate editorial operation.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
