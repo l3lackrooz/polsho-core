@@ -34,6 +34,7 @@ class ProviderQuoteFactory
         ?float $volume,
         int $timestamp,
         bool $isReference = false,
+        string $priceType = 'bid_ask',
     ): QuoteDTO {
         [$sourceBase, $sourceQuote] = $this->sourceCurrencies($subscription);
 
@@ -55,6 +56,7 @@ class ProviderQuoteFactory
             timestamp: $timestamp,
             providerMarketId: $subscription->providerMarketId,
             isReference: $isReference,
+            priceType: $priceType,
         );
     }
 

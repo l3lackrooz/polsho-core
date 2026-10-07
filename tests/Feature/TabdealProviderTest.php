@@ -80,6 +80,7 @@ class TabdealProviderTest extends TestCase
         $this->assertCount(3, $quotes);
         foreach ($quotes as $quote) {
             $this->assertSame('tabdeal', $quote->provider);
+            $this->assertSame('last_trade', $quote->priceType);
             $this->assertSame($quote->last, $quote->bid);
             $this->assertSame($quote->last, $quote->ask);
             $this->assertNull($quote->volume);
@@ -112,6 +113,8 @@ class TabdealProviderTest extends TestCase
         $this->getJson('/api/pub/quotes?instruments=USDT-IRT')
             ->assertOk()
             ->assertJsonPath('data.0.comparison_providers.0.provider', 'tabdeal')
+            ->assertJsonPath('data.0.comparison_providers.0.price_type', 'last_trade')
+            ->assertJsonPath('data.0.providers.0.price_type', 'last_trade')
             ->assertJsonPath('data.0.comparison_providers.0.bid', 262749)
             ->assertJsonPath('data.0.comparison_providers.0.ask', 262749)
             ->assertJsonPath('data.0.comparison_providers.0.timestamp', now()->getTimestampMs())

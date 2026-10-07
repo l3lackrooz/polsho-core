@@ -148,6 +148,7 @@ class LatestQuoteAggregatorTest extends TestCase
         $this->assertSame([
             [
                 'provider' => 'nobitex',
+                'price_type' => 'unknown',
                 'provider_name' => 'NOBITEX',
                 'provider_translations' => null,
                 'provider_homepage_url' => null,

@@ -59,6 +59,8 @@ class CreateMarketProvider
             'description' => Arr::get($attributes, 'description'),
             'status' => Arr::get($attributes, 'status', 'active'),
             'is_default' => (bool) Arr::get($attributes, 'is_default', false),
+            'comparison_enabled' => (bool) Arr::get($attributes, 'comparison_enabled', false),
+            'demo_enabled' => (bool) Arr::get($attributes, 'demo_enabled', false),
             'priority' => (int) Arr::get($attributes, 'priority', 0),
             'config' => $this->normalizeConfig($config),
         ];

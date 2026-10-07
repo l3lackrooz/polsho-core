@@ -17,6 +17,7 @@ class QuoteDTO
         public ?string $providerName = null,
         public ?array $providerTranslations = null,
         public ?string $providerHomepageUrl = null,
+        public string $priceType = 'unknown',
     ) {}
 
     public function spread(): ?float
@@ -42,6 +43,7 @@ class QuoteDTO
         return [
             'instrument' => $this->instrument,
             'provider' => $this->provider,
+            'price_type' => $this->priceType,
             'provider_name' => $this->providerName,
             'provider_translations' => $this->providerTranslations,
             'provider_homepage_url' => $this->providerHomepageUrl,
@@ -72,6 +74,7 @@ class QuoteDTO
             providerName: $data['provider_name'] ?? null,
             providerTranslations: $data['provider_translations'] ?? null,
             providerHomepageUrl: $data['provider_homepage_url'] ?? null,
+            priceType: $data['price_type'] ?? 'unknown',
         );
     }
 }

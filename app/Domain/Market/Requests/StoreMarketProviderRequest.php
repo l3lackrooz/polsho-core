@@ -34,6 +34,8 @@ class StoreMarketProviderRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'status' => ['sometimes', Rule::in(['active', 'inactive'])],
             'is_default' => ['sometimes', 'boolean'],
+            'comparison_enabled' => ['sometimes', 'boolean'],
+            'demo_enabled' => ['sometimes', 'boolean'],
             'priority' => ['sometimes', 'integer', 'min:0', 'max:65535'],
             'translations' => ['nullable', 'array'],
             'translations.*' => ['nullable', 'string', 'max:255'],

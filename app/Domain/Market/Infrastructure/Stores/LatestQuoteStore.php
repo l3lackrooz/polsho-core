@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Redis;
 
 class LatestQuoteStore
 {
-    private string $keyPrefix = "market:quotes:";
+    private string $keyPrefix = 'market:quotes:';
 
     private function instrumentKey(string $instrument): string
     {
-        return $this->keyPrefix . $instrument;
+        return $this->keyPrefix.$instrument;
     }
 
     /**
@@ -25,17 +25,18 @@ class LatestQuoteStore
             $key,
             $quote->provider,
             json_encode([
-                'instrument'         => $quote->instrument,
-                'provider'           => $quote->provider,
-                'bid'                => $quote->bid,
-                'ask'                => $quote->ask,
-                'last'               => $quote->last,
-                'volume'             => $quote->volume,
-                'mid'                => $quote->mid(),
-                'spread'             => $quote->spread(),
-                'timestamp'          => $quote->timestamp,
+                'instrument' => $quote->instrument,
+                'provider' => $quote->provider,
+                'price_type' => $quote->priceType,
+                'bid' => $quote->bid,
+                'ask' => $quote->ask,
+                'last' => $quote->last,
+                'volume' => $quote->volume,
+                'mid' => $quote->mid(),
+                'spread' => $quote->spread(),
+                'timestamp' => $quote->timestamp,
                 'provider_market_id' => $quote->providerMarketId,
-                'received_at'        => now()->toIso8601String(),
+                'received_at' => now()->toIso8601String(),
             ])
         );
     }

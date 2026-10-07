@@ -19,6 +19,8 @@ class MarketProviderDTO
         public int $priority = 0,
         public ?array $translations = null,
         public ?array $config = null,
+        public bool $comparisonEnabled = false,
+        public bool $demoEnabled = false,
     ) {}
 
     public static function fromArray(array $data): self
@@ -37,6 +39,8 @@ class MarketProviderDTO
             priority: (int) ($data['priority'] ?? 0),
             translations: self::normalizeTranslations($data['translations'] ?? null),
             config: $data['config'] ?? null,
+            comparisonEnabled: (bool) ($data['comparison_enabled'] ?? false),
+            demoEnabled: (bool) ($data['demo_enabled'] ?? false),
         );
     }
 
@@ -56,6 +60,8 @@ class MarketProviderDTO
                 'description' => $provider->description,
                 'status' => $provider->status,
                 'is_default' => $provider->is_default,
+                'comparison_enabled' => $provider->comparison_enabled,
+                'demo_enabled' => $provider->demo_enabled,
                 'priority' => $provider->priority,
                 'translations' => $provider->translations,
                 'config' => $provider->config,
@@ -75,6 +81,8 @@ class MarketProviderDTO
             'description' => $this->description,
             'status' => $this->status,
             'is_default' => $this->isDefault,
+            'comparison_enabled' => $this->comparisonEnabled,
+            'demo_enabled' => $this->demoEnabled,
             'priority' => $this->priority,
             'translations' => $this->translations,
             'config' => $this->config,
@@ -92,6 +100,8 @@ class MarketProviderDTO
             'description' => $this->description,
             'status' => $this->status,
             'is_default' => $this->isDefault,
+            'comparison_enabled' => $this->comparisonEnabled,
+            'demo_enabled' => $this->demoEnabled,
             'priority' => $this->priority,
             'translations' => $this->translations,
             'config' => array_merge($this->config ?? [], ['base_url' => $this->baseUrl]),

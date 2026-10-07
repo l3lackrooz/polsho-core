@@ -22,6 +22,8 @@ class MarketProvider extends Model
         'logo_path',
         'status',
         'is_default',
+        'comparison_enabled',
+        'demo_enabled',
         'priority',
         'config',
     ];
@@ -30,6 +32,8 @@ class MarketProvider extends Model
         'config' => 'array',
         'translations' => 'array',
         'is_default' => 'boolean',
+        'comparison_enabled' => 'boolean',
+        'demo_enabled' => 'boolean',
     ];
 
     protected $appends = ['logo_url'];

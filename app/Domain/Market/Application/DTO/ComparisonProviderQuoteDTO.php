@@ -16,12 +16,14 @@ class ComparisonProviderQuoteDTO
         public ?string $providerName = null,
         public ?array $providerTranslations = null,
         public ?string $providerHomepageUrl = null,
+        public string $priceType = 'unknown',
     ) {}
 
     public function toArray(): array
     {
         return [
             'provider' => $this->provider,
+            'price_type' => $this->priceType,
             'provider_name' => $this->providerName,
             'provider_translations' => $this->providerTranslations,
             'provider_homepage_url' => $this->providerHomepageUrl,

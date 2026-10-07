@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 // the router's group stack — direct registration would lose the /api prefix.
 return function (): void {
     Route::prefix('pub')->group(function () {
+        Route::get('comparison-providers', [\App\Domain\Market\Controllers\PublicComparisonProviderController::class, 'index']);
         Route::get('quotes', [PublicQuoteController::class, 'index']);
         Route::get('providers', [PublicMarketProviderProfileController::class, 'index']);
         Route::get('providers/{slug}', [PublicMarketProviderProfileController::class, 'show']);

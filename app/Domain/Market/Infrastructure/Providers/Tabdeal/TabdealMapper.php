@@ -51,6 +51,7 @@ class TabdealMapper
                     last: (float) $price,
                     provider: $provider,
                     volume: null,
+                    priceType: 'last_trade',
                     timestamp: now()->getTimestampMs(),
                 );
             }

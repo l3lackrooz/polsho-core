@@ -167,3 +167,33 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Arbitrage practice provider controls
+
+Run `php artisan migrate` before using the new provider settings. In Backoffice → Providers,
+`comparison_enabled` opts a provider into arbitrage comparison and `demo_enabled` allows
+local demo accounts/trades. Both default to false for existing and newly created providers.
+They do not change the provider's global `status`, quote ingestion, or ordinary price comparison.
+
+`GET /api/pub/comparison-providers?instrument=USDT-IRT` returns public provider metadata
+and demo eligibility. It requires comparison opt-in, an active provider, and an active market
+for the active normalized instrument. A requested IRT display market also includes the
+corresponding IRR source market (catalog eligibility only; actual IRR prices still require
+division by ten). Providers configured with `is_reference` are excluded.
+The response is not cached and never exposes runtime configuration or credentials.
+
+Flutter's Practice tab loads this catalog on entry; pull to refresh to apply admin changes.
+No local exchange list is substituted on API failure or an empty catalog. Practice loads
+actual quotes for USDT-IRR and USDT-IRT from the public quotes endpoint, subscribes to
+the existing Reverb channels, and reconciles every ten seconds while active. Per-provider
+timestamps expire after thirty seconds. IRR/IRT prices normalize to integer rials internally.
+`price_type` is carried through stored quotes, REST and Reverb: `bid_ask`, `last_trade`
+(Tabdeal's current ticker), or `unknown` for older cache entries/fallback data.
+
+Execution remains an estimate with virtual balances and assumed 0.2% fees per side.
+Depth, slippage, partial fills and transfer costs are not modeled. Before each local fill,
+the app refreshes rates and provider eligibility; changed prices require another confirmation.
+No orders are sent to exchanges. Demo balances stay in memory, survive rate refreshes,
+and reset with the app session. Direct exchange streaming can replace ingestion later
+without changing this public quote contract.

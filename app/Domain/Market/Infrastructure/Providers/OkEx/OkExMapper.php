@@ -36,6 +36,7 @@ class OkExMapper
 
             $quotes[] = $this->quotes->make(
                 subscription: $subscriptions[$symbol],
+                priceType: $bestBid > 0.0 && $bestAsk > 0.0 ? 'bid_ask' : 'unknown',
                 bid: $bestBid > 0.0 ? $bestBid : ($last ?? 0.0),
                 ask: $bestAsk > 0.0 ? $bestAsk : ($last ?? 0.0),
                 last: $last,
