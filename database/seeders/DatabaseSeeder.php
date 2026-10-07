@@ -7,6 +7,7 @@ use App\Domain\Market\Infrastructure\Persistence\Seeders\InstrumentSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\NewProvidersSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\NobitexProviderProfileSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\ProviderSeeder;
+use App\Domain\Market\Infrastructure\Persistence\Seeders\RamzinexProviderProfileSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\TabdealProviderSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\TalaProviderSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\TgjuProviderSeeder;
@@ -32,6 +33,7 @@ class DatabaseSeeder extends Seeder
             TgjuProviderSeeder::class,
             TalaProviderSeeder::class,
             NobitexProviderProfileSeeder::class,
+            RamzinexProviderProfileSeeder::class,
         ]);
     }
 }

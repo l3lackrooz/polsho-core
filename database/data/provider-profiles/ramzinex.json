@@ -1,0 +1,268 @@
+{
+  "type": "exchange",
+  "publication_status": "draft",
+  "summary": {
+    "fa": "رمزینکس، صرافی ایرانی برای خرید و فروش رمزارز در بازارهای ریالی و تتری، با ابزارهای سفارش‌گذاری، معاملات اهرمی و ربات‌های معاملاتی است.",
+    "en": "Ramzinex is an Iranian cryptocurrency exchange with rial and USDT markets, order tools, margin trading and trading bots.",
+    "de": "Ramzinex ist eine iranische Kryptobörse mit Rial- und USDT-Märkten, Orderfunktionen, Margin-Handel und Trading-Bots.",
+    "tr": "Ramzinex; riyal ve USDT piyasaları, emir araçları, marjin işlemleri ve işlem botları sunan İran merkezli bir kripto para borsasıdır.",
+    "ar": "رمزینکس منصة إيرانية لتداول العملات المشفرة بأسواق الريال وUSDT، وأدوات الأوامر والتداول بالهامش وروبوتات التداول.",
+    "fr": "Ramzinex est une plateforme iranienne de cryptomonnaies proposant des marchés en rials et en USDT, des outils d’ordres, le trading sur marge et des robots de trading."
+  },
+  "description": {
+    "fa": "رمزینکس از سال ۱۳۹۶ فعالیت خود را در ایران آغاز کرده و توسط شرکت نوآوران تجارت الکترونیک رمزینه اداره می‌شود. این پلتفرم امکان مبادله رمزارز میان کاربران را با دفتر سفارش و بازارهای ریالی و تتری فراهم می‌کند. ابزارهای آن شامل سفارش محدود و بازار، حد سود و ضرر، معاملات اهرمی، ربات‌های معاملاتی و API است.\n\nدسترسی به خدمات و سقف واریز و برداشت به سطح احراز هویت حساب وابسته است. کارمزد معاملات بر اساس حجم معاملات ماه گذشته، بازار و نقش سفارش‌گذار یا سفارش‌بردار تعیین می‌شود؛ هزینه برداشت رمزارز نیز به ارز و شبکه انتخابی بستگی دارد. جدول رسمی کارمزدها مرجع نرخ‌های جاری است.\n\nرمزینکس از طریق وب و اپلیکیشن اندروید در دسترس است و برای iOS لینک وب‌اپ ارائه می‌کند. راه‌های ارتباطی و پشتیبانی در صفحه رسمی تماس با ما درج شده‌اند.",
+    "en": "Ramzinex began operating in Iran in 2017 (1396 in the Solar Hijri calendar) and is operated by نوآوران تجارت الکترونیک رمزینه. Users trade cryptocurrencies through an order book with rial and USDT markets. Tools include limit and market orders, take-profit and stop-loss orders, margin trading, trading bots and API access.\n\nService access and deposit and withdrawal limits depend on the account’s verification level. Trading fees depend on the previous month’s trading volume, market and maker or taker role; crypto withdrawal fees depend on the asset and network. Consult the official fee schedule for current rates.\n\nRamzinex is available on the web and Android, with a web app link for iOS. Contact and support channels are listed on its official contact page.",
+    "de": "Ramzinex ist seit 2017 (1396 im iranischen Kalender) im Iran tätig und wird von نوآوران تجارت الکترونیک رمزینه betrieben. Die Plattform bietet ein Orderbuch mit Rial- und USDT-Märkten. Zu den Funktionen gehören Limit- und Market-Orders, Take-Profit und Stop-Loss, Margin-Handel, Trading-Bots und API-Zugang.\n\nDer Zugang zu Diensten sowie Ein- und Auszahlungslimits hängen von der Identitätsprüfung ab. Handelsgebühren richten sich nach dem Handelsvolumen des Vormonats, dem Markt und der Maker- oder Taker-Rolle. Auszahlungsgebühren für Kryptowährungen hängen vom Vermögenswert und Netzwerk ab. Aktuelle Sätze stehen in der offiziellen Gebührenübersicht.\n\nRamzinex ist im Web und für Android verfügbar; für iOS wird eine Web-App verlinkt. Kontakt- und Supportkanäle stehen auf der offiziellen Kontaktseite.",
+    "tr": "Ramzinex, İran’da 2017 yılında (Hicri Şemsi 1396) faaliyete başlamıştır ve نوآوران تجارت الکترونیک رمزینه tarafından işletilir. Platform, riyal ve USDT piyasalarında emir defteri üzerinden kripto para alım satımı sunar. Limit ve piyasa emirleri, kâr alma ve zarar durdurma, marjin işlemleri, işlem botları ve API erişimi sağlar.\n\nHizmetlere erişim ile yatırma ve çekme limitleri kimlik doğrulama seviyesine bağlıdır. İşlem ücretleri önceki ayın işlem hacmine, piyasaya ve piyasa yapıcı veya alıcı rolüne göre belirlenir. Kripto çekim ücreti varlığa ve ağa bağlıdır. Güncel oranlar için resmî ücret tablosuna bakılmalıdır.\n\nRamzinex web ve Android üzerinden kullanılabilir; iOS için bir web uygulaması bağlantısı sunulur. Destek kanalları resmî iletişim sayfasında yer alır.",
+    "ar": "بدأت رمزینکس نشاطها في إيران عام 2017 (1396 بالتقويم الهجري الشمسي)، وتديرها شركة نوآوران تجارت الکترونیک رمزینه. تتيح المنصة تداول العملات المشفرة بين المستخدمين عبر دفتر أوامر في أسواق الريال وUSDT. وتشمل أدواتها أوامر الحد والسوق وجني الأرباح ووقف الخسارة والتداول بالهامش وروبوتات التداول وواجهة API.\n\nيعتمد الوصول إلى الخدمات وحدود الإيداع والسحب على مستوى التحقق من الهوية. وتختلف رسوم التداول بحسب حجم التداول خلال الشهر السابق والسوق ودور صانع السيولة أو آخذها، بينما تعتمد رسوم سحب العملات المشفرة على العملة والشبكة. تُراجع الأسعار الحالية في جدول الرسوم الرسمي.\n\nتتوفر رمزینکس عبر الويب وتطبيق أندرويد، مع رابط تطبيق ويب لنظام iOS. وترد قنوات التواصل والدعم في صفحة الاتصال الرسمية.",
+    "fr": "Ramzinex exerce en Iran depuis 2017 (1396 dans le calendrier persan) et est exploitée par نوآوران تجارت الکترونیک رمزینه. La plateforme permet de négocier des cryptomonnaies via un carnet d’ordres sur des marchés en rials et en USDT. Elle propose des ordres à cours limité et au marché, des ordres de prise de bénéfices et de limitation des pertes, le trading sur marge, des robots et une API.\n\nL’accès aux services et les plafonds de dépôt et de retrait dépendent du niveau de vérification d’identité. Les frais de trading dépendent du volume du mois précédent, du marché et du rôle maker ou taker. Les frais de retrait de cryptomonnaies dépendent de l’actif et du réseau. Le barème officiel indique les tarifs en vigueur.\n\nRamzinex est accessible sur le Web et Android, avec un lien vers une application Web pour iOS. Les canaux d’assistance figurent sur sa page de contact officielle."
+  },
+  "seo_title": {
+    "fa": "صرافی رمزینکس | معرفی، کارمزد و احراز هویت",
+    "en": "Ramzinex Exchange | Overview, Fees and Verification",
+    "de": "Ramzinex | Überblick, Gebühren und Verifizierung",
+    "tr": "Ramzinex | Tanıtım, Ücretler ve Kimlik Doğrulama",
+    "ar": "رمزینکس | التعريف والرسوم والتحقق من الهوية",
+    "fr": "Ramzinex | Présentation, frais et vérification"
+  },
+  "seo_description": {
+    "fa": "معرفی صرافی رمزینکس، شرکت اداره‌کننده، بازارها، شرایط احراز هویت و لینک‌های رسمی کارمزد، پشتیبانی و اپلیکیشن.",
+    "en": "Explore Ramzinex’s operator, markets, identity verification and official links for fees, support and apps.",
+    "de": "Informationen zu Betreiber, Märkten und Identitätsprüfung von Ramzinex sowie offizielle Links zu Gebühren, Support und Apps.",
+    "tr": "Ramzinex’in işletmecisi, piyasaları, kimlik doğrulaması ve ücret, destek ve uygulamalar için resmî bağlantılar.",
+    "ar": "تعرّف على الشركة المشغلة لرمزینکس وأسواقها والتحقق من الهوية وروابط الرسوم والدعم والتطبيقات الرسمية.",
+    "fr": "Découvrez l’exploitant de Ramzinex, ses marchés, la vérification d’identité et les liens officiels vers les frais, l’assistance et les applications."
+  },
+  "legal_name": "نوآوران تجارت الکترونیک رمزینه",
+  "country_code": "IR",
+  "founded_year": 2017,
+  "kyc_required": true,
+  "fee_url": "https://ramzinex.ir/info/commissions/",
+  "support_url": "https://ramzinex.ir/info/contact-us/",
+  "terms_url": "https://ramzinex.ir/info/terms/",
+  "android_app_url": "https://myket.ir/app/com.ramzinex.ramzinex",
+  "ios_app_url": "https://ramzinex.ir/app/",
+  "facts": [
+    {
+      "key": "markets",
+      "label": {
+        "fa": "بازارها",
+        "en": "Markets",
+        "de": "Märkte",
+        "tr": "Piyasalar",
+        "ar": "الأسواق",
+        "fr": "Marchés"
+      },
+      "value": {
+        "fa": "ریالی و تتری (USDT)",
+        "en": "Rial and USDT",
+        "de": "Rial und USDT",
+        "tr": "Riyal ve USDT",
+        "ar": "الريال وUSDT",
+        "fr": "Rials et USDT"
+      }
+    },
+    {
+      "key": "fee_model",
+      "label": {
+        "fa": "ساختار کارمزد",
+        "en": "Fee model",
+        "de": "Gebührenmodell",
+        "tr": "Ücret modeli",
+        "ar": "نظام الرسوم",
+        "fr": "Structure des frais"
+      },
+      "value": {
+        "fa": "پلکانی بر اساس حجم ماه گذشته، بازار و نقش Maker/Taker؛ نرخ جاری در جدول رسمی",
+        "en": "Tiered by previous-month volume, market and maker/taker role; current rates in the official schedule",
+        "de": "Gestaffelt nach Vormonatsvolumen, Markt und Maker/Taker-Rolle; aktuelle Sätze in der offiziellen Übersicht",
+        "tr": "Önceki ayın hacmine, piyasaya ve maker/taker rolüne göre kademeli; güncel oranlar resmî tabloda",
+        "ar": "متدرجة حسب حجم الشهر السابق والسوق ودور Maker/Taker؛ الأسعار الحالية في الجدول الرسمي",
+        "fr": "Par paliers selon le volume du mois précédent, le marché et le rôle maker/taker ; tarifs actuels dans le barème officiel"
+      }
+    },
+    {
+      "key": "verification_levels",
+      "label": {
+        "fa": "سطوح احراز هویت",
+        "en": "Verification levels",
+        "de": "Verifizierungsstufen",
+        "tr": "Doğrulama seviyeleri",
+        "ar": "مستويات التحقق",
+        "fr": "Niveaux de vérification"
+      },
+      "value": {
+        "fa": "احراز نشده، احراز پایه و احراز ویژه؛ خدمات و سقف‌ها وابسته به سطح حساب",
+        "en": "Unverified, basic and special verification; services and limits depend on account level",
+        "de": "Unverifiziert, Basis- und Sonderverifizierung; Dienste und Limits abhängig von der Kontostufe",
+        "tr": "Doğrulanmamış, temel ve özel doğrulama; hizmetler ve limitler hesap seviyesine bağlıdır",
+        "ar": "غير موثّق، تحقق أساسي وتحقق خاص؛ الخدمات والحدود مرتبطة بمستوى الحساب",
+        "fr": "Non vérifié, vérification de base et spéciale ; services et plafonds selon le niveau du compte"
+      }
+    },
+    {
+      "key": "trading_tools",
+      "label": {
+        "fa": "ابزارهای معاملاتی",
+        "en": "Trading tools",
+        "de": "Handelsfunktionen",
+        "tr": "İşlem araçları",
+        "ar": "أدوات التداول",
+        "fr": "Outils de trading"
+      },
+      "value": {
+        "fa": "سفارش محدود و بازار، حد سود و ضرر، اهرم، ربات و API",
+        "en": "Limit and market orders, take-profit/stop-loss, margin, bots and API",
+        "de": "Limit- und Market-Orders, Take-Profit/Stop-Loss, Margin, Bots und API",
+        "tr": "Limit ve piyasa emirleri, kâr alma/zarar durdurma, marjin, botlar ve API",
+        "ar": "أوامر الحد والسوق وجني الأرباح ووقف الخسارة والهامش والروبوتات وAPI",
+        "fr": "Ordres à cours limité et au marché, prise de bénéfices/limitation des pertes, marge, robots et API"
+      }
+    },
+    {
+      "key": "mobile_access",
+      "label": {
+        "fa": "دسترسی موبایل",
+        "en": "Mobile access",
+        "de": "Mobiler Zugang",
+        "tr": "Mobil erişim",
+        "ar": "الوصول عبر الهاتف",
+        "fr": "Accès mobile"
+      },
+      "value": {
+        "fa": "اندروید از مایکت و بازار؛ iOS از طریق وب‌اپ (PWA)",
+        "en": "Android via Myket and Bazaar; iOS via web app (PWA)",
+        "de": "Android über Myket und Bazaar; iOS über Web-App (PWA)",
+        "tr": "Myket ve Bazaar üzerinden Android; web uygulaması (PWA) üzerinden iOS",
+        "ar": "أندرويد عبر Myket وBazaar؛ وiOS عبر تطبيق ويب (PWA)",
+        "fr": "Android via Myket et Bazaar ; iOS via une application Web (PWA)"
+      }
+    },
+    {
+      "key": "support_phone",
+      "label": {
+        "fa": "تلفن پشتیبانی",
+        "en": "Support phone",
+        "de": "Support-Telefon",
+        "tr": "Destek telefonu",
+        "ar": "هاتف الدعم",
+        "fr": "Téléphone du support"
+      },
+      "value": {
+        "fa": "+98 21 62999214",
+        "en": "+98 21 62999214",
+        "de": "+98 21 62999214",
+        "tr": "+98 21 62999214",
+        "ar": "+98 21 62999214",
+        "fr": "+98 21 62999214"
+      }
+    },
+    {
+      "key": "support_email",
+      "label": {
+        "fa": "ایمیل پشتیبانی",
+        "en": "Support email",
+        "de": "Support-E-Mail",
+        "tr": "Destek e-postası",
+        "ar": "بريد الدعم",
+        "fr": "E-mail du support"
+      },
+      "value": {
+        "fa": "support@ramzinex.com",
+        "en": "support@ramzinex.com",
+        "de": "support@ramzinex.com",
+        "tr": "support@ramzinex.com",
+        "ar": "support@ramzinex.com",
+        "fr": "support@ramzinex.com"
+      }
+    },
+    {
+      "key": "headquarters",
+      "label": {
+        "fa": "محل دفتر",
+        "en": "Office location",
+        "de": "Bürostandort",
+        "tr": "Ofis konumu",
+        "ar": "موقع المكتب",
+        "fr": "Adresse du bureau"
+      },
+      "value": {
+        "fa": "تهران، برج فناوری طرشت (شریف)",
+        "en": "Tehran, Tarasht (Sharif) Technology Tower",
+        "de": "Teheran, Tarasht (Sharif) Technology Tower",
+        "tr": "Tahran, Tarasht (Sharif) Teknoloji Kulesi",
+        "ar": "طهران، برج طرشت (شريف) للتكنولوجيا",
+        "fr": "Téhéran, tour technologique de Tarasht (Sharif)"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "label": {
+        "fa": "درباره رمزینکس",
+        "en": "About Ramzinex",
+        "de": "Über Ramzinex",
+        "tr": "Ramzinex hakkında",
+        "ar": "حول رمزینکس",
+        "fr": "À propos de Ramzinex"
+      },
+      "url": "https://ramzinex.ir/info/about-us/"
+    },
+    {
+      "label": {
+        "fa": "قوانین و نام شرکت",
+        "en": "Terms and legal operator",
+        "de": "Bedingungen und Betreiber",
+        "tr": "Koşullar ve işletmeci",
+        "ar": "الشروط والشركة المشغلة",
+        "fr": "Conditions et exploitant"
+      },
+      "url": "https://ramzinex.ir/info/terms/"
+    },
+    {
+      "label": {
+        "fa": "کارمزدهای رسمی",
+        "en": "Official fees",
+        "de": "Offizielle Gebühren",
+        "tr": "Resmî ücretler",
+        "ar": "الرسوم الرسمية",
+        "fr": "Frais officiels"
+      },
+      "url": "https://ramzinex.ir/info/commissions/"
+    },
+    {
+      "label": {
+        "fa": "احراز هویت و سطوح کاربری",
+        "en": "Verification and account levels",
+        "de": "Verifizierung und Kontostufen",
+        "tr": "Doğrulama ve hesap seviyeleri",
+        "ar": "التحقق ومستويات الحساب",
+        "fr": "Vérification et niveaux de compte"
+      },
+      "url": "https://ramzinex.ir/info/account-levels/"
+    },
+    {
+      "label": {
+        "fa": "تماس و پشتیبانی",
+        "en": "Contact and support",
+        "de": "Kontakt und Support",
+        "tr": "İletişim ve destek",
+        "ar": "التواصل والدعم",
+        "fr": "Contact et assistance"
+      },
+      "url": "https://ramzinex.ir/info/contact-us/"
+    },
+    {
+      "label": {
+        "fa": "اپلیکیشن‌های رسمی",
+        "en": "Official apps",
+        "de": "Offizielle Apps",
+        "tr": "Resmî uygulamalar",
+        "ar": "التطبيقات الرسمية",
+        "fr": "Applications officielles"
+      },
+      "url": "https://ramzinex.ir/info/applications/"
+    }
+  ],
+  "last_reviewed_at": "2026-10-07"
+}

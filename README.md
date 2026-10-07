@@ -55,6 +55,27 @@ Separated forms such as `USDT/IRT`, `USDT-IRT` and `USDT_IRT` are also accepted.
 The provider config enables `allow_zero_spread` so its last-price snapshots remain
 visible in the public quotes API. Other exchanges retain the normal spread checks.
 
+## Ramzinex exchange profile
+
+The complete six-language profile payload is stored in
+`database/data/provider-profiles/ramzinex.json`. Its operator, history, account
+levels, fee model, contact details and app links were checked against the six
+official sources included in the payload on 2026-10-07. Fee rates and network
+availability are intentionally linked to the current official schedule.
+The iOS link opens Ramzinex's PWA, not an App Store listing.
+
+With the existing `ramzinex` provider registered, create its editorial draft:
+
+```sh
+php artisan db:seed --class='App\Domain\Market\Infrastructure\Persistence\Seeders\RamzinexProviderProfileSeeder'
+```
+
+The seed preserves existing profiles and does not create or configure a market
+provider. To replace an existing profile, submit the JSON payload through the
+authenticated admin `PUT /api/market/providers/{id}/profile` endpoint. The payload
+uses `draft`; preserve the existing publication status if updating a published
+profile. Review and publish through Backoffice when ready.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
