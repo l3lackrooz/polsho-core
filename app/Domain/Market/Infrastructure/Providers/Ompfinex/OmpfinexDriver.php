@@ -24,9 +24,7 @@ class OmpfinexDriver implements MarketDataProviderInterface, SupportsPriceSnapsh
     public function healthCheck(): bool
     {
         try {
-            $this->client->fetchMarkets();
-
-            return true;
+            return $this->client->fetchMarkets() !== [] && $this->client->fetchOrderBooks() !== [];
         } catch (\Throwable) {
             return false;
         }
@@ -41,12 +39,13 @@ class OmpfinexDriver implements MarketDataProviderInterface, SupportsPriceSnapsh
         }
 
         $rows = $this->client->fetchMarkets();
+        $orderBooks = $this->client->fetchOrderBooks();
 
-        return $this->mapper->mapSnapshot($rows, $subscriptions, $this->name());
+        return $this->mapper->mapSnapshot($rows, $orderBooks, $subscriptions, $this->name());
     }
 
     /**
-     * @param Collection<int, mixed> $instruments
+     * @param  Collection<int, mixed>  $instruments
      * @return array<string, MarketSubscriptionDTO>
      */
     private function normalizeSubscriptions(Collection $instruments): array

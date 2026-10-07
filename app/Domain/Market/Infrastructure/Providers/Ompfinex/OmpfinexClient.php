@@ -12,29 +12,35 @@ class OmpfinexClient
         private readonly int $timeout = 10,
     ) {}
 
-    /**
-     * GET /v1/market
-     *
-     * Public market list: {"status":"OK","data":[{ id, base_currency, quote_currency, ... , price fields }]}
-     *
-     * NOTE: OMPFinex only documents user endpoints publicly and the API is not
-     * reachable from outside Iran, so the exact stats field names could not be
-     * verified. Run `php artisan market:sync ompfinex --now` once and adjust
-     * OmpfinexMapper::FIELD_CANDIDATES if needed.
-     *
-     * @return array<int, array<string, mixed>>
-     */
+    /** @return array<int, array<string, mixed>> */
     public function fetchMarkets(): array
+    {
+        return $this->fetch('/v1/market', true);
+    }
+
+    /** @return array<string, array<string, mixed>> */
+    public function fetchOrderBooks(): array
+    {
+        return $this->fetch('/v1/orderbook', false);
+    }
+
+    private function fetch(string $path, bool $list): array
     {
         $response = Http::baseUrl($this->baseUrl)
             ->timeout($this->timeout)
             ->acceptJson()
-            ->get('/v1/market');
+            ->get($path);
 
         if ($response->failed()) {
-            throw new RuntimeException('OMPFinex market request failed: '.$response->body());
+            throw new RuntimeException('OMPFinex request failed for '.$path.': HTTP '.$response->status());
         }
 
-        return $response->json('data', []);
+        $data = $response->json('data');
+        if ($response->json('status') !== 'OK' || ! is_array($data)
+            || ($data !== [] && array_is_list($data) !== $list)) {
+            throw new RuntimeException('OMPFinex returned an invalid response for '.$path);
+        }
+
+        return $data;
     }
 }

@@ -55,6 +55,23 @@ Separated forms such as `USDT/IRT`, `USDT-IRT` and `USDT_IRT` are also accepted.
 The provider config enables `allow_zero_spread` so its last-price snapshots remain
 visible in the public quotes API. Other exchanges retain the normal spread checks.
 
+## OMPFinex provider
+
+OMPFinex uses `/v1/market` for market IDs and last prices, and `/v1/orderbook`
+for live buy/sell prices. Verified remote IDs are `1` for BTC/IRT, `14` for
+BTC/USDT and `9` for USDT/IRT. Attach these numeric IDs to the corresponding
+instruments in Backoffice before enabling an existing provider.
+
+The [official API documentation](https://docs.ompfinex.com/) defines `asks` as
+buy orders and `bids` as sell orders. The mapper selects the highest buy and
+lowest sell, skips unusable books and converts the API's IRR amounts to toman
+for IRT instruments. It retains rial amounts for IRR instruments. Quote turnover
+is not exposed as base volume. Quotes use the order-book fetch time.
+
+```sh
+php artisan market:sync ompfinex --now
+```
+
 ## Ramzinex exchange profile
 
 The complete six-language profile payload is stored in

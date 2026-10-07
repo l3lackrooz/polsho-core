@@ -3,8 +3,8 @@
 namespace App\Domain\Market\Infrastructure\Persistence\Seeders;
 
 use App\Domain\Market\Infrastructure\Providers\Bitpin\BitpinDriver;
-use App\Domain\Market\Infrastructure\Providers\Ompfinex\OmpfinexDriver;
 use App\Domain\Market\Infrastructure\Providers\OkEx\OkExDriver;
+use App\Domain\Market\Infrastructure\Providers\Ompfinex\OmpfinexDriver;
 use App\Domain\Market\Infrastructure\Providers\Wallex\WallexDriver;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,10 +13,7 @@ use Illuminate\Support\Facades\DB;
  * Seeds Wallex, Bitpin and OMPFinex providers plus their provider_markets
  * rows for the existing instruments (btc-irt, btc-usdt, usdt-irt).
  *
- * OMPFinex is seeded as INACTIVE because its market ids could not be verified
- * from outside Iran. Verify with `php artisan market:sync ompfinex --now`,
- * fill in the real market ids below (or via provider:market:add), then set
- * the provider status to active.
+ * OMPFinex market IDs and order books were verified against the public API.
  */
 class NewProvidersSeeder extends Seeder
 {
@@ -72,12 +69,13 @@ class NewProvidersSeeder extends Seeder
                 'slug' => 'ompfinex',
                 'driver' => OmpfinexDriver::class,
                 'base_url' => 'https://api.ompfinex.com',
-                'status' => 'inactive', // enable after verifying market ids from Iran
+                'status' => 'active',
                 'priority' => 4,
-                // OMPFinex matches by numeric market id — fill in the real ids.
+                // /v1/market IDs; the mapper converts IRR prices to IRT.
                 'markets' => [
-                    // 'btc-irt' => '<market_id>',
-                    // 'usdt-irt' => '<market_id>',
+                    'btc-irt' => '1',
+                    'btc-usdt' => '14',
+                    'usdt-irt' => '9',
                 ],
             ],
         ];
