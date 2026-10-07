@@ -39,7 +39,7 @@ class PublicComparisonProviderController extends Controller
             ->map(fn (MarketProvider $provider): array => [
                 'slug' => $provider->slug,
                 'name' => $provider->name,
-                'translations' => $provider->translations ?? (object) [],
+                'translations' => (object) ($provider->translations ?? []),
                 'logo_url' => $provider->logo_url,
                 'demo_enabled' => $provider->demo_enabled,
             ])->values();

@@ -15,6 +15,14 @@ class ComparisonProviderApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_empty_translations_are_a_json_object_for_mobile_clients(): void
+    {
+        $this->provider('untranslated', ['comparison_enabled' => true, 'translations' => []]);
+        $response = $this->getJson('/api/pub/comparison-providers')->assertOk();
+        $payload = json_decode($response->getContent());
+        $this->assertInstanceOf(\stdClass::class, $payload->data->providers[0]->translations);
+    }
+
     public function test_directory_only_includes_opted_in_active_non_reference_providers_for_the_requested_market(): void
     {
         $this->provider('enabled', ['comparison_enabled' => true, 'demo_enabled' => true]);
