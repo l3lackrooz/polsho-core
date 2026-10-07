@@ -35,7 +35,7 @@ class BitpinClient
     }
 
     /**
-     * GET /api/v1/mkt/orderbook/{symbol}/
+     * GET /api/v1/mth/orderbook/{symbol}/
      *
      * Returns {asks: [[price, qty], ...], bids: [[price, qty], ...]}.
      *
@@ -46,7 +46,7 @@ class BitpinClient
         $response = Http::baseUrl($this->baseUrl)
             ->timeout($this->timeout)
             ->acceptJson()
-            ->get(sprintf('/api/v1/mkt/orderbook/%s/', $symbol));
+            ->get(sprintf('/api/v1/mth/orderbook/%s/', $symbol));
 
         if ($response->failed()) {
             throw new RuntimeException('Bitpin orderbook request failed: '.$response->body());

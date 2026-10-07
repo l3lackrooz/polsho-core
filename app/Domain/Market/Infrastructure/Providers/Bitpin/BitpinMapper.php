@@ -14,11 +14,12 @@ class BitpinMapper
 
     /**
      * @param  array<int, array<string, mixed>>  $tickers  list from /mkt/tickers/
-     * @param  array<string, array<string, mixed>>  $orderBooks  keyed by remote symbol, from /mkt/orderbook/{symbol}/
+     * @param  array<string, array<string, mixed>>  $orderBooks  keyed by remote symbol, from /mth/orderbook/{symbol}/
      * @param  array<string, MarketSubscriptionDTO>  $subscriptions  keyed by remote symbol (BTC_IRT, ...)
+     * @param  array<string, int>  $orderBookTimestamps  local fetch times in milliseconds
      * @return array<int, QuoteDTO>
      */
-    public function mapSnapshot(array $tickers, array $orderBooks, array $subscriptions, string $provider): array
+    public function mapSnapshot(array $tickers, array $orderBooks, array $subscriptions, string $provider, array $orderBookTimestamps = []): array
     {
         $quotes = [];
 
@@ -31,20 +32,30 @@ class BitpinMapper
 
             $book = $orderBooks[$symbol] ?? [];
             // Orderbook rows are [price, quantity] with best price first.
-            $bestBid = isset($book['bids'][0][0]) ? (float) $book['bids'][0][0] : 0.0;
-            $bestAsk = isset($book['asks'][0][0]) ? (float) $book['asks'][0][0] : 0.0;
-            $last = isset($row['price']) ? (float) $row['price'] : null;
+            $bestBid = is_numeric($book['bids'][0][0] ?? null) ? (float) $book['bids'][0][0] : 0.0;
+            $bestAsk = is_numeric($book['asks'][0][0] ?? null) ? (float) $book['asks'][0][0] : 0.0;
+
+            // A failed or empty book must not turn a last trade into a live
+            // two-sided quote. Other subscribed markets can still be updated.
+            if (! is_finite($bestBid) || ! is_finite($bestAsk) || $bestBid <= 0 || $bestAsk <= $bestBid) {
+                continue;
+            }
+
+            $last = is_numeric($row['price'] ?? null) ? (float) $row['price'] : null;
+            if ($last !== null && (! is_finite($last) || $last <= 0)) {
+                $last = null;
+            }
 
             $quotes[] = $this->quotes->make(
                 subscription: $subscriptions[$symbol],
-                bid: $bestBid > 0.0 ? $bestBid : ($last ?? 0.0),
-                ask: $bestAsk > 0.0 ? $bestAsk : ($last ?? 0.0),
+                bid: $bestBid,
+                ask: $bestAsk,
                 last: $last,
                 provider: $provider,
                 volume: null,
-                timestamp: isset($row['timestamp'])
-                    ? (int) round(((float) $row['timestamp']) * 1000)
-                    : (int) round(microtime(true) * 1000),
+                // The ticker timestamp is the last trade time, which can be
+                // old even when the freshly fetched order book is current.
+                timestamp: $orderBookTimestamps[$symbol] ?? now()->getTimestampMs(),
             );
         }
 

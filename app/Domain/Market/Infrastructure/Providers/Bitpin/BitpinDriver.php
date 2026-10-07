@@ -45,19 +45,21 @@ class BitpinDriver implements MarketDataProviderInterface, SupportsPriceSnapshot
 
         // Bitpin tickers have no bid/ask, so pull top-of-book per subscribed symbol.
         $orderBooks = [];
+        $orderBookTimestamps = [];
         foreach (array_keys($subscriptions) as $symbol) {
             try {
                 $orderBooks[$symbol] = $this->client->fetchOrderBook($symbol);
+                $orderBookTimestamps[$symbol] = now()->getTimestampMs();
             } catch (\Throwable $e) {
                 Log::warning(sprintf('Bitpin orderbook fetch failed for [%s]: %s', $symbol, $e->getMessage()));
             }
         }
 
-        return $this->mapper->mapSnapshot($tickers, $orderBooks, $subscriptions, $this->name());
+        return $this->mapper->mapSnapshot($tickers, $orderBooks, $subscriptions, $this->name(), $orderBookTimestamps);
     }
 
     /**
-     * @param Collection<int, mixed> $instruments
+     * @param  Collection<int, mixed>  $instruments
      * @return array<string, MarketSubscriptionDTO>
      */
     private function normalizeSubscriptions(Collection $instruments): array
