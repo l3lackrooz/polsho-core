@@ -3,7 +3,6 @@
 namespace App\Domain\Market\Infrastructure\Providers\Tabdeal;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
 class TabdealClient
@@ -18,12 +17,19 @@ class TabdealClient
         $response = Http::baseUrl($this->baseUrl)
             ->timeout($this->timeout)
             ->acceptJson()
-            ->get('/exchangeInfo');
+            ->get('/r/plots/currencies/dynamic-info/');
 
         if ($response->failed()) {
             throw new RuntimeException('Tabdeal REST request failed: '.$response->body());
         }
-        return $response->json();
+
+        $currencies = $response->json('currencies');
+
+        if (! is_array($currencies)) {
+            throw new RuntimeException('Tabdeal REST response is missing the currencies snapshot.');
+        }
+
+        return $currencies;
     }
 
     public function fetchTicker(string $symbol): array

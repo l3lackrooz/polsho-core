@@ -4,12 +4,9 @@ namespace App\Domain\Market\Infrastructure\Providers\Tabdeal;
 
 use App\Domain\Market\Application\DTO\MarketSubscriptionDTO;
 use App\Domain\Market\Contracts\Capabilities\SupportsPriceSnapshot;
-use App\Domain\Market\Contracts\Capabilities\SupportsPriceStream;
 use App\Domain\Market\Contracts\MarketDataProviderInterface;
 use App\Domain\Market\Infrastructure\Subscriptions\MarketSubscriptionFactory;
-use App\Domain\Market\Infrastructure\Support\WebSockets\TextWebSocketClient;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 
 class TabdealDriver implements MarketDataProviderInterface, SupportsPriceSnapshot
 {
@@ -27,8 +24,10 @@ class TabdealDriver implements MarketDataProviderInterface, SupportsPriceSnapsho
     public function healthCheck(): bool
     {
         try {
-            $this->client->fetchTicker('BTCIRT');
-            return true;
+            $rows = $this->client->fetchTicker('BTCIRT');
+
+            return is_numeric($rows['BTC']['IRT']['price'] ?? null)
+                && (float) $rows['BTC']['IRT']['price'] > 0;
         } catch (\Throwable) {
             return false;
         }

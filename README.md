@@ -36,6 +36,22 @@ The gateway receives an authenticated JSON request:
 Any `2xx` response is accepted. Non-success responses fail the request and the
 unused verification-code record is removed, allowing the user to retry.
 
+## Tabdeal provider
+
+Tabdeal snapshots use `https://api-web.tabdeal.org/r/plots/currencies/dynamic-info/`.
+The feed contains last prices grouped by base and quote currency. IRT prices
+are already in toman. Bid and ask both use the last price because this endpoint
+does not provide an order book; volume stays null and timestamps use fetch time.
+
+To register Tabdeal and map the existing BTC/IRT, BTC/USDT and USDT/IRT instruments:
+
+```sh
+php artisan db:seed --class='App\Domain\Market\Infrastructure\Persistence\Seeders\TabdealProviderSeeder'
+php artisan market:sync tabdeal --now
+```
+
+Additional markets use concatenated remote symbols, such as `ETHIRT` or `ETHUSDT`.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

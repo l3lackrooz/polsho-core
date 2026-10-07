@@ -13,28 +13,41 @@ class TabdealMapper
     ) {}
 
     /**
-     * @param  array<string, array<string, mixed>>  $rows
+     * @param  array<string, array<string, array<string, mixed>>>  $rows
      * @param  array<string, MarketSubscriptionDTO>  $subscriptions
      * @return array<int, QuoteDTO>
      */
     public function mapSnapshot(array $rows, array $subscriptions, string $provider): array
     {
         $quotes = [];
-        foreach ($rows as $row) {
-            $symbol = $row['symbol'];
-            if (! isset($subscriptions[$symbol])) {
+        foreach ($rows as $base => $markets) {
+            if (! is_array($markets)) {
                 continue;
             }
 
-            $quotes[] = $this->quotes->make(
-                subscription: $subscriptions[$symbol],
-                bid: isset($row['bid']) ? (float) $row['bid'] : 0.0,
-                ask: isset($row['ask']) ? (float) $row['ask'] : 0.0,
-                last: isset($row['last']) ? (float) $row['last'] : null,
-                provider: $provider,
-                volume: isset($row['volume']) ? (float) $row['volume'] : null,
-                timestamp: now()->getTimestampMs(),
-            );
+            foreach ($markets as $quote => $row) {
+                $symbol = $base.$quote;
+                if (! isset($subscriptions[$symbol]) || ! is_array($row)) {
+                    continue;
+                }
+
+                $price = $row['price'] ?? null;
+                if (! is_numeric($price) || ! is_finite((float) $price) || (float) $price <= 0.0) {
+                    continue;
+                }
+
+                // This feed supplies last prices only, without order-book
+                // bid/ask, volume or exchange timestamps. IRT is in toman.
+                $quotes[] = $this->quotes->make(
+                    subscription: $subscriptions[$symbol],
+                    bid: (float) $price,
+                    ask: (float) $price,
+                    last: (float) $price,
+                    provider: $provider,
+                    volume: null,
+                    timestamp: now()->getTimestampMs(),
+                );
+            }
         }
 
         return $quotes;

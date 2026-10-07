@@ -7,6 +7,7 @@ use App\Domain\Market\Infrastructure\Persistence\Seeders\InstrumentSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\NewProvidersSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\NobitexProviderProfileSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\ProviderSeeder;
+use App\Domain\Market\Infrastructure\Persistence\Seeders\TabdealProviderSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\TalaProviderSeeder;
 use App\Domain\Market\Infrastructure\Persistence\Seeders\TgjuProviderSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
             ProviderSeeder::class,
             InstrumentSeeder::class,
             NewProvidersSeeder::class,
+            TabdealProviderSeeder::class,
             TgjuProviderSeeder::class,
             TalaProviderSeeder::class,
             NobitexProviderProfileSeeder::class,
